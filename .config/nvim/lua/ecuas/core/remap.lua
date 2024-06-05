@@ -6,6 +6,8 @@ local keymap = vim.keymap -- keymaps
 
 -- keymaps to allow for navigation during insert mode
 -- use <C-:> instead of <ESC>
+keymap.set("i", "jj", "<ESC>")
+keymap.set("i", "hh", "<ESC>")
 keymap.set("i", "<C-c>", "<Esc><Esc><Esc>")
 keymap.set("i", "<c-h>", "<Left>")
 keymap.set("i", "<C-j>", "<Down>")
@@ -82,3 +84,6 @@ vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 --         vim.lsp.buf.hover()
 --     end
 -- end, { desc = "Peek Fold" })
+--
+--------- Markdown ---------------
+keymap.set('n', "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown" })

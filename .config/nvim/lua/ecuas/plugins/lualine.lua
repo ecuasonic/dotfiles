@@ -70,40 +70,6 @@ return {
             always_visible = false,
         }
 
-        local buffers = {
-            'buffers',
-            icons_enabled = true,
-            show_filename_only = true,
-            hide_filename_extension = false,
-            show_modified_status = true,
-            mode = 2,
-            padding = 2,
-            filetype_names = {
-                TelescopePrompt = 'Telescope',
-                dashboard = 'Dashboard',
-                packer = 'Packer',
-                fzf = 'FZF',
-                alpha = 'Alpha',
-            },
-            use_mode_colors = false,
-            buffers_color = {
-                active = {fg = 'cyan', bg = '222222'},
-                inactive = {bg = '444444'},
-            },
-            symbols = {
-                modified = ' ●',
-                alternate_file = '',
-                directory =  '',
-            }
-        }
-
-        local datetime = {
-            'datetime',
-            style = '%A, %B %d | %I:%M %p',
-            color = {fg = 'cyan', bg=''},
-            padding = 4
-        }
-
         local filename = {
             'filename',
             file_status = true,
@@ -119,14 +85,13 @@ return {
             },
         }
 
-        local fileformat = {
-            'fileformat',
-            symbols = {
-                unix = '', -- e712
-                dos = '',  -- e70f
-                mac = '',  -- e711
-            }
-        }
+        -- local fileformat = {
+        --     'fileformat',
+        --     symbols = {
+        --         unix = '', -- e712
+        --         dos = '',  -- e70f
+        --         mac = '',  -- e711
+        --     }
 
 
         -------------------------------------------------------------------------
@@ -135,8 +100,8 @@ return {
             options = {
                 icons_enabled = true,
                 theme = 'nightfly',
-                component_separators = '',
-                section_separators = '',
+                component_separators = { left = '►', right = ''},
+                section_separators = { left = '', right = ''},
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},
@@ -173,14 +138,14 @@ return {
                 },
                 lualine_c = {},
                 lualine_x = {
-                    {'encoding',},
-                    fileformat,
-                    {
-                        'filetype',
-                        colored = true,
-                        icon_only = true,
-                        icon = false,
-                    }
+                    -- {'encoding',},
+                    -- fileformat,
+                    -- {
+                    --     'filetype',
+                    --     colored = true,
+                    --     icon_only = true,
+                    --     icon = false,
+                    -- }
                 },
                 lualine_y = {'progress'},
                 lualine_z = {'location'}
@@ -188,7 +153,7 @@ return {
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {
-                    {'mode'},
+                    { 'mode', },
                     diagnostics
                 },
                 lualine_c = {},
@@ -200,7 +165,9 @@ return {
                 lualine_z = {}
             },
             tabline = {
-                lualine_a = { Harpoon_files },
+                lualine_a = {
+                    Harpoon_files,
+                },
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},

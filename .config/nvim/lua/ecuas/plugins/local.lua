@@ -7,6 +7,10 @@ local local_plugins = {
             vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
         end
     },
+    {
+        "bufferline",
+        dir = "~local/bufferline.nvim",
+    }
 }
 
 return local_plugins
