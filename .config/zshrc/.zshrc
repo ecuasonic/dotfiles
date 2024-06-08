@@ -115,8 +115,8 @@ if [[ ! "$-" == *i* ]]; then
   return
 fi
 
-alias reload-zsh="source $HOME/.config/zshrc/.zshrc"
-alias edit-zsh="nvim $HOME/.zshrc"
+alias sz="source $HOME/.config/zshrc/.zshrc"
+alias ez="nvim $HOME/.config/zshrc/.zshrc"
 
 # History configuration
 HISTFILE=~/.zsh_history
@@ -226,15 +226,21 @@ alias ls="eza --group-directories-first --icons=always --color=always"
 alias lt="eza -al --sort=modified"
 
 #---------------- COMMANDS --------------
-gotoHome() {
+h() {
     echo "-------------------gotoHome-------------------"
     cd ~/../../mnt/c/Users/ecuas/Desktop/Programming
     ls
 }
 
-gotoNvim() {
+n() {
     echo "-------------------gotoNvim-------------------"
     cd ~/.config/nvim
+    ls
+}
+
+t() {
+    echo "------------------gotoTmux--------------------"
+    cd ~/.config/tmux
     ls
 }
 
@@ -246,6 +252,22 @@ cdls() {
 clearls() {
     clear
     ls
+}
+
+udf() {
+    rm -rf ~/dot-files/.config/bat
+    cp -r ~/.config/bat ~/dot-files/.config
+
+    rm -rf ~/dot-files/.config/nvim
+    cp -r ~/.config/nvim ~/dot-files/.config
+    rm -rf ~/dot-files/.config/nvim/undo
+
+    rm -rf ~/dot-files/.config/tmux
+    cp -r ~/.config/tmux ~/dot-files/.config
+
+    rm -rf ~/dot-files/.config/zshrc
+    cp -r ~/.config/zshrc ~/dot-files/.config
+
 }
 
 # ------------ TheFuck ---------------
