@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zshrc/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -22,7 +22,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-# SH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -108,20 +108,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# ~/.zshrc: executed by zsh for non-login shells.
-
-# If not running interactively, don't do anything
-if [[ ! "$-" == *i* ]]; then
-  return
-fi
-
 alias sz="source $HOME/.config/zshrc/.zshrc"
 alias ez="nvim $HOME/.config/zshrc/.zshrc"
 
 # History configuration
-HISTFILE=~/.zsh_history
+HISTFILE=~/.zsh-history
 SAVEHIST=2000
-HISTSIZE=999
+HISTSAVE=999
 setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
@@ -136,13 +129,6 @@ setopt extended_glob
 # Colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:locus=01;32:quote=01'
 
-autoload -U colors
-colors
-setopt PROMPT_SUBST
-PS1="%F{black}[%n@%m:%~]%f$ "
-
-cd /mnt/c/Users/ecuas/Desktop/Programming
-
 alias website="tmux attach-session -t website"
 alias other="tmux attach-session -t other"
 alias cs2200="tmux attach-session -t cs2200"
@@ -153,15 +139,12 @@ alias detach="tmux detach"
 # Enable autocomplete for executables in the current directory
 compdef _files ''
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 #----------------- FZF --------------------
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 fg="#CBE0F0"
 bg="#011628"
@@ -190,7 +173,7 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-source ~/fzf-git.sh/fzf-git.sh
+source ~/.config/zshrc/fzf-git.sh
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
@@ -226,24 +209,6 @@ alias ls="eza --group-directories-first --icons=always --color=always"
 alias lt="eza -al --sort=modified"
 
 #---------------- COMMANDS --------------
-h() {
-    echo "-------------------gotoHome-------------------"
-    cd ~/../../mnt/c/Users/ecuas/Desktop/Programming
-    ls
-}
-
-n() {
-    echo "-------------------gotoNvim-------------------"
-    cd ~/.config/nvim
-    ls
-}
-
-t() {
-    echo "------------------gotoTmux--------------------"
-    cd ~/.config/tmux
-    ls
-}
-
 cdls() {
     cd $1
     ls
@@ -254,20 +219,12 @@ clearls() {
     ls
 }
 
-udf() {
-    rm -rf ~/dot-files/.config/bat
-    cp -r ~/.config/bat ~/dot-files/.config
+uldf() {
+    rm -rf ~/.config/nvim
+    cp -r ~/dotfiles/.config/nvim ~/.config
 
-    rm -rf ~/dot-files/.config/nvim
-    cp -r ~/.config/nvim ~/dot-files/.config
-    rm -rf ~/dot-files/.config/nvim/undo
-
-    rm -rf ~/dot-files/.config/tmux
-    cp -r ~/.config/tmux ~/dot-files/.config
-
-    rm -rf ~/dot-files/.config/zshrc
-    cp -r ~/.config/zshrc ~/dot-files/.config
-
+    rm -rf ~/.config/tmux
+    cp -r ~/dotfiles/.config/tmux ~/.config
 }
 
 # ------------ TheFuck ---------------
@@ -314,3 +271,6 @@ fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zshrc/.p10k.zsh.
 [[ ! -f ~/.config/zshrc/.p10k.zsh ]] || source ~/.config/zshrc/.p10k.zsh
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
