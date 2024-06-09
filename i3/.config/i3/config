@@ -8,6 +8,11 @@ set $mod Mod1
 new_window pixel 3
 new_float normal
 
+# Setting mouse acceleration
+# exec xset mouse 100/80 100
+# set touchpad acceleration (PinebookPro)
+exec --no-startup-id xinput -set-prop 'HAILUCK CO.,LTD USB KEYBOARD Touchpad' 'libinput Accel Speed' 0.9
+
 # Hide borders
 hide_edge_borders none
 
@@ -21,7 +26,7 @@ bindsym $mod+n border normal
 font pango:MesloLGS NF 11
 
 exec --no-startup-id picom
-exec --no-startup-id feh --bg-scale ~/backgrounds/Barcelona.png
+exec --no-startup-id nitrogen --restore
 
 # kill any hanging polybar processes
 exec_always killall polybar
