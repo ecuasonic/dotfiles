@@ -18,7 +18,7 @@ export ZDOTDIR=$HOME/.config/zshrc
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-export PATH=$PATH:~/local
+export OBSIDIAN_REST_API_KEY=cba463260884be711af064b64696bb0cb9559d47037e5db454b9dbb364a8b94c
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -227,6 +227,18 @@ uldf() {
 
     rm -rf ~/.config/tmux
     cp -r ~/dotfiles/.config/tmux ~/.config
+}
+
+second() {
+    xrandr --output HDMI-1-1 --auto --output HDMI-1-1 --same-as eDP-2
+    xrandr --output eDP-2 --off
+    i3 restart
+}
+
+first() {
+    xrandr --output eDP-2 --auto --output eDP-2 --same-as HDMI-1-1
+    xrandr --output HDMI-1-1 --off
+    i3 restart
 }
 
 # ------------ TheFuck ---------------
