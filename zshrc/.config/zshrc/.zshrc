@@ -234,13 +234,19 @@ uldf() {
 second() {
     xrandr --output HDMI-1-1 --auto --output HDMI-1-1 --same-as eDP-2
     xrandr --output eDP-2 --off
-    nitrogen --set-scaled ~/Backgrounds/1920x1080barcelona.png
+    export SIZE="1920x1080"
+    killall nitrogen
+    sleep 1
+    nitrogen --set-centered ~/Backgrounds/1920x1080barcelona.png
     i3 restart
 }
 
 first() {
     xrandr --output eDP-2 --auto --output eDP-2 --same-as HDMI-1-1
     xrandr --output HDMI-1-1 --off
+    export SIZE="2560x1600"
+    killall nitrogen
+    sleep 1
     nitrogen --set-scaled ~/Backgrounds/2560x1600barcelona.png
     i3 restart
 }

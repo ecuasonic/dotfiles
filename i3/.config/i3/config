@@ -21,9 +21,9 @@ exec_always --no-startup-id xset dpms 0 0 300
 # Sleep settings
 set $Locker i3lock && sleep 1
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id ~/.config/i3/custom_configs/monitor.sh, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
@@ -36,15 +36,14 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-# bindsym $mod+Pause "i3-nagbar -t warning -m 'hello there'"
 
-# bindsym shift+F11 exec systemctl hibernate
 # bindsym shift+F9 exec i3lock -e -i ~/Backgrounds/${SIZE}barcelong.png
 # bindsym shift+F10 exec systemctl suspend
 # bindsym shift+F11 exec systemctl hibernate
 # bindsym shift+F12 exec systemctl poweroff
 
-bindsym $mod+p exec picom
+bindsym $mod+p exec "picom"
+bindsym $mod+shift+p exec "killall picom"
 
 # # Screenshots
 bindsym Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png# Hide borders
