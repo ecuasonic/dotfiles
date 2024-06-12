@@ -6,11 +6,9 @@ set_from_resource $SIZE echo "$SIZE"
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod1
 
-focus_follows_mouse no
-
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-# new_window pixel 3
-# new_float normal
+new_window pixel 3
+new_float normal
 
 # Prolong screensaver time
 exec --no-startup-id xset s 900
@@ -23,21 +21,20 @@ set $Locker i3lock && sleep 1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-
+qq
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-bindsym $mod+Pause mode "$mode_system"
-# bindsym $mod+Pause "i3-nagbar -t warning -m 'hello there'"
-
+bindsym $mod+Pause "i3-nagbar -m '(l) lock (e) logout (s) suspend (h) hibernate (r) reboot (Shift+s) shutdown' 'mode "$mode_system"'
 # bindsym shift+F11 exec systemctl hibernate
 # bindsym shift+F9 exec i3lock -e -i ~/Backgrounds/${SIZE}barcelong.png
 # bindsym shift+F10 exec systemctl suspend

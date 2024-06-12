@@ -11,6 +11,7 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=$HOME/.config/zshrc
+export SIZE="2560x1600"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -19,6 +20,7 @@ export ZDOTDIR=$HOME/.config/zshrc
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 export OBSIDIAN_REST_API_KEY=cba463260884be711af064b64696bb0cb9559d47037e5db454b9dbb364a8b94c
+export PATH="$HOME/.local/bin:$PATH"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -207,7 +209,7 @@ alias ld="eza -lD"
 alias lf="eza -lf --icons=always --color=always | grep -v /"
 alias lh="eza -dl .* --group-directories-first"
 alias ll="eza -al --group-directories-first --icons=always --git"
-alias ls="eza --group-directories-first --icons=always --color=always"
+alias ls="eza --group-directories-first --icons=always --color=always --git"
 alias lt="eza -al --sort=modified"
 
 #---------------- COMMANDS --------------
@@ -232,13 +234,23 @@ uldf() {
 second() {
     xrandr --output HDMI-1-1 --auto --output HDMI-1-1 --same-as eDP-2
     xrandr --output eDP-2 --off
+    nitrogen --set-scaled ~/Backgrounds/1920x1080barcelona.png
     i3 restart
 }
 
 first() {
     xrandr --output eDP-2 --auto --output eDP-2 --same-as HDMI-1-1
     xrandr --output HDMI-1-1 --off
+    nitrogen --set-scaled ~/Backgrounds/2560x1600barcelona.png
     i3 restart
+}
+
+save() {
+    ~/.config/i3/custom_configs/saveWindow.sh
+}
+
+restore() {
+    ~/.config/i3/custom_configs/restoreWindow.sh
 }
 
 # ------------ TheFuck ---------------
