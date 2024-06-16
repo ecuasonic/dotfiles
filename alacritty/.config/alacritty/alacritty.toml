@@ -44,7 +44,7 @@ normal                = { family = "MesloLGS NF", style = "Regular" }
 bold                  = { family = "MesloLGS NF", style = "Bold" }
 italic                = { family = "MesloLGS NF", style = "Italic" }
 bold_italic           = { family = "MesloLGS NF", style = "Bold Italic" }
-size                  = 9
+size                  = 14
 offset                = { x = 0, y = 0 }
 glyph_offset          = { x = 0, y = 0 }
 #builtin_box_drawing   = true
@@ -165,18 +165,18 @@ bindings = [
 ]
 
 [hints]
-#alphabet              = "jfkdls;ahgurieowpq"
+alphabet              = "jfkdls;ahgurieowpq"
 
-#[[hints.enabled]]
-#command               = "xdg-open"
+# [[hints.enabled]]
+# command               = "xdg-open"
 ## command             = "open" # On macOS
 ## command             = { program = "cmd", args = [ "/c", "start", "" ] } # On Windows
-#hyperlinks            = true
-#post_processing       = true
-#persist               = false
-#mouse.enabled         = true
+# hyperlinks            = true
+# post_processing       = true
+# persist               = false
+# mouse.enabled         = true
 #binding               = { key = "U", mods = "Control|Shift" }
-#regex                 = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩‘]+"
+# regex                 = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩‘]+"
 
 [keyboard]
 bindings = [
