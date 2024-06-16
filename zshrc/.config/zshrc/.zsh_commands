@@ -9,14 +9,7 @@ clearls() {
     ls
 }
 
-uldf() {
-    rm -rf ~/.config/nvim
-    cp -r ~/dotfiles/.config/nvim ~/.config
-
-    rm -rf ~/.config/tmux
-    cp -r ~/dotfiles/.config/tmux ~/.config
-}
-
+# change monitors
 switch() {
     display_ports=$(~/.config/i3/custom_configs/detect_monitor.sh)
 
@@ -39,6 +32,7 @@ switch() {
     i3 restart
 }
 
+# change alacritty font
 f() {
     reset
     ~/.config/i3/custom_configs/change_alacritty_font.sh $1
