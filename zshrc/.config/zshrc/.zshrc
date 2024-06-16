@@ -231,23 +231,24 @@ uldf() {
     cp -r ~/dotfiles/.config/tmux ~/.config
 }
 
-second() {
-    xrandr --output HDMI-1-1 --auto --output HDMI-1-1 --same-as eDP-2
-    xrandr --output eDP-2 --off
-    export SIZE="1920x1080"
-    killall nitrogen
-    sleep 1
-    nitrogen --set-centered ~/Backgrounds/1920x1080barcelona.png
-    i3 restart
-}
+s() {
+    display_ports=$(~/.config/i3/custom_configs/detect_monitor.sh)
 
-first() {
-    xrandr --output eDP-2 --auto --output eDP-2 --same-as HDMI-1-1
-    xrandr --output HDMI-1-1 --off
-    export SIZE="2560x1600"
+    if [ $display_ports = "HDMI-1-1" ]; then
+        xrandr --output eDP-2 --auto --output eDP-2 --same-as HDMI-1-1
+        sleep 1
+        xrandr --output HDMI-1-1 --off
+        SIZE="2560x1600"
+    elif [ $display_ports = "eDP-2" ] || [ $display_ports = "eDP-1"]; then
+        xrandr --output HDMI-1-1 --auto --output HDMI-1-1 --same-as $display_ports
+        sleep 1
+        xrandr --output $display_ports --off
+        SIZE="1920x1080"
+    fi
+
     killall nitrogen
     sleep 1
-    nitrogen --set-scaled ~/Backgrounds/2560x1600barcelona.png
+    nitrogen --set-centered ~/Backgrounds/${SIZE}barcelona.png
     i3 restart
 }
 
