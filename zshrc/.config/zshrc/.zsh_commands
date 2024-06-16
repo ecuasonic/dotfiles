@@ -38,7 +38,7 @@ f() {
     ~/.config/i3/custom_configs/change_alacritty_font.sh $1
 }
 
-
+# i3 resurrection
 save() {
     ~/.config/i3/custom_configs/saveWindow.sh
 }
