@@ -1,0 +1,52 @@
+# ----- Edit and Source -------------
+alias sz="source $HOME/.config/zshrc/.zshrc"
+alias ez="nvim $HOME/.config/zshrc/.zshrc"
+alias ea="nvim $HOME/.config/zshrc/.zsh_alias"
+alias ec="nvim $HOME/.config/zshrc/.zsh_commands"
+
+alias ei3="nvim $HOME/.config/i3/config"
+
+# ------ Refresh Rate --------------
+
+alias r60="xrandr -r 60"
+
+# ---------- Tmux -----------------
+
+alias website="tmux attach-session -t website"
+alias other="tmux attach-session -t other"
+alias cs2200="tmux attach-session -t cs2200"
+alias detach="tmux detach"
+
+# ------ Eza (better ls) -----------
+
+alias ld="eza -lD"
+alias lf="eza -lf --icons=always --color=always | grep -v /"
+alias lh="eza -dl .* --group-directories-first"
+alias ll="eza -al --group-directories-first --icons=always --git"
+alias ls="eza --group-directories-first --icons=always --color=always --git"
+alias lt="eza -al --sort=modified"
+
+# ------------- GIT ------------------
+alias gc="git commit -m"
+alias gca="git commit -a -m"
+alias gp="git push origin HEAD"
+alias gpu="git pull origin"
+alias gst="git status"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias gdiff="git diff"
+alias gco="git checkout"
+alias gb="git branch"
+alias gba="git branch -a"
+alias gadd="git add"
+alias ga='git add -p'
+alias gcoall="git checkout --"
+alias gr='git remote'
+alias gre='git reset'
+
+#-------------DIRS------------------
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+

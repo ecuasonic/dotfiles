@@ -103,17 +103,9 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias sz="source $HOME/.config/zshrc/.zshrc"
-alias ez="nvim $HOME/.config/zshrc/.zshrc"
+# Organization
+source $HOME/.config/zshrc/.zsh_alias
+source $HOME/.config/zshrc/.zsh_commands
 
 # History configuration
 HISTFILE=~/.zsh-history
@@ -132,11 +124,6 @@ setopt extended_glob
 
 # Colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:locus=01;32:quote=01'
-
-alias website="tmux attach-session -t website"
-alias other="tmux attach-session -t other"
-alias cs2200="tmux attach-session -t cs2200"
-alias detach="tmux detach"
 
 # export TERM=tmux-256color
 
@@ -203,63 +190,6 @@ _fzf_comprun() {
 
 export BAT_THEME="tokyonight_night"
 
-# ------ Eza (better ls) -----------
-
-alias ld="eza -lD"
-alias lf="eza -lf --icons=always --color=always | grep -v /"
-alias lh="eza -dl .* --group-directories-first"
-alias ll="eza -al --group-directories-first --icons=always --git"
-alias ls="eza --group-directories-first --icons=always --color=always --git"
-alias lt="eza -al --sort=modified"
-
-#---------------- COMMANDS --------------
-cdls() {
-    cd $1
-    ls
-}
-
-clearls() {
-    clear
-    ls
-}
-
-uldf() {
-    rm -rf ~/.config/nvim
-    cp -r ~/dotfiles/.config/nvim ~/.config
-
-    rm -rf ~/.config/tmux
-    cp -r ~/dotfiles/.config/tmux ~/.config
-}
-
-s() {
-    display_ports=$(~/.config/i3/custom_configs/detect_monitor.sh)
-
-    if [ $display_ports = "HDMI-1-1" ]; then
-        xrandr --output eDP-2 --auto --output eDP-2 --same-as HDMI-1-1
-        sleep 1
-        xrandr --output HDMI-1-1 --off
-        SIZE="2560x1600"
-    elif [ $display_ports = "eDP-2" ] || [ $display_ports = "eDP-1"]; then
-        xrandr --output HDMI-1-1 --auto --output HDMI-1-1 --same-as $display_ports
-        sleep 1
-        xrandr --output $display_ports --off
-        SIZE="1920x1080"
-    fi
-
-    killall nitrogen
-    sleep 1
-    nitrogen --set-centered ~/Backgrounds/${SIZE}barcelona.png
-    i3 restart
-}
-
-save() {
-    ~/.config/i3/custom_configs/saveWindow.sh
-}
-
-restore() {
-    ~/.config/i3/custom_configs/restoreWindow.sh
-}
-
 # ------------ TheFuck ---------------
 # thefuck alias
 eval $(thefuck --alias)
@@ -271,39 +201,14 @@ eval "$(zoxide init zsh)"
 
 alias cd="z"
 
-# ------------- GIT ------------------
-alias gc="git commit -m"
-alias gca="git commit -a -m"
-alias gp="git push origin HEAD"
-alias gpu="git pull origin"
-alias gst="git status"
-alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
-alias gdiff="git diff"
-alias gco="git checkout"
-alias gb="git branch"
-alias gba="git branch -a"
-alias gadd="git add"
-alias ga='git add -p'
-alias gcoall="git checkout --"
-alias gr='git remote'
-alias gre='git reset'
-
-#-------------DIRS------------------
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-
 #------------Navigation-------------
 
 cx() { cd "$@" && l; }
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
-f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
+find() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
 fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zshrc/.p10k.zsh.
 [[ ! -f ~/.config/zshrc/.p10k.zsh ]] || source ~/.config/zshrc/.p10k.zsh
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
