@@ -203,10 +203,10 @@ alias cd="z"
 
 #------------Navigation-------------
 
-cx() { cd "$@" && l; }
-fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
-find() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
-fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
+# cx() { cd "$@" && l; }
+# fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
+# find() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
+# fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zshrc/.p10k.zsh.
 [[ ! -f ~/.config/zshrc/.p10k.zsh ]] || source ~/.config/zshrc/.p10k.zsh

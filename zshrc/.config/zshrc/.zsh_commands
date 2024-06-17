@@ -1,4 +1,13 @@
 #---------------- COMMANDS --------------
+
+r60() {
+    display_ports=$(~/.config/custom_scripts/detect_monitor.sh)
+
+    if [ $display_ports = "eDP-2" ] || [ $display_ports = "eDP-1"]; then
+        xrandr -r 60
+    fi
+}
+
 cdls() {
     cd $1
     ls
@@ -11,7 +20,7 @@ clearls() {
 
 # change monitors
 switch() {
-    display_ports=$(~/.config/i3/custom_configs/detect_monitor.sh)
+    display_ports=$(~/.config/custom_scripts/detect_monitor.sh)
 
     if [ $display_ports = "HDMI-1-1" ]; then
         xrandr --output eDP-2 --auto --output eDP-2 --same-as HDMI-1-1
@@ -35,15 +44,15 @@ switch() {
 # change alacritty font
 f() {
     reset
-    ~/.config/i3/custom_configs/change_alacritty_font.sh $1
+    ~/.config/custom_scripts/change_alacritty_font.sh $1
 }
 
 # i3 resurrection
 save() {
-    ~/.config/i3/custom_configs/saveWindow.sh
+    ~/.config/custom_scripts/saveWindow.sh
 }
 
 restore() {
-    ~/.config/i3/custom_configs/restoreWindow.sh
+    ~/.config/custom_scripts/restoreWindow.sh
 }
 

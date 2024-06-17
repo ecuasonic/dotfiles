@@ -6,10 +6,6 @@ alias ec="nvim $HOME/.config/zshrc/.zsh_commands"
 
 alias ei3="nvim $HOME/.config/i3/config"
 
-# ------ Refresh Rate --------------
-
-alias r60="xrandr -r 60"
-
 # ---------- Tmux -----------------
 
 alias website="tmux attach-session -t website"
