@@ -44,7 +44,7 @@ normal                = { family = "MesloLGS NF", style = "Regular" }
 bold                  = { family = "MesloLGS NF", style = "Bold" }
 italic                = { family = "MesloLGS NF", style = "Italic" }
 bold_italic           = { family = "MesloLGS NF", style = "Bold Italic" }
-size                  = 14
+size                  = 10
 offset                = { x = 0, y = 0 }
 glyph_offset          = { x = 0, y = 0 }
 #builtin_box_drawing   = true

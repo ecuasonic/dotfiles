@@ -1,2 +1,4 @@
 tmux/.config/tmux/plugins
 zshrc/.config/zshrc/.zcompdump*
+alacritty
+nvim/.config/nvim/undo

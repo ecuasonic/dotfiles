@@ -107,6 +107,9 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.config/zshrc/.zsh_alias
 source $HOME/.config/zshrc/.zsh_commands
 
+# Refresh rate to 60 if on laptop monitor
+save_power
+
 # History configuration
 HISTFILE=~/.zsh-history
 SAVEHIST=2000
