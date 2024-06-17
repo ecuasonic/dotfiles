@@ -14,7 +14,7 @@ for_window [class=".*"] border pixel 10
 # Prolong screensaver time
 # exec --no-startup-id xset s 2000
 exec_always xautolock -time 10 -locker 'i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)'
-exec_always --no-startup-id xset dpms 0 900 0
+exec_always --no-startup-id xset dpms 0 630 0
 # exec xss-lock --transfer-sleep-lock -- i3lock --nofork --image=$HOME/Pictures/barcelona.png &
 
 # Sleep settings

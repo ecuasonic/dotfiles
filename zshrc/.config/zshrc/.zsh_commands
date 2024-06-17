@@ -47,14 +47,13 @@ s() {
     fi
 
     killall nitrogen
-    sleep 1
+    sleep 0.1
     nitrogen --set-centered ~/Backgrounds/${SIZE}barcelona.png
     i3 restart
 }
 
 # change alacritty font
 f() {
-    reset
     ~/.config/custom_scripts/change_alacritty_font.sh $1
 }
 

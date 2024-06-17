@@ -17,4 +17,6 @@ CURRENT_SIZE=$(grep "size\s" $CONFIG_FILE | awk '{print $3}' )
 sed -i "s/^\(size\s*=\s*\)$CURRENT_SIZE/\1$1/" "$CONFIG_FILE"
 
 # Print a message indicating the change
+sleep 0.1
+reset
 echo "New Font Size: $1"
