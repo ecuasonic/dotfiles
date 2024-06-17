@@ -7,7 +7,6 @@ local keymap = vim.keymap -- keymaps
 -- keymaps to allow for navigation during insert mode
 -- use <C-:> instead of <ESC>
 keymap.set("i", "jj", "<ESC>")
-keymap.set("i", "hh", "<ESC>")
 keymap.set("i", "<C-c>", "<Esc><Esc><Esc>")
 keymap.set("i", "<c-h>", "<Left>")
 keymap.set("i", "<C-j>", "<Down>")

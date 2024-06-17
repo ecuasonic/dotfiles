@@ -1,6 +1,8 @@
 -- for conciseness
 local opt = vim.opt -- vim options
 
+opt.conceallevel = 2
+
 -- hide -- INSERT on lualine
 opt.showmode = false
 
