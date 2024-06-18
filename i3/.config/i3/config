@@ -337,10 +337,10 @@ bindsym Caps_Lock mode "CAPSLOCK"
 # bindsym Print exec scrot ~/Pictures/Screenshots/%F.png && xclip -selection clipboard -t image/png -i \ls -t ~/Pictures/Screenshots/* | head -n1
 
 #Take select screenshot, save in a folder and copy to clipboard
-bindsym Print exec scrot -s ~/Pictures/Screenshots/%F.png -e 'xclip -selection clipboard -t image/png -i $f'
+bindsym Print+$mod exec scrot -s ~/Pictures/Screenshots/%F.png -e 'xclip -selection clipboard -t image/png -i $f'
 
 # # Screenshots
-bindsym $mod+Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png# Hide borders
+bindsym Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png# Hide borders
 
 exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
 exec firefox
