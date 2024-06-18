@@ -110,4 +110,4 @@ keymap.set('n', "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Mark
 -- vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git"})
 
 --------- obsidian ---------
-vim.keymap.set("n", "<leader>t", "<cmd>ObsidianTemplates<cmd>", { desc = "Obsidian templates" })
+vim.keymap.set("n", "<leader>t", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
