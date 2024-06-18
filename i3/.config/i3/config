@@ -1,12 +1,12 @@
 # i3 config file (v4)
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set_from_resource $SIZE echo "$SIZE"
-
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod1
 
 focus_follows_mouse no
+no_focus [all]
+focus_on_window_activation none
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 for_window [class=".*"] border pixel 10
@@ -18,7 +18,7 @@ exec_always --no-startup-id xset dpms 0 630 0
 # exec xss-lock --transfer-sleep-lock -- i3lock --nofork --image=$HOME/Pictures/barcelona.png &
 
 # Sleep settings
-set $Locker i3lock -i $(~/.config/custom_scripts/i3lock_background.sh) && sleep 1
+set $Locker i3lock -i $(~/.config/custom_scripts/i3lock_background.sh) && sleep 2
 
 set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -32,21 +32,18 @@ mode "$mode_system" {
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym F12 mode "default"
+    bindsym F11 mode "default"
 }
 
 bindsym F12 mode "$mode_system"
 bindsym F11 mode "$mode_system"
-
-# bindsym shift+F9 exec i3lock -e -i ~/Backgrounds/${SIZE}barcelong.png
-# bindsym shift+F10 exec systemctl suspend
-# bindsym shift+F11 exec systemctl hibernate
-# bindsym shift+F12 exec systemctl poweroff
+bindsym F10 exec --no-startup-id ~/.config/custom_scripts/switch_monitor.sh
+bindsym F9 exec --no-startup-id "i3-resurrect restore -w 1"
 
 bindsym $mod+p exec "picom"
 bindsym $mod+shift+p exec "killall picom"
 
-# # Screenshots
-bindsym Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png# Hide borders
 hide_edge_borders none
 
 # change borders
@@ -87,7 +84,7 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id exec ~/.config/i3/custom_configs/volume_up.sh 115
+bindsym XF86AudioRaiseVolume exec --no-startup-id exec ~/.config/custom_scripts/volume_up.sh 115
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
@@ -198,8 +195,6 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 
-# Open applications on specific workspaces
-# assign [title="Firefox"] $ws2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -331,3 +326,29 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+#CapsLock indicator
+mode "CAPSLOCK" {
+    bindsym Caps_Lock mode "default"
+}
+bindsym Caps_Lock mode "CAPSLOCK"
+
+ #Take screenshot, save in a folder and copy to clipboard:
+# bindsym Print exec scrot ~/Pictures/Screenshots/%F.png && xclip -selection clipboard -t image/png -i \ls -t ~/Pictures/Screenshots/* | head -n1
+
+#Take select screenshot, save in a folder and copy to clipboard
+bindsym Print exec scrot -s ~/Pictures/Screenshots/%F.png -e 'xclip -selection clipboard -t image/png -i $f'
+
+# # Screenshots
+bindsym $mod+Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png# Hide borders
+
+exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
+exec firefox
+exec alacritty
+exec sleep 0.5
+exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.i3/workspace-2.json'"
+assign [class="obsidian"] 2
+exec obsidian
+exec alacritty
+exec sleep 0.5
+exec --no-startup-id "i3-msg 'workspace 1'"
