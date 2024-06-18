@@ -6,12 +6,15 @@ local keymap = vim.keymap -- keymaps
 
 -- keymaps to allow for navigation during insert mode
 -- use <C-:> instead of <ESC>
-keymap.set("i", "jj", "<ESC>")
 keymap.set("i", "<C-c>", "<Esc><Esc><Esc>")
 keymap.set("i", "<c-h>", "<Left>")
 keymap.set("i", "<C-j>", "<Down>")
 keymap.set("i", "<C-k>", "<Up>")
 keymap.set("i", "<C-l>", "<Right>")
+
+keymap.set("n", "<A-o>", "o<ESC>")
+keymap.set("n", "<A-O>", "O<ESC>")
+keymap.set("i", "jj", "<ESC>")
 
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
@@ -86,3 +89,25 @@ vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 --
 --------- Markdown ---------------
 keymap.set('n', "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown" })
+
+---------- init.lua --------------
+-- vim.keymap.set("n", "gd", function() vim.lsp.buf.defintion() end, opts)
+-- vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+-- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+-- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+-- vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+-- vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.reference() end, opts)
+-- vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.renamedefintiondefintion() end, opts)
+-- vim.keymap.set("n", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
+-- vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+-- vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+
+---------- auto-session --------
+-- keymap.set("n", "<leader>wr", "<cmd>sessionrestore<cr>", { desc = "restore session for cwd" }) -- restore last workspace session for current directory
+-- keymap.set("n", "<leader>ws", "<cmd>sessionsave<cr>", { desc = "save session for auto session root dir" }) -- save workspace session for current working directory
+
+--------- git fugitive ---------
+-- vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git"})
+
+--------- obsidian ---------
+vim.keymap.set("n", "<leader>t", "<cmd>ObsidianTemplates<cmd>", { desc = "Obsidian templates" })
