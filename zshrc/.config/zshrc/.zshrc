@@ -108,7 +108,9 @@ source $HOME/.config/zshrc/.zsh_alias
 source $HOME/.config/zshrc/.zsh_commands
 
 # Refresh rate to 60 if on laptop monitor
-save_power
+# If i have this on, then when I switch to hybrid, it swtiches back to integrated
+#   and loses i3 resurrections with the save before hand
+# save_power
 
 # History configuration
 HISTFILE=~/.zsh-history
@@ -203,8 +205,6 @@ alias auto="fuck"
 eval "$(zoxide init zsh)"
 
 alias cd="z"
-
-#------------Navigation-------------
 
 # cx() { cd "$@" && l; }
 # fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
