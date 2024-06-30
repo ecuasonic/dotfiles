@@ -1,3 +1,10 @@
+
+# Start lstpice through wine
+alias ltspice="wine ~/.wine/drive_c/Program\ Files/LTC/LTspiceXVII/XVIIx64.exe"
+
+# Start ccs
+alias ccstudio="/home/ecuas/ti/ccs1271/ccs/eclipse/ccstudio"
+
 # ----- Edit and Source -------------
 alias sz="source $HOME/.config/zshrc/.zshrc"
 alias ez="nvim $HOME/.config/zshrc/.zshrc"

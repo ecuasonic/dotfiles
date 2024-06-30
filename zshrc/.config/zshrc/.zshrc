@@ -13,6 +13,11 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=$HOME/.config/zshrc
 export SIZE="2560x1600"
 
+
+# Sets Control to be both escape and Control
+setxkbmap -option ctrl:nocaps
+xcape -e 'Control_L=Escape' -t 175
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -174,7 +179,7 @@ source ~/.config/zshrc/fzf-git.sh
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+# export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
 # Advanced customization of fzf options via _fzf_comprun function
 # - The first argument to the function is the name of the command.
@@ -215,3 +220,7 @@ alias cd="z"
 [[ ! -f ~/.config/zshrc/.p10k.zsh ]] || source ~/.config/zshrc/.p10k.zsh
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+~/.config/custom_scripts/stty.sh
+# stty susp "^C"
+# stty intr "^Z"
