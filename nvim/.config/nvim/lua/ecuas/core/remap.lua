@@ -4,6 +4,12 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local keymap = vim.keymap -- keymaps
 
+keymap.set("n", "<Tab>", "a<C-t><Esc>")
+keymap.set("n", "<S-Tab>", "a<C-d><Esc>")
+
+keymap.set("v", "<Tab>", ">gv^")
+keymap.set("v", "<S-Tab>", "<gv^")
+
 -- keymaps to allow for navigation during insert mode
 -- use <C-:> instead of <ESC>
 keymap.set("i", "<C-c>", "<Esc><Esc><Esc>")
@@ -110,4 +116,7 @@ keymap.set('n', "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Mark
 -- vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git"})
 
 --------- obsidian ---------
-vim.keymap.set("n", "<leader>t", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
+vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
+vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<cr>", { desc = "Obsidian New Page" })
+vim.keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<cr>", { desc = "Obsidian New Daily" })
+vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
