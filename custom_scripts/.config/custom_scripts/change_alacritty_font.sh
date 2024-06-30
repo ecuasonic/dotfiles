@@ -18,5 +18,5 @@ sed -i "s/^\(size\s*=\s*\)$CURRENT_SIZE/\1$1/" "$CONFIG_FILE"
 
 # Print a message indicating the change
 sleep 0.1
-reset
+clear
 echo "New Font Size: $1"

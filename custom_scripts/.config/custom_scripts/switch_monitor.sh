@@ -3,8 +3,14 @@ display_ports=$(~/.config/custom_scripts/detect_monitor.sh)
 if [ $display_ports = "HDMI-1-1" ]; then
 
     xrandr --output eDP-2 --auto --output eDP-2 --same-as $display_ports --output $display_ports --off
+    sleep 0.1
     xrandr -r 60
     SIZE="2560x1600"
+
+    killall nitrogen
+    sleep 0.1
+    nitrogen --set-centered ~/Backgrounds/${SIZE}barcelona.png
+    i3 restart
 
 elif [ "$display_ports" = "eDP-2" ] || [ "$display_ports" = "eDP-1" ]; then
 
@@ -16,15 +22,16 @@ elif [ "$display_ports" = "eDP-2" ] || [ "$display_ports" = "eDP-1" ]; then
         xrandr --output $display_ports --off
         SIZE="1920x1080"
 
+        killall nitrogen
+        sleep 0.1
+        nitrogen --set-centered ~/Backgrounds/${SIZE}barcelona.png
+        i3 restart
+
+
     else
         xrandr -r 60
-        return 0
     fi
 
 fi
 
-killall nitrogen
-sleep 0.1
-nitrogen --set-centered ~/Backgrounds/${SIZE}barcelona.png
-i3 restart
 
