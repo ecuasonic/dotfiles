@@ -12,10 +12,11 @@ focus_on_window_activation none
 for_window [class=".*"] border pixel 10
 
 # Prolong screensaver time
+exec --no-startup-id ~/.config/custom_scripts/lock_suspend.sh
 # exec --no-startup-id xset s 2000
-# exec_always xautolock -time 1 -locker 'i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)'
-# exec_always xautolock -time 10 -locker '$(~/.config/custom_scripts/lock.sh)'
-# exec_always --no-startup-id xset dpms 0 2000 0
+# exec_always xautolock -time 1 -locker 'i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)' -notify 10 'systemctl suspend'
+# exec_always xautolock -time 1 -locker '$(~/.config/custom_scripts/lock.sh)'
+# exec_always --no-startup-id xset dpms 0 0 70
 # exec xss-lock --transfer-sleep-lock -- i3lock --nofork --image=$HOME/Pictures/barcelona.png &
 
 # Sleep settings
@@ -77,7 +78,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
