@@ -29,18 +29,6 @@ return {
     },
     config = function()
 
-        -- Last updated on 5/4/2024
-        local blockFiller = {
-            'mode',
-            fmt = function()
-                return ' '
-            end,
-            color = '',
-            padding = 70
-        }
-
-        --------------------------------------------------------------------------
-
         local mode = {
             'mode',
             icons_enabled = true,
@@ -85,22 +73,12 @@ return {
             },
         }
 
-        -- local fileformat = {
-        --     'fileformat',
-        --     symbols = {
-        --         unix = '', -- e712
-        --         dos = '',  -- e70f
-        --         mac = '',  -- e711
-        --     }
-
-
-        -------------------------------------------------------------------------
-
         require('lualine').setup {
             options = {
                 icons_enabled = true,
                 theme = 'nightfly',
-                component_separators = { left = '►', right = ''},
+                -- component_separators = { left = '', right = ''},
+                component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = ''},
                 disabled_filetypes = {
                     statusline = {},
@@ -127,47 +105,36 @@ return {
                         'diff',
                         colored = true,
                         diff_color = {
-                            added = 'LuaLineDiffAdd',
-                            modified = 'LuaLineDiffChange',
-                            removed = 'LuaLineDiffDelete',
+                            added = {fg='#a1cd5e'},
+                            modified = {fg='#e3d18a'},
+                            removed = {fg='#fc514e'},
                         },
                         symbols = {added = '+', modified = '~', removed = '-'},
                         source = nil,
                     },
-                    diagnostics
+                    diagnostics,
                 },
                 lualine_c = {},
-                lualine_x = {
-                    -- {'encoding',},
-                    -- fileformat,
-                    -- {
-                    --     'filetype',
-                    --     colored = true,
-                    --     icon_only = true,
-                    --     icon = false,
-                    -- }
-                },
-                lualine_y = {'progress'},
-                lualine_z = {'location'}
+                lualine_x = { 'filesize' },
+                lualine_y = { 'progress' },
+                lualine_z = { 'location' },
             },
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {
                     { 'mode', },
-                    diagnostics
+                    diagnostics,
                 },
                 lualine_c = {},
                 lualine_x = {},
                 lualine_y = {
-                    {'progress',},
-                    {'location',}
+                    { 'progress' },
+                    { 'location' },
                 },
                 lualine_z = {}
             },
             tabline = {
-                lualine_a = {
-                    Harpoon_files,
-                },
+                lualine_a = { Harpoon_files },
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
