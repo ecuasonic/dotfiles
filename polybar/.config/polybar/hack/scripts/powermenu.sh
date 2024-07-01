@@ -74,16 +74,9 @@ case $chosen in
         systemctl hibernate
         ;;
     $suspend)
-		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
-            sleep 2
-			systemctl suspend
-		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-			exit 0
-        else
-			msg
-        fi
+        i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
+        sleep 2
+        systemctl suspend
         ;;
     $logout)
 		ans=$(confirm_exit &)

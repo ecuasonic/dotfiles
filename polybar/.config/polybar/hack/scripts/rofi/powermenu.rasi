@@ -19,10 +19,10 @@ configuration {
 	sidebar-mode: 					false;
     dpi:                            150;
 
-    kb-row-up:                      "Up,Control+k";
+    kb-row-up:                      "Up,k";
     kb-column-left:                 "Left";
-    kb-row-down:                    "Down,Control+j";
-    kb-accept-entry:                "Return,KP_Enter,Tab";
+    kb-row-down:                    "Down,j";
+    kb-accept-entry:                "Return,KP_Enter";
     terminal:                       "mate-terminal";
     kb-clear-line:                  "Control-d";
     kb-cancel:                      "Escape";
