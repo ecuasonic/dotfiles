@@ -26,6 +26,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 export OBSIDIAN_REST_API_KEY=cba463260884be711af064b64696bb0cb9559d47037e5db454b9dbb364a8b94c
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
