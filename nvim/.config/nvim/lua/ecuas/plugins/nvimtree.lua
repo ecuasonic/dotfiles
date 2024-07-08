@@ -23,6 +23,7 @@ return {
 
             api.config.mappings.default_on_attach(bufnr)
 
+            vim.keymap.set("n", "<esc>", "<esc>lh<cmd>NvimTreeClose<CR>")
             vim.keymap.set('n', '<C-x>', api.node.open.vertical, opts('Open: Vertical Split'))
             vim.keymap.set('n', '<C-S-x>', api.node.open.horizontal, opts('Open: Horizontal Split'))
         end
@@ -281,7 +282,7 @@ return {
 
         -- set keymaps
         vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
-        vim.keymap.set("n", "<esc>", "<cmd>NvimTreeClose<CR>")
+        -- vim.keymap.set("n", "<esc>", "<cmd>NvimTreeClose<CR>")
         vim.keymap.set("n", "<leader>pr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
     end
 }

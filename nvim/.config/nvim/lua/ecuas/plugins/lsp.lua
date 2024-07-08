@@ -62,7 +62,6 @@ return {
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
@@ -97,10 +96,9 @@ return {
                 documentation = cmp.config.window.bordered(),
             },
             mapping = cmp.mapping.preset.insert({
-                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                ['<C-o>'] = cmp.mapping.complete(),
-                ['<C-e>'] = cmp.mapping.abort(),
+                ['<C-j>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-k>'] = cmp.mapping.scroll_docs(4),
+                ['<C-a>'] = cmp.mapping.abort(),
                 ['<Tab>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
             }),
             sources = cmp.config.sources(
