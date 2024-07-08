@@ -11,6 +11,9 @@ focus_on_window_activation none
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 for_window [class=".*"] border pixel 10
 
+# Set the keyboard repeat and delay
+exec_always --no-startup-id xset r rate 200 40
+
 # Prolong screensaver time
 exec --no-startup-id ~/.config/custom_scripts/lock_suspend.sh
 # exec --no-startup-id xset s 2000

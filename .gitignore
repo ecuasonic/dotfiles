@@ -1,5 +1,5 @@
 tmux/.config/tmux/plugins
 zshrc/.config/zshrc/.zcompdump*
-alacritty
+alacritty/.config/alacritty/alacritty.toml
 nvim/.config/nvim/undo
 nvim/.config/nvim/lazy-lock.json
