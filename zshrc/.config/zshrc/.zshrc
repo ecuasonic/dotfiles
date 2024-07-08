@@ -141,7 +141,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:locus=01;32:quote=01'
 # Enable autocomplete for executables in the current directory
 compdef _files ''
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
 
 #----------------- FZF --------------------
 
