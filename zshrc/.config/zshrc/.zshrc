@@ -201,12 +201,6 @@ _fzf_comprun() {
 
 export BAT_THEME="tokyonight_night"
 
-# ------------ TheFuck ---------------
-# thefuck alias
-eval $(thefuck --alias)
-eval $(thefuck --alias fk)
-alias auto="fuck"
-
 # ------------ Zoxide (better cd) -----------
 eval "$(zoxide init zsh)"
 
