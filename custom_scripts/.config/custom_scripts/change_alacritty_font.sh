@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to the configuration file
-CONFIG_FILE="/home/ecuas/dotfiles/alacritty/.config/alacritty/alacritty.toml"
+CONFIG_FILE="/home/ecuas/.config/alacritty/alacritty.toml"
 
 # Read the current font size from the configuration file
 CURRENT_SIZE=$(grep "size\s" $CONFIG_FILE | awk '{print $3}' )
