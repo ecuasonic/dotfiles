@@ -4,6 +4,10 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local keymap = vim.keymap -- keymaps
 
+-- Motions
+keymap.set("n", "G", "Gzz")
+keymap.set("n", "gf", "gfzz")
+
 -- Indentation in Normal Mode
 keymap.set("n", "<Tab>", "a<C-t><Esc>")
 keymap.set("n", "<S-Tab>", "a<C-d><Esc>")
@@ -86,6 +90,12 @@ vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidia
 vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<cr>", { desc = "Obsidian New Page" })
 vim.keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<cr>", { desc = "Obsidian New Daily" })
 vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
+vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
+local function follow_link_and_center()
+    vim.cmd("ObsidianFollowLink")
+    vim.cmd("normal! zz")
+end
+vim.keymap.set("n", "<leader>gf", follow_link_and_center, { desc = "Obsidian Links" })
 
 -- keymaps to allow for navigation during insert mode use <C-:> instead of <ESC>
 -- keymap.set("i", "<C-c>", "<Esc><Esc><Esc>")

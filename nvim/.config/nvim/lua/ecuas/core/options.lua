@@ -62,8 +62,6 @@ opt.isfname:append("@-@")
 opt.updatetime = 50
 
 opt.colorcolumn = "80"
-vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
-vim.cmd([[highlight Comment cterm=NONE term=NONE gui=NONE ctermfg=white guifg=white]])
 
 opt.foldcolumn = '1'
 opt.foldlevel = 99
