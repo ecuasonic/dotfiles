@@ -44,6 +44,7 @@ exec --no-startup-id ~/.config/custom_scripts/lock_suspend.sh
 bindsym F12 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F11 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F10 exec --no-startup-id ~/.config/custom_scripts/switch_monitor.sh
+# bindsym F9 exec --no-startup-id "sudo ~/dotfiles/root_scripts/.config/root_scripts/fan_switch.sh"
 
 bindsym $mod+p exec "picom"
 bindsym $mod+shift+p exec "killall picom"
