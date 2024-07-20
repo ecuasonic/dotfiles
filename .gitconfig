@@ -1,9 +1,10 @@
-# This is Git's per-user configuration file
-[user]
-    name = ecuas
-	email = ecuasonic@gmail.com
-[core]
-    editor = nvim
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+
 [init]
     defaultBranch = main
 
@@ -26,15 +27,3 @@
 
 [diff]
     colorMoved = default
-; [credential "https://github.com"]
-; 	helper =
-; 	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
-; [credential "https://gist.github.com"]
-; 	helper =
-; 	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
-[credential "https://github.com"]
-	helper = 
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
