@@ -30,12 +30,12 @@ alias detach="tmux detach"
 
 # ------ Eza (better ls) -----------
 
-alias ld="eza -lD"
-alias lf="eza -lf --icons=always --color=always | grep -v /"
-alias lh="eza -dl .* --group-directories-first"
-alias ll="eza -al --group-directories-first --icons=always --git"
-alias ls="eza --group-directories-first --icons=always --color=always --git"
-alias lt="eza -al --sort=modified"
+# alias ld="eza -lD"
+# alias lf="eza -lf --icons=always --color=always | grep -v /"
+# alias lh="eza -dl .* --group-directories-first"
+# alias ll="eza -al --group-directories-first --icons=always --git"
+# alias ls="eza --group-directories-first --icons=always --color=always --git"
+# alias lt="eza -al --sort=modified"
 
 # ------------- GIT ------------------
 alias gc="git commit -m"

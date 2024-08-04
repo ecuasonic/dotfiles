@@ -14,9 +14,9 @@ export ZDOTDIR=$HOME/.config/zshrc
 export SIZE="2560x1600"
 
 
-# Sets Control to be both escape and Control
-setxkbmap -option ctrl:nocaps
-xcape -e 'Control_L=Escape' -t 175
+# # Sets Control to be both escape and Control (set in i3 config)
+# setxkbmap -option ctrl:nocaps
+# xcape -e 'Control_L=Escape' -t 175
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
