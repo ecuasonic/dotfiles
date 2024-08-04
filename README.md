@@ -36,6 +36,7 @@ sudo dnf install stow git-delta
 # Install needed programs
 # -------------------------------------------------------------------
 sudo dnf install alacritty luarocks btop zsh zoxide
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # -------------------------------------------------------------------
 # Set up ohmyzsh and zsh plugins
@@ -75,4 +76,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Power management
 # -------------------------------------------------------------------
 sudo dnf install tlp
+# /etc/tlp.conf L0152: SCHED_POWERSAVE_ON_AC="1"
+# /etc/tlp.conf L0254: AHCI_RUNTIM_PM_ON_AC="auto"
+# /etc/tlp.conf L0349: RUNTIME_PM_ONAC="auto"
 ```
