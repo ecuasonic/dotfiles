@@ -9,10 +9,15 @@ no_focus [all]
 focus_on_window_activation none
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-for_window [class=".*"] border pixel 10
+for_window [class=".*"] border pixel 9
 
 # Set the keyboard repeat and delay
 exec_always --no-startup-id xset r rate 200 40
+# exec_always --no-startup-id xset r rate
+
+# Sets Control to be both escape and Control
+exec_always --no-startup-id setxkbmap -option ctrl:nocaps
+exec_always --no-startup-id xcape -e 'Control_L=Escape' -t 175
 
 # Prolong screensaver time
 exec --no-startup-id ~/.config/custom_scripts/lock_suspend.sh
@@ -206,7 +211,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -268,7 +273,9 @@ set $mantle    #181825
 set $crust     #11111b
 
 # target                 title     bg    text      indicator    border
-client.focused           $mantle   $mauve $mantle  $rosewater #1e88e5
+# client.focused           $mantle   $mauve $mantle  $rosewater #1e88e5
+client.focused           $mantle   $mauve $mantle  $rosewater #FFA500
+# client.focused           $mantle   $mauve $mantle  $rosewater #B41825
 client.focused_inactive  $overlay0 $base  $text    $rosewater $base
 client.unfocused         $overlay0 $base  $text    $rosewater $base
 client.urgent            $peach    $base  $peach   $overlay0  $peach
@@ -280,7 +287,7 @@ client.background        $bas:w
 # -------------------------------
 
 # Set inner/outer gaps
-gaps inner 10
+gaps inner 7
 gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
