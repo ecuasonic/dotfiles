@@ -1,4 +1,4 @@
-Zephurous G14 2022 had no issues.
+Zephyrus G14 2022 had no issues.
 MacBook Pro 2012 Issues:
 	No wifi access and no wifi driver to begin with.
 	Had to connect to ethernet to connect online.
