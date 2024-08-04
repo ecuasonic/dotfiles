@@ -67,6 +67,11 @@ case $chosen in
 		fi
         ;;
     $hibernate)
+        i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
+        i3-save-tree --workspace 2 > ~/.i3/workspace-2.json
+        i3-save-tree --workspace 3 > ~/.i3/workspace-3.json
+        sleep 1
+
         ~/.config/custom_scripts/laptop_monitor.sh
         sleep 2
         i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
@@ -81,6 +86,11 @@ case $chosen in
     $logout)
 		ans=$(confirm_exit &)
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+            i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
+            i3-save-tree --workspace 2 > ~/.i3/workspace-2.json
+            i3-save-tree --workspace 3 > ~/.i3/workspace-3.json
+            sleep 1
+
 			if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
 				openbox --exit
 			elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
