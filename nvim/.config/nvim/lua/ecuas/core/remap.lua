@@ -4,6 +4,12 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local keymap = vim.keymap -- keymaps
 
+keymap.set("n", "gd", ":vsp <CR><c-]>")
+keymap.set("n", "<leader>w", "<cmd>SymbolsOutline<CR>")
+
+-- keymap.set("n", "<c-s>", ":w<CR>")
+-- keymap.set("n", "<c-q>", ":q<CR>")
+
 -- Motions
 keymap.set("n", "G", "Gzz")
 keymap.set("n", "gf", "gfzz")
@@ -39,8 +45,8 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down " 
 keymap.set("n", "J", "mzJ'z")
 
 -- Moves half pages and maintains cursor at center
-keymap.set("n", "<C-y>", "<C-d>zz")
-keymap.set("n", "<C-e>", "<C-u>zz")
+-- keymap.set("n", "<C-y>", "<C-d>zz")
+-- keymap.set("n", "<C-e>", "<C-u>zz")
 
 -- Keeps search terms in the middle
 keymap.set("n", "n", "nzzzv")
@@ -86,11 +92,12 @@ vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 keymap.set('n', "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown" })
 
 --------- obsidian ---------
-vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
-vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<cr>", { desc = "Obsidian New Page" })
-vim.keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<cr>", { desc = "Obsidian New Daily" })
-vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
-vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
+keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
+keymap.set("n", "<leader>on", ":ObsidianNew ", { desc = "Obsidian New Page" })
+keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<cr>", { desc = "Obsidian New Daily" })
+keymap.set("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
+keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
+keymap.set("n", "<leader>om", "<cmd>ObsidianBridgeTelescopeCommand<cr>", { desc = "Obsidian Bridge Menu" })
 local function follow_link_and_center()
     vim.cmd("ObsidianFollowLink")
     vim.cmd("normal! zz")
