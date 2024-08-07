@@ -51,8 +51,11 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # -------------------------------------------------------------------
 # Install programs for i3
 # -------------------------------------------------------------------
-sudo dnf install rofi polybar picom nitrogen xrandr xset cargo brightnessctl bat
+sudo dnf install rofi polybar picom nitrogen xrandr xset cargo brightnessctl bat python3-pip scrot
+bat cache --build
 cargo install xidlehook --bins
+cd; mkdir local; cd local; git clone https://github.com/JonnyHaystack/i3-resurrect.git
+pip3 install --user --upgrade i3-resurrect
 # Update /etc/X11/xorg.conf.d/90-touchpad.conf
 # Get background, open up nitrogen, then select it
 # Update scripts if needed
@@ -61,6 +64,7 @@ cargo install xidlehook --bins
 # Install xcape for ctrl/esc
 # -------------------------------------------------------------------
 sudo dnf install git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
+cd ~/local;
 git clone https://github.com/alols/xcape.git
 cd xcape
 make
