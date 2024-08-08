@@ -4,13 +4,17 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local keymap = vim.keymap -- keymaps
 
-keymap.set("n", "gd", ":vsp <CR><c-]>")
 keymap.set("n", "<leader>w", "<cmd>SymbolsOutline<CR>")
 
 -- keymap.set("n", "<c-s>", ":w<CR>")
 -- keymap.set("n", "<c-q>", ":q<CR>")
 
 -- Motions
+keymap.set("n", "H", "^")
+keymap.set("v", "H", "^")
+keymap.set("n", "L", "$")
+keymap.set("v", "L", "$")
+
 keymap.set("n", "G", "Gzz")
 keymap.set("n", "gf", "gfzz")
 
