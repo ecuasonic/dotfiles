@@ -12,6 +12,9 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=$HOME/.config/zshrc
 export SIZE="2560x1600"
+# Add to gcc path for autocomplete in nvim
+export C_INCLUDE_PATH=/usr/avr/include:/home/ecuas/.arduino15/:/usr/lib/gcc/avr/14.1.0/include:/usr/lib/gcc/avr/14.1.0/include-fixed
+
 
 
 # # Sets Control to be both escape and Control (set in i3 config)
