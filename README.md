@@ -61,6 +61,11 @@ pip3 install --user --upgrade i3-resurrect
 # Update scripts if needed
 
 # -------------------------------------------------------------------
+# Firefox settings
+# -------------------------------------------------------------------
+
+
+# -------------------------------------------------------------------
 # Install xcape for ctrl/esc
 # -------------------------------------------------------------------
 sudo dnf install git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
@@ -83,4 +88,13 @@ sudo dnf install tlp
 # /etc/tlp.conf L0152: SCHED_POWERSAVE_ON_AC="1"
 # /etc/tlp.conf L0254: AHCI_RUNTIM_PM_ON_AC="auto"
 # /etc/tlp.conf L0349: RUNTIME_PM_ONAC="auto"
+
+# -------------------------------------------------------------------
+# GCC and Nvim "go-to-file" gf
+# -------------------------------------------------------------------
+# So that gcc knows where to look for, add to .zshrc:
+# export C_INCLUDE_PATH=/home/ecuas/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include:$C_INCLUDE_PATH
+# So that nvim gf works, add to init.lua
+# vim.o.path = vim.o.path .. ",/home/ecuas/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/**"
+
 ```
