@@ -25,13 +25,12 @@ sudo modprobe wl
 # -------------------------------------------------------------------
 # Install gh to get dotfiles online
 # -------------------------------------------------------------------
-sudo dnf install gh
+sudo dnf install gh git
 gh auth login
 git clone https://github.com/ecuasonic/dotfiles.git
 sudo dnf install stow git-delta
 # stow everything and copy important config files, such as:
 #   .gitconfig .zshenv
-
 # -------------------------------------------------------------------
 # Install needed programs
 # -------------------------------------------------------------------
@@ -51,7 +50,8 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # -------------------------------------------------------------------
 # Install programs for i3
 # -------------------------------------------------------------------
-sudo dnf install rofi polybar picom nitrogen xrandr xset cargo brightnessctl bat python3-pip scrot
+sudo dnf install rofi polybar picom nitrogen xrandr xset cargo brightnessctl bat python3-pip scrot i3-gaps
+# sudo pacman -S xorg-server xorg-xinit
 bat cache --build
 cargo install xidlehook --bins
 cd; mkdir local; cd local; git clone https://github.com/JonnyHaystack/i3-resurrect.git
