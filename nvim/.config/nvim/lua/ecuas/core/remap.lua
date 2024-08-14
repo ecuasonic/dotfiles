@@ -15,8 +15,7 @@ keymap.set("v", "H", "^")
 keymap.set("n", "L", "$")
 keymap.set("v", "L", "$")
 
-keymap.set("n", "G", "Gzz")
-keymap.set("n", "gf", "gfzz")
+-- keymap.set("n", "G", "Gzz")
 
 -- Indentation in Normal Mode
 keymap.set("n", "<Tab>", "a<C-t><Esc>")
@@ -102,11 +101,13 @@ keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<cr>", { desc = "Obsidian New
 keymap.set("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
 keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
 keymap.set("n", "<leader>om", "<cmd>ObsidianBridgeTelescopeCommand<cr>", { desc = "Obsidian Bridge Menu" })
-local function follow_link_and_center()
-    vim.cmd("ObsidianFollowLink")
-    vim.cmd("normal! zz")
-end
-vim.keymap.set("n", "<leader>gf", follow_link_and_center, { desc = "Obsidian Links" })
+keymap.set("n", "gf", function()
+    if require("obsidian").util.cursor_on_markdown_link() then
+        return "<cmd>ObsidianFollowLink<CR>"
+    else
+        return "gfzz"
+    end
+end, { noremap = false, expr = true })
 
 -- keymaps to allow for navigation during insert mode use <C-:> instead of <ESC>
 -- keymap.set("i", "<C-c>", "<Esc><Esc><Esc>")

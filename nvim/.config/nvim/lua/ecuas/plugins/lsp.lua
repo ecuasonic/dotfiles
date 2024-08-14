@@ -56,7 +56,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "tsserver",
                 "clangd",
                 "arduino_language_server"
             },
