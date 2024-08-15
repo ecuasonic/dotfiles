@@ -31,6 +31,7 @@ git clone https://github.com/ecuasonic/dotfiles.git
 sudo dnf install stow git-delta
 # stow everything and copy important config files, such as:
 #   .gitconfig .zshenv
+# dont forget to make scripts executable
 # -------------------------------------------------------------------
 # Install needed programs
 # -------------------------------------------------------------------
