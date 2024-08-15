@@ -106,5 +106,4 @@ sudo dnf install tlp
 # nitrogen/.config/nitrogen/bg-saved.cfg    : L2
 # nitrogen/.config/nitrogen/nitrogen.cfg    : L2
 # polybar/.config/polybar/hack/bars.ini     : L118, L161
-# polybar/.config/polybar/hack/config.ini   : L162
 ```

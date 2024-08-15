@@ -14,7 +14,7 @@ alias ea="nvim $HOME/.config/zshrc/.zsh_alias"
 alias ec="nvim $HOME/.config/zshrc/.zsh_commands"
 
 alias ei3="nvim $HOME/.config/i3/config"
-alias ep="nvim $HOME/.config/polybar/hack"
+alias ep="nvim $HOME/.config/polybar/hack/bars.ini"
 alias en="nvim $HOME/.config/nvim/lua/ecuas"
 alias eni="nvim $HOME/.config/nitrogen"
 
@@ -64,4 +64,3 @@ alias ......="cd ../../../../.."
 
 #-----------FANS-------------------
 alias fan="sudo ~/dotfiles/root_scripts/.config/root_scripts/fan_switch.sh"
-
