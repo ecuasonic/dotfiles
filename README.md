@@ -79,8 +79,9 @@ sudo make install
 # -------------------------------------------------------------------
 # Install tmux plugin manager
 # -------------------------------------------------------------------
+sudo dnf install tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    prefix + I: To install plugins
+# prefix + I: To install plugins
 
 # -------------------------------------------------------------------
 # Power management
