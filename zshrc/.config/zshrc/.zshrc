@@ -219,6 +219,6 @@ alias cd="z"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-~/.config/custom_scripts/stty.sh
+# ~/.config/custom_scripts/stty.sh
 # stty susp "^C"
 # stty intr "^Z"

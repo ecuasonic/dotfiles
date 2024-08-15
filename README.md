@@ -99,4 +99,12 @@ sudo dnf install tlp
 # So that nvim gf works, add to init.lua
 # vim.o.path = vim.o.path .. ",/home/ecuas/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/**"
 
+# -------------------------------------------------------------------
+# Where G14 and MBP2012 differ
+# -------------------------------------------------------------------
+# i3/.config/i3/config : L05
+# nitrogen/.config/nitrogen/bg-saved.cfg    : L2
+# nitrogen/.config/nitrogen/nitrogen.cfg    : L2
+# polybar/.config/polybar/hack/bars.ini     : L118, L161
+# polybar/.config/polybar/hack/config.ini   : L162
 ```
