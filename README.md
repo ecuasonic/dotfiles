@@ -102,7 +102,7 @@ sudo dnf install tlp
 # -------------------------------------------------------------------
 # Where G14 and MBP2012 differ
 # -------------------------------------------------------------------
-# i3/.config/i3/config : L05
+# i3/.config/i3/config                      : L5, L15
 # nitrogen/.config/nitrogen/bg-saved.cfg    : L2
 # nitrogen/.config/nitrogen/nitrogen.cfg    : L2
 # polybar/.config/polybar/hack/bars.ini     : L118, L161
