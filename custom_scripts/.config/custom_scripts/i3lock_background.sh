@@ -1,5 +1,5 @@
 # .config/i3/config
-# hack/scripts/rofi/powermenu.sh
+# hack/scripts/powermenu.sh
 
 xrandr_output=$(xrandr --listactivemonitors)
 display_ports=$(echo "$xrandr_output" | awk '/^[[:space:]]*[0-9]+:/ {print $4}')

@@ -9,5 +9,6 @@ if [ $display_ports = "HDMI-1-1" ]; then
     killall nitrogen
     sleep 0.1
     nitrogen --set-centered ~/Backgrounds/${SIZE}barcelona.png
+    sleep 0.1
     i3 restart
 fi
