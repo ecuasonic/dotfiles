@@ -63,4 +63,4 @@ alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
 #-----------FANS-------------------
-alias fan="sudo ~/dotfiles/root_scripts/.config/root_scripts/fan_switch.sh"
+# alias fan="sudo ~/dotfiles/root_scripts/.config/root_scripts/fan_switch.sh"

@@ -35,9 +35,9 @@ clearls() {
 }
 
 # change monitors
-s() {
-    ~/.config/custom_scripts/switch_monitor.sh
-}
+# s() {
+#     ~/.config/custom_scripts/switch_monitor.sh
+# }
 
 # change alacritty font
 f() {
@@ -46,10 +46,10 @@ f() {
 
 # i3 resurrection
 save() {
-    ~/.config/custom_scripts/saveWindow.sh
+    ~/.config/custom_scripts/save_workspaces.sh
 }
 
-resurrect() {
-    ~/.config/custom_scripts/restoreWindow.sh
+restore() {
+    ~/.config/custom_scripts/restore_workspaces.sh
 }
 
