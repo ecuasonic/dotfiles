@@ -41,6 +41,9 @@ case $chosen in
     $shutdown)
 		ans=$(confirm_exit &)
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+            ~/.config/custom_scripts/save_workspaces.sh
+            sleep 2
+
 			systemctl poweroff
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
@@ -50,8 +53,11 @@ case $chosen in
         ;;
     $reboot)
 		ans=$(confirm_exit &)
-		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			systemctl reboot
+        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+            ~/.config/custom_scripts/save_workspaces.sh
+            sleep 2
+
+            systemctl reboot
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
         else
@@ -62,16 +68,11 @@ case $chosen in
 		if [[ -f /usr/bin/i3lock ]]; then
             i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
             sleep 2
-		elif [[ -f /usr/bin/betterlockscreen ]]; then
-			betterlockscreen -l
-		fi
+        fi
         ;;
     $hibernate)
-        i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
-        i3-save-tree --workspace 2 > ~/.i3/workspace-2.json
-        i3-save-tree --workspace 3 > ~/.i3/workspace-3.json
-        sleep 1
-
+        ~/.config/custom_scripts/save_workspaces.sh
+        sleep 2
         ~/.config/custom_scripts/laptop_monitor.sh
         sleep 2
         i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
@@ -86,10 +87,8 @@ case $chosen in
     $logout)
 		ans=$(confirm_exit &)
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
-            i3-save-tree --workspace 2 > ~/.i3/workspace-2.json
-            i3-save-tree --workspace 3 > ~/.i3/workspace-3.json
-            sleep 1
+            ~/.config/custom_scripts/save_workspaces.sh
+            sleep 2
 
 			if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
 				openbox --exit
