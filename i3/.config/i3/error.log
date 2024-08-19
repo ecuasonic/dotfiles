@@ -1,0 +1,30 @@
+[ 08/19/2024 01:00:51.038 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7915
+[ 08/19/2024 01:00:51.038 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7919
+[ 08/19/2024 01:00:51.038 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7931
+[ 08/19/2024 01:00:51.038 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7935
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7949
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7953
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7969
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7973
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7987
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 7991
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8002
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8006
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8015
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8019
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8050
+[ 08/19/2024 01:00:51.040 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8054
+[ 08/19/2024 01:00:51.081 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8447
+[ 08/19/2024 01:00:51.081 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8448
+[ 08/19/2024 01:00:51.081 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8449
+[ 08/19/2024 01:00:51.081 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8450
+[ 08/19/2024 01:00:51.081 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 8451
+Terminated
+[ 08/19/2024 01:00:51.447 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 797
+
+(nitrogen:5078): GLib-GObject-CRITICAL **: 01:00:51.590: Attempting to freeze the notification queue for object GtkSettings[0x55ef9c2befb0]; Property notification does not work during instance finalization.
+
+(nitrogen:5078): GLib-GObject-CRITICAL **: 01:00:51.590: Attempting to thaw the notification queue for object GtkSettings[0x55ef9c2befb0]; Property notification does not work during instance finalization.
+[ 08/19/2024 01:00:51.958 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 1034
+Terminated
+[ 08/19/2024 01:05:46.190 x_log_error WARN ] X error 3 WINDOW request 2 minor 0 serial 30840

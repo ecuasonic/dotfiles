@@ -1,6 +1,9 @@
 # i3 config file (v4)
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+set $ERROR_LOG ~/.config/i3/error.log
+set $SCRIPTS ~/.config/custom_scripts
+
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 # ----------------------------------------------------------------------------
 #set $mod Mod4
@@ -18,47 +21,22 @@ for_window [class=".*"] border pixel 9
 # ----------------------------------------------------------------------------
 
 # Set the keyboard repeat and delay
-exec_always --no-startup-id xset r rate 200 40
-# exec_always --no-startup-id xset r rate
+exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xset" "r rate 200 40" 2> $ERROR_LOG
 
 # Sets Control to be both escape and Control
-exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-exec_always --no-startup-id xcape -e 'Control_L=Escape' -t 175
+exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "setxkbmap" "-option ctrl:nocaps" 2>> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xcape" "-e 'Control_L=Escape' -t 175" 2>> $ERROR_LOG
 
 # Prolong screensaver time
-exec --no-startup-id ~/.config/custom_scripts/lock_suspend.sh
-# exec --no-startup-id xset s 2000
-# exec_always xautolock -time 1 -locker 'i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)' -notify 10 'systemctl suspend'
-# exec_always xautolock -time 1 -locker '$(~/.config/custom_scripts/lock.sh)'
-# exec_always --no-startup-id xset dpms 0 0 70
-# exec xss-lock --transfer-sleep-lock -- i3lock --nofork --image=$HOME/Pictures/barcelona.png &
-
-# Sleep settings
-# set $Locker i3lock -i $(~/.config/custom_scripts/i3lock_background.sh) && sleep 2
-#
-# set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-# mode "$mode_system" {
-#     bindsym l exec --no-startup-id $Locker, mode "default"
-#     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-#     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-#     bindsym h exec --no-startup-id ~/.config/custom_scripts/laptop_monitor.sh && sleep 2 && $Locker && systemctl hibernate, mode "default"
-#     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-#     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-#
-#     # back to normal: Enter or Escape
-#     bindsym Return mode "default"
-#     bindsym Escape mode "default"
-#     bindsym F12 mode "default"
-#     bindsym F11 mode "default"
-# }
+exec --no-startup-id $SCRIPTS/lock_suspend.sh
+exec --no-startup-id $SCRIPTS/i3_startup.sh
 
 bindsym F12 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F11 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
-bindsym F10 exec --no-startup-id ~/.config/custom_scripts/switch_monitor.sh
-# bindsym F9 exec --no-startup-id "sudo ~/dotfiles/root_scripts/.config/root_scripts/fan_switch.sh"
+bindsym F10 exec --no-startup-id zsh -c "$SCRIPTS/switch_monitor.sh 2>> $ERROR_LOG"
 
-bindsym $mod+p exec "picom"
-bindsym $mod+shift+p exec "killall picom"
+exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "picom" 2>> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "nitrogen" "--restore" 2>> $ERROR_LOG
 
 hide_edge_borders none
 
@@ -71,14 +49,8 @@ bindsym $mod+n border normal
 # is used in the bar {} block below.
 font pango:MesloLGS NF 11
 
-exec --no-startup-id picom
-exec_always --no-startup-id nitrogen --restore
-
 # kill any hanging polybar processes
-# exec_always killall polybar
-# exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
-exec_always ~/.config/polybar/hack/launch.sh
-
+exec_always --no-startup-id ~/.config/polybar/hack/launch.sh
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -101,7 +73,7 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id exec ~/.config/custom_scripts/volume_up.sh 115
+bindsym XF86AudioRaiseVolume exec --no-startup-id exec $SCRIPTS/volume_up.sh 115
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
@@ -122,7 +94,6 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+d exec "rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/hack/scripts/rofi/launcher.rasi"
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -135,23 +106,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+| split h
@@ -359,16 +318,3 @@ bindsym Print+$mod exec scrot -s ~/Pictures/Screenshots/%F.png -e 'xclip -select
 
 # # Screenshots
 bindsym Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png# Hide borders
-
-exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
-exec firefox
-exec sleep 0.5
-exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.i3/workspace-2.json'"
-assign [class="obsidian"] 2
-exec obsidian
-exec --no-startup-id "i3-msg 'workspace 2; exec alacritty'"
-exec sleep 0.5
-exec --no-startup-id "i3-msg 'workspace 3; append_layout ~/.i3/workspace-3.json'"
-exec --no-startup-id "i3-msg 'workspace 3; exec alacritty'"
-exec sleep 0.5
-exec --no-startup-id "i3-msg 'workspace 1'"
