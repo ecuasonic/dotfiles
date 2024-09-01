@@ -44,7 +44,7 @@ normal                = { family = "MesloLGS NF", style = "Regular" }
 bold                  = { family = "MesloLGS NF", style = "Bold" }
 italic                = { family = "MesloLGS NF", style = "Italic" }
 bold_italic           = { family = "MesloLGS NF", style = "Bold Italic" }
-size                  = 14
+size                  = 8
 offset                = { x = 0, y = 0 }
 glyph_offset          = { x = 0, y = 0 }
 #builtin_box_drawing   = true
@@ -151,9 +151,9 @@ blinking              = "Off"
 
 [cursor]
 blink_interval        = 500
-blink_timeout         = 0
-#unfocused_hollow      = true
-#thickness             = 0.15
+blink_timeout         = 100
+unfocused_hollow      = true
+thickness             = 0.15
 
 [terminal]
 #osc52                 = "OnlyCopy"
@@ -181,13 +181,13 @@ alphabet              = "jfkdls;ahgurieowpq"
 [keyboard]
 bindings = [
   { key = "V",        mods = "Control", action = "Paste" },
-  { key = "C",        mods = "Control", action = "Copy" },
-  { key = "Insert",   mods = "Shift",         action = "PasteSelection" },
-  { key = "F",        mods = "Control|Shift", action = "SearchForward",     mode = "~Search" },
-  { key = "B",        mods = "Control|Shift", action = "SearchBackward",    mode = "~Search" },
-  { key = "Key0",     mods = "Control",       action = "ResetFontSize" },
-  { key = "Equals",   mods = "Control",       action = "IncreaseFontSize" },
-  { key = "Minus",    mods = "Control",       action = "DecreaseFontSize" },
+  # { key = "y",        mods = "Control", action = "Copy" },
+  # { key = "Insert",   mods = "Shift",         action = "PasteSelection" },
+  # { key = "F",        mods = "Control|Shift", action = "SearchForward",     mode = "~Search" },
+  # { key = "B",        mods = "Control|Shift", action = "SearchBackward",    mode = "~Search" },
+  # { key = "Key0",     mods = "Control",       action = "ResetFontSize" },
+  # { key = "Equals",   mods = "Control",       action = "IncreaseFontSize" },
+  # { key = "Minus",    mods = "Control",       action = "DecreaseFontSize" },
 ]
 
 
