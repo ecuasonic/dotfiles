@@ -21,10 +21,10 @@ TERM                  = "xterm-256color"
 [window]
 #dimensions            = { columns = 0, lines = 0 }
 #position              = { x = 0, y = 0 }
-padding               = { x = 5, y = 5 }
-#dynamic_padding       = true
+padding               = { x = 0, y = 0 }
+dynamic_padding       = true
 decorations           = "None"
-opacity               = 0.9
+opacity               = 1.0
 blur                  = true
 #startup_mode          = "Windowed"
 title                 = "Alacritty"
@@ -36,7 +36,7 @@ class                 = { instance = "Alacritty", general = "Alacritty" }
 
 
 [scrolling]
-history               = 65535
+history               = 10000
 #multiplier            = 3
 
 [font]
@@ -52,8 +52,8 @@ glyph_offset          = { x = 0, y = 0 }
 
 # catpuccin-mocha, ported from .yml
 [colors.primary]
-background            = "#1E1E2E"
-foreground            = "#CDD6F4"
+background            = "#010005"
+foreground            = "#FFFFFF"
 dim_foreground        = "#CDD6F4"
 bright_foreground     = "#CDD6F4"
 
@@ -94,13 +94,13 @@ text                  = "#1E1E2E"
 background            = "#F5E0DC"
 
 [colors.normal]
-black                 = "#45475A"
+black                 = "#1d202f"
 red                   = "#F38BA8"
 green                 = "#A6E3A1"
 yellow                = "#F9E2AF"
-blue                  = "#89B4FA"
+blue                  = "#7aa2f7"
 magenta               = "#F5C2E7"
-cyan                  = "#94E2D5"
+cyan                  = "#7dcfff"
 white                 = "#BAC2DE"
 
 [colors.bright]
@@ -161,7 +161,7 @@ thickness             = 0.15
 [mouse]
 hide_when_typing      = true
 bindings = [
-  { mouse = "Middle", action = "PasteSelection" },
+  # { mouse = "Middle", action = "PasteSelection" },
 ]
 
 [hints]
