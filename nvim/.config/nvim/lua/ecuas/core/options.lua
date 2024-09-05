@@ -54,7 +54,7 @@ opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo")
 
 opt.hlsearch = false
-opt.incsearch = true
+opt.incsearch = false
 
 opt.scrolloff = 8
 opt.isfname:append("@-@")
