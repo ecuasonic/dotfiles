@@ -2,7 +2,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $ERROR_LOG ~/.config/i3/error.log
-set $SCRIPTS ~/.config/custom_scripts
+set $SCRIPTS ~/.config/scripts
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 # ----------------------------------------------------------------------------
@@ -16,8 +16,7 @@ focus_on_window_activation none
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 # ----------------------------------------------------------------------------
-# for_window [class=".*"] border pixel 5
-for_window [class=".*"] border pixel 9
+for_window [class=".*"] border pixel 5
 # ----------------------------------------------------------------------------
 
 # Set the keyboard repeat and delay
@@ -26,6 +25,9 @@ exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xset" "r rate 200 40" 
 # Sets Control to be both escape and Control
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "setxkbmap" "-option ctrl:nocaps" 2>> $ERROR_LOG
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xcape" "-e 'Control_L=Escape' -t 175" 2>> $ERROR_LOG
+
+# Copy obsidian notes on each reboot
+exec --no-startup-id rclone sync ~/Documents/Obsidian-Notes remote-google-drive:notes --drive-use-trash=false
 
 # Prolong screensaver time
 exec --no-startup-id $SCRIPTS/lock_suspend.sh
@@ -42,7 +44,7 @@ hide_edge_borders none
 
 # change borders
 bindsym $mod+u border none
-bindsym $mod+y border pixel 7
+bindsym $mod+y border pixel 5
 bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -175,40 +177,6 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-bindsym $mod+r mode "resize"
- # Start i3bar to display a workspace bar (plus the system information i3status
-# # finds out, if available)
-# bar {
-#         status_command i3status --config ~/.config/i3/i3status.conf
-# }
 
 set $rosewater #f5e0dc
 set $flamingo  #f2cdcd
@@ -237,22 +205,35 @@ set $base      #1e1e2e
 set $mantle    #181825
 set $crust     #11111b
 
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    bindsym h resize shrink width 10 px or 10 ppt;
+    bindsym j resize grow height 10 px or 10 ppt;
+    bindsym k resize shrink height 10 px or 10 ppt;
+    bindsym l resize grow width 10 px or 10 ppt;
+
+# TODO: Change the color of the border when entering this mode.
+    bindsym Escape exec --no-startup-id "i3-msg 'border pixel 5'; i3-msg mode 'default'"
+}
+bindsym $mod+r exec --no-startup-id "i3-msg 'border pixel 3'; i3-msg mode 'resize'"
+
 # target                 title     bg    text      indicator    border
 # client.focused           $mantle   $mauve $mantle  $rosewater #1e88e5
-client.focused           $mantle   $mauve $mantle  $rosewater #FFA500
 # client.focused           $mantle   $mauve $mantle  $rosewater #B41825
-client.focused_inactive  $overlay0 $base  $text    $rosewater $base
-client.unfocused         $overlay0 $base  $text    $rosewater $base
+client.focused           $mantle   $mauve $mantle  $rosewater #FFA500
+# client.unfocused         $overlay0 $base  $text    $rosewater $base
+client.unfocused         $overlay0 $base  $text    $rosewater #141C21
+client.focused_inactive  $overlay0 $base  $text    $rosewater #141C21
 client.urgent            $peach    $base  $peach   $overlay0  $peach
 client.placeholder       $overlay0 $base  $text    $overlay0  $overlay0
-client.background        $bas:w
+# client.background        $bas:w
 
 # -------------------------------
 # Settings for i3-gaps:
 # -------------------------------
 
 # Set inner/outer gaps
-gaps inner 7
+gaps inner 0
 gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
