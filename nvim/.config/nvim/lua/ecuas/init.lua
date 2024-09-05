@@ -81,3 +81,25 @@ require('lspconfig.ui.windows').default_options = {
 -- vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 vim.cmd([[hi Comment guifg=yellow ctermfg=yellow]])
 
+-----------------ARDUINO------------------
+
+-- Function to set C_INCLUDE_PATH based on directory
+local function update_include_path()
+    local cwd = vim.fn.getcwd()
+    if cwd == vim.fn.expand("~/Arduino") or cwd == vim.fn.expand("/usr/avr/include/*") then
+        vim.fn.setenv("C_INCLUDE_PATH", "/usr/avr/include")
+        print("C_INCLUDE_PATH set to: /usr/avr/include")
+    else
+        vim.fn.setenv("C_INCLUDE_PATH", "")
+        print("C_INCLUDE_PATH cleared")
+    end
+end
+
+-- Set an autocommand to trigger the update_include_path function on directory change
+vim.api.nvim_create_autocmd("DirChanged", {
+    pattern = "*",
+    callback = update_include_path
+})
+
+-- Call the function on startup to set the correct path initially
+update_include_path()
