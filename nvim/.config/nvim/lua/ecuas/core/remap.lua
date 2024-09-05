@@ -57,13 +57,16 @@ keymap.set("n", "N", "Nzzzv")
 
 -- greatest remap ever
 -- You can paste to replace words, without the deleted words going into buffer
-keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste over words, w/o going into buffer" })
+keymap.set("x", "p", "\"_dP", { desc = "Paste over words, w/o going into buffer" })
+keymap.set("x", "<leader>p", "\"_d\"+P", { desc = "Paste over words, from clipboard, w/o going into buffer"})
+keymap.set("n", "<leader>p", "\"+p", { desc = "Paste from clipboard"})
+keymap.set("n", "<leader>P", "\"+P", { desc = "Paste from clipboard ()"})
 
 -- next greatest remap ever : asbjornHaland
 -- Yank into system clipboard
 keymap.set("n", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
 keymap.set("v", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
-keymap.set("n", "<leader>Y", "\"+Y", { desc = "Yank line into sys-clipboard" })
+keymap.set("n", "<leader>yy", "\"+Y", { desc = "Yank line into sys-clipboard" })
 
 -- Delete to void register
 keymap.set("n", "<leader>d", "\"_d", { desc = "Delete into void register" })
@@ -108,10 +111,3 @@ keymap.set("n", "gf", function()
         return "gfzz"
     end
 end, { noremap = false, expr = true })
-
--- keymaps to allow for navigation during insert mode use <C-:> instead of <ESC>
--- keymap.set("i", "<C-c>", "<Esc><Esc><Esc>")
--- keymap.set("i", "<c-h>", "<Left>")
--- keymap.set("i", "<C-j>", "<Down>")
--- keymap.set("i", "<C-k>", "<Up>")
--- keymap.set("i", "<C-l>", "<Right>")
