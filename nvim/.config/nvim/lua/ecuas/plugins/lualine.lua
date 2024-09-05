@@ -21,6 +21,95 @@ function Harpoon_files()
     return table.concat(contents)
 end
 
+local mode = {
+    'mode',
+    icons_enabled = true,
+    icon = nil,
+    separator = '',
+    cond = nil,
+    draw_empty = false,
+    type = nil,
+    padding = 1,
+    fmt = nil,
+    on_click = nil,
+}
+
+local diagnostics = {
+    'diagnostics',
+    sources = { 'nvim_lsp' },
+    sections = { 'error', 'warn', 'info', 'hint' },
+    --diagnostics_color = {
+    --error = 'DiagnosticError',
+    --warn = 'DiagnosticWarn',
+    --info = 'DiagnosticInfo',
+    --hint = 'DiagnosticHint',
+    --},
+    --symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+    colored = true,
+    update_in_insert = false,
+    always_visible = false,
+}
+
+local filename = {
+    'filename',
+    file_status = true,
+    newfile_status = false,
+    padding = 1,
+    path = 3,
+    shorting_target = 40,
+    symbols = {
+        modified = '',
+        readonly = '[-]',
+        unnames = '[No Name]',
+        newfile = '[New]',
+    },
+}
+
+-- Copyright (c) 2020-2021 shadmansaleh
+-- MIT license, see LICENSE for more details.
+-- stylua: ignore
+local colors = {
+    color3   = '#090a15', -- Line
+    color6   = '#a1aab8',
+    color7   = '#82aaff', -- Normal BG
+    color8   = '#ae81ff',
+    color0   = '#092236', -- Normal, Replace, Insert FG
+    color1   = '#ff5874', -- Replace BG
+    color2   = '#00d7af',
+    color9   = '#ffa500'
+}
+
+local nightfly =  {
+    -- custom_nightfly.command.a = { fg = '#000000', bg = '#ffa500', gui = 'bold' }
+    -- custom_nightfly.command.z = custom_nightfly.command.a
+    replace = {
+        a = { fg = colors.color0, bg = colors.color1, gui = 'bold' },
+        b = { fg = colors.color2, bg = colors.color3 },
+    },
+    inactive = {
+        a = { fg = colors.color6, bg = colors.color3, gui = 'bold' },
+        b = { fg = colors.color6, bg = colors.color3 },
+        c = { fg = colors.color6, bg = colors.color3 },
+    },
+    normal = {
+        a = { fg = colors.color0, bg = colors.color7, gui = 'bold' },
+        b = { fg = colors.color2, bg = colors.color3 },
+        c = { fg = colors.color2, bg = colors.color3 },
+    },
+    visual = {
+        a = { fg = colors.color0, bg = colors.color8, gui = 'bold' },
+        b = { fg = colors.color2, bg = colors.color3 },
+    },
+    insert = {
+        a = { fg = colors.color0, bg = colors.color2, gui = 'bold' },
+        b = { fg = colors.color2, bg = colors.color3 },
+    },
+    command = {
+        a = { fg = colors.color0, bg = colors.color9, gui = 'bold' },
+        b = { fg = colors.color2, bg = colors.color3, gui = 'bold' }
+    }
+}
+
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -29,54 +118,12 @@ return {
     },
     config = function()
 
-        local mode = {
-            'mode',
-            icons_enabled = true,
-            icon = nil,
-            separator = '',
-            cond = nil,
-            draw_empty = false,
-            type = nil,
-            padding = 1,
-            fmt = nil,
-            on_click = nil,
-        }
-
-        local diagnostics = {
-            'diagnostics',
-            sources = { 'nvim_lsp' },
-            sections = { 'error', 'warn', 'info', 'hint' },
-            --diagnostics_color = {
-            --error = 'DiagnosticError',
-            --warn = 'DiagnosticWarn',
-            --info = 'DiagnosticInfo',
-            --hint = 'DiagnosticHint',
-            --},
-            --symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
-            colored = true,
-            update_in_insert = false,
-            always_visible = false,
-        }
-
-        local filename = {
-            'filename',
-            file_status = true,
-            newfile_status = false,
-            padding = 1,
-            path = 3,
-            shorting_target = 40,
-            symbols = {
-                modified = '',
-                readonly = '[-]',
-                unnames = '[No Name]',
-                newfile = '[New]',
-            },
-        }
+        -- custom_nightfly.tabline = { fg = '#ffffff'}
 
         require('lualine').setup {
             options = {
                 icons_enabled = true,
-                theme = 'nightfly',
+                theme = nightfly,
                 -- component_separators = { left = '', right = ''},
                 component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = ''},
@@ -88,9 +135,9 @@ return {
                 always_divide_middle = true,
                 globalstatus = false,
                 refresh = {
-                    statusline = 1000,
-                    tabline = 1000,
-                    winbar = 1000,
+                    statusline = 1500,
+                    tabline = 1500,
+                    winbar = 1500,
                 }
             },
             sections = {
