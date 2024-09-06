@@ -41,9 +41,7 @@ case $chosen in
     $shutdown)
 		ans=$(confirm_exit &)
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            ~/.config/custom_scripts/save_workspaces.sh
-            sleep 2
-
+            ~/.config/scripts/rs_workspace.sh -s
 			systemctl poweroff
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
@@ -54,9 +52,7 @@ case $chosen in
     $reboot)
 		ans=$(confirm_exit &)
         if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            ~/.config/custom_scripts/save_workspaces.sh
-            sleep 2
-
+            ~/.config/scripts/rs_workspace.sh -s
             systemctl reboot
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
@@ -66,37 +62,28 @@ case $chosen in
         ;;
     $lock)
 		if [[ -f /usr/bin/i3lock ]]; then
-            i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
+            i3lock -i $(~/.config/scripts/i3lock_background.sh)
             sleep 2
         fi
         ;;
     $hibernate)
-        ~/.config/custom_scripts/save_workspaces.sh
-        sleep 2
-        ~/.config/custom_scripts/laptop_monitor.sh
-        sleep 2
-        i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
-        sleep 2
+        ~/.config/scripts/rs_workspace.sh -s
+        ~/.config/scripts/laptop_monitor.sh
+        sleep 1
+        i3lock -i $(~/.config/scripts/i3lock_background.sh)
+        sleep 1
         systemctl hibernate
         ;;
     $suspend)
-        i3lock -i $(~/.config/custom_scripts/i3lock_background.sh)
-        sleep 2
+        i3lock -i ~/Backgrounds/background.png
+        sleep 1
         systemctl suspend
         ;;
     $logout)
 		ans=$(confirm_exit &)
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            ~/.config/custom_scripts/save_workspaces.sh
-            sleep 2
-
-			if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
-				openbox --exit
-			elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
-				bspc quit
-			elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
-				i3-msg exit
-			fi
+            ~/.config/scripts/rs_workspace.sh -s
+            i3-msg exit
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
         else
