@@ -12,9 +12,7 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=$HOME/.config/zshrc
 export SIZE="2560x1600"
-
-# Add to gcc path for autocomplete in nvim
-# export C_INCLUDE_PATH=/usr/avr/include:/home/ecuas/.arduino15/:/usr/lib/gcc/avr/14.1.0/include:/usr/lib/gcc/avr/14.1.0/include-fixed
+export EDITOR="$(which nvim)"
 
 # # Sets Control to be both escape and Control (set in i3 config)
 # setxkbmap -option ctrl:nocaps
@@ -90,7 +88,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -216,8 +214,32 @@ alias cd="z"
 # To customize prompt, run `p10k configure` or edit ~/.config/zshrc/.p10k.zsh.
 [[ ! -f ~/.config/zshrc/.p10k.zsh ]] || source ~/.config/zshrc/.p10k.zsh
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # ~/.config/custom_scripts/stty.sh
 # stty susp "^C"
 # stty intr "^Z"
+
+# man colors
+export LESS_TERMCAP_mb=$'\e[1;31m'   # start blinking
+export LESS_TERMCAP_md=$'\e[1;31m'   # start bold
+export LESS_TERMCAP_me=$'\e[0m'      # end mode
+export LESS_TERMCAP_se=$'\e[0m'      # end standout-mode
+export LESS_TERMCAP_so=$'\e[01;1;33m' # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\e[0m'      # end underline
+export LESS_TERMCAP_us=$'\e[1;32m'   # begin underline
+export GROFF_NO_SGR=1
+
+# VIM keybindings
+bindkey -v
+bindkey -M vicmd '^[' undefined-key
+bindkey -M vicmd 'yy' vi-yank-whole-line
+bindkey -M vicmd 'H' vi-first-non-blank
+bindkey -M vicmd 'L' vi-end-of-line
+bindkey -M vicmd > ~/dotfiles/zshrc/.config/zshrc/bindkey.txt
+
+function zvm_config() {
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
+
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/zshrc/.config/zshrc/.p10k.zsh.
