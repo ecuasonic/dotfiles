@@ -3,8 +3,7 @@ vim.g.mapleader = " " -- space key
 
 -- for conciseness
 local keymap = vim.keymap -- keymaps
-
-keymap.set("n", "<leader>w", "<cmd>SymbolsOutline<CR>")
+keymap.set('n', ';', "")
 
 -- keymap.set("n", "<c-s>", ":w<CR>")
 -- keymap.set("n", "<c-q>", ":q<CR>")

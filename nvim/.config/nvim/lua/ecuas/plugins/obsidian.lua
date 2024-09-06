@@ -36,7 +36,7 @@ return {
                 -- Optional, if you keep daily notes in a separate directory.
                 folder = "1 - Rough Notes",
                 -- Optional, if you want to change the date format for the ID of daily notes.
-                date_format = "%Y-%m-%d",
+                date_format = "%m-%d-%Y",
                 -- Optional, if you want to change the date format of the default alias of daily notes.
                 alias_format = "%B %-d, %Y",
                 -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
@@ -62,19 +62,19 @@ return {
                     -- opts = { noremap = false, expr = true, buffer = true },
                 -- },
                 -- Toggle check-boxes.
-                ["<leader>ch"] = {
+                ["<cr>"] = {
                     action = function()
                         return require("obsidian").util.toggle_checkbox()
                     end,
                     opts = { buffer = true },
                 },
-                -- Smart action depending on context, either follow link or toggle checkbox.
-                ["<cr>"] = {
-                    action = function()
-                        return require("obsidian").util.smart_action()
-                    end,
-                    opts = { buffer = true, expr = true },
-                }
+                -- -- Smart action depending on context, either follow link or toggle checkbox.
+                -- ["<cr>"] = {
+                --     action = function()
+                --         return require("obsidian").util.smart_action()
+                --     end,
+                --     opts = { buffer = true, expr = true },
+                -- }
             },
 
             -- Where to put new notes. Valid options are
@@ -166,8 +166,8 @@ return {
             -- Optional, for templates (see below).
             templates = {
                 folder = "4 - Templates",
-                date_format = "%Y-%m-%d",
-                time_format = "%H:%mm:%s %a",
+                date_format = "%m-%d-%Y",
+                time_format = "%I:%M %p",
                 -- A map for custom variables, the key should be the variable and the value a function
                 substitutions = {},
             },

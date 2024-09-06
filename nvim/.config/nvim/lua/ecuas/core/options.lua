@@ -1,5 +1,6 @@
 -- for conciseness
 local opt = vim.opt -- vim options
+opt.iskeyword:remove('_')
 
 opt.conceallevel = 2
 
