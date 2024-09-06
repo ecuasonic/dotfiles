@@ -1,6 +1,40 @@
-#---------------- COMMANDS --------------
+# --------------- Helper Function ------
+function _go_to_then_return_() {
+    cd $HOME/"$1"
+    nvim "$2"
+    cd - > /dev/null
+}
+# --------------- Edit Config ----------
 
-integrated() {
+function ez() {
+    _go_to_then_return_ ".config/zshrc" ".zshrc"
+}
+function ea() {
+    _go_to_then_return_ ".config/zshrc" ".zsh_alias"
+}
+function ec() {
+    _go_to_then_return_ ".config/zshrc" ".zsh_commands"
+}
+function et() {
+    _go_to_then_return_ ".config/tmux" "tmux.conf"
+}
+function ei3() {
+    _go_to_then_return_ ".config/i3" "config"
+}
+function ep() {
+    _go_to_then_return_ ".config/polybar/hack" "config.ini"
+}
+function en() {
+    _go_to_then_return_ ".config/nvim/lua/ecuas" "init.lua"
+}
+function notes() {
+    _go_to_then_return_ "Documents/Obsidian-Notes" "To-do.md"
+}
+function s() {
+    _go_to_then_return_ ".config/scripts" "README.md"
+}
+
+function integrated() {
     display_ports=$(~/.config/custom_scripts/detect_monitor.sh)
 
     if [ "$(supergfxctl -g)" = "Hybrid" ]; then
@@ -15,7 +49,7 @@ integrated() {
     fi
 }
 
-hybrid() {
+function hybrid() {
     if [ "$(supergfxctl -g)" = "Integrated" ]; then
         supergfxctl -m Hybrid
         echo "Switching to Hybrid..."
@@ -23,33 +57,3 @@ hybrid() {
         i3-msg exit
     fi
 }
-
-cdls() {
-    cd $1
-    ls
-}
-
-clearls() {
-    clear
-    ls
-}
-
-# change monitors
-# s() {
-#     ~/.config/custom_scripts/switch_monitor.sh
-# }
-
-# change alacritty font
-f() {
-    ~/.config/custom_scripts/change_alacritty_font.sh $1
-}
-
-# i3 resurrection
-save() {
-    ~/.config/custom_scripts/save_workspaces.sh
-}
-
-restore() {
-    ~/.config/custom_scripts/restore_workspaces.sh
-}
-
