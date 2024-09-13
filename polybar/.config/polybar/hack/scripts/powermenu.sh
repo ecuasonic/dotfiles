@@ -5,10 +5,10 @@
 ## Github  : @adi1090x
 ## Twitter : @adi1090x
 
-dir="~/.config/polybar/hack/scripts/rofi"
+dir="~/dotfiles/polybar/.config/polybar/hack/scripts/rofi"
 uptime=$(uptime -p | sed -e 's/up //g')
 
-rofi_command="rofi -no-config -theme $dir/powermenu.rasi"
+rofi_command="rofi -no-config -hover-select -theme $dir/powermenu.rasi"
 
 # Options
 shutdown=" Shutdown"
@@ -75,7 +75,7 @@ case $chosen in
         systemctl hibernate
         ;;
     $suspend)
-        i3lock -i ~/Backgrounds/background.png
+        i3lock -i $(~/.config/scripts/i3lock_background.sh)
         sleep 1
         systemctl suspend
         ;;

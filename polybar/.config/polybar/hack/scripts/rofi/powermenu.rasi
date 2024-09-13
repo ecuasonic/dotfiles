@@ -1,12 +1,3 @@
-/*
- *
- * Author  : Aditya Shakya
- * Mail    : adi1090x@gmail.com
- * Github  : @adi1090x
- * Twitter : @adi1090x
- *
- */
-
 configuration {
 	font:							"Terminus 10";
     show-icons:                     true;
@@ -23,6 +14,8 @@ configuration {
     kb-column-left:                 "Left";
     kb-row-down:                    "Down,j";
     kb-accept-entry:                "Return,KP_Enter";
+    me-accept-entry:                "MousePrimary";
+    me-select-entry:                "";
     terminal:                       "mate-terminal";
     kb-clear-line:                  "Control-d";
     kb-cancel:                      "Escape";
@@ -36,13 +29,13 @@ configuration {
 
 }
 
-@import "colors.rasi"
+@import "~/dotfiles/scripts/.config/scripts/rofi/colors.rasi"
 
 window {
     transparency:                   "real";
     background-color:               @bg;
     text-color:                     @fg;
-	border:							6px;
+	border:							1px;
 	border-color:					@ac;
     border-radius:                  0px;
 	width:							500px;
