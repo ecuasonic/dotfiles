@@ -2,7 +2,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $ERROR_LOG ~/.config/i3/error.log
-set $SCRIPTS ~/.config/scripts
+set $SCRIPTS ~/dotfiles/scripts/.config/scripts
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 # ----------------------------------------------------------------------------
@@ -28,9 +28,11 @@ exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xcape" "-e 'Control_L=
 
 exec --no-startup-id $SCRIPTS/i3_startup.sh
 
+bindsym Print exec --no-startup-id $SCRIPTS/screenshot.sh
 bindsym F12 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F11 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F10 exec --no-startup-id zsh -c "$SCRIPTS/switch_monitor.sh 2>> $ERROR_LOG"
+bindsym F9 exec --no-startup-id $SCRIPTS/upload_download.sh
 
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "picom" 2>> $ERROR_LOG
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "nitrogen" "--restore" 2>> $ERROR_LOG
@@ -85,13 +87,13 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/hack/scripts/rofi/launcher.rasi"
+bindsym $mod+d exec "rofi -no-config -sort -sorting-method 'fzf' -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/hack/scripts/rofi/launcher.rasi"
 
 # change focus
 bindsym $mod+h focus left
@@ -214,11 +216,3 @@ gaps outer 0
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
 
-#Take screenshot, save in a folder and copy to clipboard:
-# bindsym Print exec scrot ~/Pictures/Screenshots/%F.png && xclip -selection clipboard -t image/png -i \ls -t ~/Pictures/Screenshots/* | head -n1
-
-#Take select screenshot, save in a folder and copy to clipboard
-bindsym Print+$mod exec scrot -s ~/Pictures/Screenshots/%F.png -e 'xclip -selection clipboard -t image/png -i $f'
-
-# # Screenshots
-bindsym Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Documents/Obsidian-Notes/Rough-Screenshots/screenshot_$NOW.png# Hide borders
