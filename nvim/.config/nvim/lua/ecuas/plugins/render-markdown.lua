@@ -2,6 +2,14 @@ return {
     'MeanderingProgrammer/render-markdown.nvim',
     config = function()
         require('render-markdown').setup({
+            render_modes = { 'n', 'v', 'i', 'c'},
+            latex = {
+                enabled = true,
+                converter = 'latex2text',
+                highlight = 'RenderMarkdownMath',
+                top_pad = 0,
+                bottom_pad = 0.
+            },
             heading = {
                 -- Turn on / off heading icon & background rendering
                 enabled = true,

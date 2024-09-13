@@ -33,8 +33,8 @@ return {
                 sidebars = transparent and "transparent" or "dark",
                 floats = transparent and "transparent" or "dark",
                 comments = { italic = true },
-                keywords = { italic = true },
-                functions = { bold = true },
+                keywords = { italic = false },
+                functions = { bold = false },
                 variables = {}
             },
             dim_inactive = true,

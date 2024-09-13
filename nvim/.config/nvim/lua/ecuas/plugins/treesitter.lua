@@ -28,6 +28,7 @@ return {
                 "vim",
                 "dockerfile",
                 "gitignore",
+                "latex",
                 "comment",
                 "regex",
                 "query",

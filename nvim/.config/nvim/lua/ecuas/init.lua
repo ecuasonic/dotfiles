@@ -7,7 +7,7 @@ require("ecuas.core.config")
 -- load plugins
 require("ecuas.plugins-setup")
 
-vim.o.path = vim.o.path .. "/usr/avr/include,/home/ecuas/.arduino15/,/usr/lib/gcc/avr/14.1.0/include,/usr/lib/gcc/avr/14.1.0/include-fixed"
+-- vim.o.path = vim.o.path .. "/usr/avr/include,/home/ecuas/.arduino15/,/usr/lib/gcc/avr/14.1.0/include,/usr/lib/gcc/avr/14.1.0/include-fixed"
 
 local augroup = vim.api.nvim_create_augroup
 local ecuasGroup = augroup('ecuas', {})

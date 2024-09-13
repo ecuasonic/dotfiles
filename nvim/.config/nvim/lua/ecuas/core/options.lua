@@ -1,6 +1,8 @@
 -- for conciseness
 local opt = vim.opt -- vim options
 opt.iskeyword:remove('_')
+opt.iskeyword:remove('[')
+opt.iskeyword:remove(']')
 
 opt.conceallevel = 2
 
@@ -10,6 +12,9 @@ opt.showmode = false
 -- line numbers
 opt.relativenumber = true
 opt.number = true
+-- vim.cmd('highlight WhiteNum guifg=white')
+-- vim.cmd('highlight GreyNum guifg=grey')
+-- vim.opt.statuscolumn = "%#GreyNum#%l%=%#WhiteNum#%r │"
 
 -- tabs & indentation
 opt.tabstop = 4
@@ -68,3 +73,7 @@ opt.foldcolumn = '1'
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
+
+
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"

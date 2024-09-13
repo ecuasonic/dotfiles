@@ -11,28 +11,15 @@ function Harpoon_files()
         else
             contents[index] = string.format("%%#HarpoonNumberInactive# %s. %%#HarpoonInactive#%s ", index, file_name)
         end
-        vim.cmd([[highlight HarpoonNumberActive ctermfg=255 guifg=yellow]])
+        vim.cmd([[highlight HarpoonNumberActive ctermfg=255 guifg=orange]])
         vim.cmd([[highlight HarpoonActive ctermfg=255 guifg=cyan]])
-        vim.cmd([[highlight HarpoonNumberInactive ctermfg=255 guifg=yellow]])
+        vim.cmd([[highlight HarpoonNumberInactive ctermfg=255 guifg=orange]])
         vim.cmd([[highlight HarpoonInactive ctermfg=255 guifg=white]])
 
     end
 
     return table.concat(contents)
 end
-
-local mode = {
-    'mode',
-    icons_enabled = true,
-    icon = nil,
-    separator = '',
-    cond = nil,
-    draw_empty = false,
-    type = nil,
-    padding = 1,
-    fmt = nil,
-    on_click = nil,
-}
 
 local diagnostics = {
     'diagnostics',
@@ -69,44 +56,42 @@ local filename = {
 -- MIT license, see LICENSE for more details.
 -- stylua: ignore
 local colors = {
-    color3   = '#090a15', -- Line
-    color6   = '#a1aab8',
-    color7   = '#82aaff', -- Normal BG
-    color8   = '#ae81ff',
-    color0   = '#092236', -- Normal, Replace, Insert FG
-    color1   = '#ff5874', -- Replace BG
-    color2   = '#00d7af',
-    color9   = '#ffa500'
+    bg   = '#090a15',
+    white    = '#ffffff'
 }
 
-local nightfly =  {
-    -- custom_nightfly.command.a = { fg = '#000000', bg = '#ffa500', gui = 'bold' }
-    -- custom_nightfly.command.z = custom_nightfly.command.a
+local default_color = {fg = '#ffffff', bg = '#090a15'}
+
+local boring_color =  {
     replace = {
-        a = { fg = colors.color0, bg = colors.color1, gui = 'bold' },
-        b = { fg = colors.color2, bg = colors.color3 },
+        a = default_color,
+        b = default_color,
+        c = default_color,
     },
     inactive = {
-        a = { fg = colors.color6, bg = colors.color3, gui = 'bold' },
-        b = { fg = colors.color6, bg = colors.color3 },
-        c = { fg = colors.color6, bg = colors.color3 },
+        a = default_color,
+        b = default_color,
+        c = default_color,
     },
     normal = {
-        a = { fg = colors.color0, bg = colors.color7, gui = 'bold' },
-        b = { fg = colors.color2, bg = colors.color3 },
-        c = { fg = colors.color2, bg = colors.color3 },
+        a = default_color,
+        b = default_color,
+        c = default_color,
     },
     visual = {
-        a = { fg = colors.color0, bg = colors.color8, gui = 'bold' },
-        b = { fg = colors.color2, bg = colors.color3 },
+        a = default_color,
+        b = default_color,
+        c = default_color,
     },
     insert = {
-        a = { fg = colors.color0, bg = colors.color2, gui = 'bold' },
-        b = { fg = colors.color2, bg = colors.color3 },
+        a = default_color,
+        b = default_color,
+        c = default_color,
     },
     command = {
-        a = { fg = colors.color0, bg = colors.color9, gui = 'bold' },
-        b = { fg = colors.color2, bg = colors.color3, gui = 'bold' }
+        a = default_color,
+        b = default_color,
+        c = default_color,
     }
 }
 
@@ -123,10 +108,12 @@ return {
         require('lualine').setup {
             options = {
                 icons_enabled = true,
-                theme = nightfly,
+                theme = boring_color,
                 -- component_separators = { left = '', right = ''},
-                component_separators = { left = '', right = '' },
-                section_separators = { left = '', right = ''},
+                -- component_separators = { left = '', right = '' },
+                component_separators = { left = '', right = '' },
+                -- section_separators = { left = '', right = ''},
+                section_separators = { left = '', right = ''},
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},
@@ -141,43 +128,81 @@ return {
                 }
             },
             sections = {
-                lualine_a = { mode },
+                lualine_a = {},
                 lualine_b = {
+                    {
+                        'mode',
+                        fmt = function(str)
+                            if str == "NORMAL" then
+                                return ""
+                            else
+                                return "--" .. str .. "--"
+                            end
+                        end
+                    },
+                    diagnostics,
+                },
+                lualine_c = {},
+                lualine_x = {
                     {
                         'branch',
                         icons_enabled = true,
                         icon = {'', align='right', color = {fg='green'}}
                     },
-                    {
-                        'diff',
-                        colored = true,
-                        diff_color = {
-                            added = {fg='#a1cd5e'},
-                            modified = {fg='#e3d18a'},
-                            removed = {fg='#fc514e'},
-                        },
-                        symbols = {added = '+', modified = '~', removed = '-'},
-                        source = nil,
-                    },
-                    diagnostics,
+                    -- {
+                    --     'diff',
+                    --     colored = true,
+                    --     diff_color = {
+                    --         added = {fg='#a1cd5e'},
+                    --         modified = {fg='#e3d18a'},
+                    --         removed = {fg='#fc514e'},
+                    --     },
+                    --     symbols = {added = '+', modified = '~', removed = '-'},
+                    --     source = nil,
+                    -- },
+                    { 'progress' },
+                    { 'location' },
                 },
-                lualine_c = {},
-                lualine_x = { 'filesize' },
-                lualine_y = { 'progress' },
-                lualine_z = { 'location' },
+                lualine_y = {},
+                lualine_z = {},
             },
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {
-                    { 'mode', },
+                    {
+                        'mode',
+                        fmt = function(str)
+                            if str == "NORMAL" then
+                                return ""
+                            else
+                                return "--" .. str .. "--"
+                            end
+                        end
+                    },
                     diagnostics,
                 },
                 lualine_c = {},
-                lualine_x = {},
-                lualine_y = {
+                lualine_x = {
+                    {
+                        'branch',
+                        icons_enabled = true,
+                        icon = {'', align='right', color = {fg='green'}}
+                    },
+                    -- {
+                    --     'diff',
+                    --     colored = true,
+                    --     diff_color = {
+                    --         added = {fg='#a1cd5e'},
+                    --         modified = {fg='#e3d18a'},
+                    --         removed = {fg='#fc514e'},
+                    --     },
+                    --     symbols = {added = '+', modified = '~', removed = '-'},
+                    --     source = nil,
+                    -- },
                     { 'progress' },
                     { 'location' },
                 },
+                lualine_y = {},
                 lualine_z = {}
             },
             tabline = {
@@ -192,7 +217,7 @@ return {
                 lualine_b = { filename },
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {},
+                lualine_y = {'filesize'},
                 lualine_z = {}
             },
             inactive_winbar = {
@@ -200,7 +225,7 @@ return {
                 lualine_b = { filename },
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {},
+                lualine_y = {'filesize'},
                 lualine_z = {}
             },
 

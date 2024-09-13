@@ -5,39 +5,13 @@ vim.g.mapleader = " " -- space key
 local keymap = vim.keymap -- keymaps
 keymap.set('n', ';', "")
 
--- keymap.set("n", "<c-s>", ":w<CR>")
--- keymap.set("n", "<c-q>", ":q<CR>")
-
--- Motions
-keymap.set("n", "H", "^")
-keymap.set("v", "H", "^")
-keymap.set("n", "L", "$")
-keymap.set("v", "L", "$")
-
--- keymap.set("n", "G", "Gzz")
-
--- Indentation in Normal Mode
-keymap.set("n", "<Tab>", "a<C-t><Esc>")
-keymap.set("n", "<S-Tab>", "a<C-d><Esc>")
-
 -- Multi-line Indentation in Visual Mode
 keymap.set("v", "<Tab>", ">gv^")
 keymap.set("v", "<S-Tab>", "<gv^")
 
-
 -- Creating space before or after line in Normal Mode
 keymap.set("n", "<A-o>", "o<ESC>")
 keymap.set("n", "<A-O>", "O<ESC>")
-
--- window management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
-
--- increment/decrement numbers
-keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" })
-keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
 
 -- Moves highlighted segments of code up and down
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted code up " })
@@ -45,10 +19,6 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down " 
 
 -- Removes newline char at end of line and keeps cursor at start of line
 keymap.set("n", "J", "mzJ'z")
-
--- Moves half pages and maintains cursor at center
--- keymap.set("n", "<C-y>", "<C-d>zz")
--- keymap.set("n", "<C-e>", "<C-u>zz")
 
 -- Keeps search terms in the middle
 keymap.set("n", "n", "nzzzv")
@@ -105,7 +75,7 @@ keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links
 keymap.set("n", "<leader>om", "<cmd>ObsidianBridgeTelescopeCommand<cr>", { desc = "Obsidian Bridge Menu" })
 keymap.set("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
-        return "<cmd>ObsidianFollowLink<CR>"
+        return "m'<cmd>ObsidianFollowLink<CR> zz"
     else
         return "gfzz"
     end

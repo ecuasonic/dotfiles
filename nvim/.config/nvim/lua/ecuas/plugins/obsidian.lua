@@ -15,8 +15,8 @@ return {
             acknowledge_conflicts = true,
             workspaces = {
                 {
-                    name = "Obsidian-Notes",
-                    path = "~/Documents/Obsidian-Notes/",
+                    name = "Obsidian_Notes",
+                    path = "~/Documents/Obsidian_Notes/",
                 },
             },
 
@@ -26,7 +26,7 @@ return {
             -- dir = "~/vaults/work",
 
             -- Optional, if you keep notes in a specific subdirectory of your vault.
-            notes_subdir = "1 - Rough Notes",
+            notes_subdir = "Rough_Notes",
 
             -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
             -- levels defined by "vim.log.levels.*".
@@ -34,13 +34,13 @@ return {
 
             daily_notes = {
                 -- Optional, if you keep daily notes in a separate directory.
-                folder = "1 - Rough Notes",
+                folder = "Daily_Notes",
                 -- Optional, if you want to change the date format for the ID of daily notes.
                 date_format = "%m-%d-%Y",
                 -- Optional, if you want to change the date format of the default alias of daily notes.
                 alias_format = "%B %-d, %Y",
                 -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-                template = nil
+                template = 'Daily_Note_Template.md'
             },
 
             -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
@@ -165,7 +165,7 @@ return {
 
             -- Optional, for templates (see below).
             templates = {
-                folder = "4 - Templates",
+                folder = "Templates",
                 date_format = "%m-%d-%Y",
                 time_format = "%I:%M %p",
                 -- A map for custom variables, the key should be the variable and the value a function
@@ -296,7 +296,7 @@ return {
                 -- The default folder to place images in via `:ObsidianPasteImg`.
                 -- If this is a relative path it will be interpreted as relative to the vault root.
                 -- You can always override this per image by passing a full path to the command instead of just a filename.
-                img_folder = "Rough-Screenshots",  -- This is the default
+                img_folder = "Images",  -- This is the default
                 -- A function that determines the text to insert in the note when pasting an image.
                 -- It takes two arguments, the `obsidian.Client` and an `obsidian.Path` to the image file.
                 -- This is the default implementation.
