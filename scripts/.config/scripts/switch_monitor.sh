@@ -1,4 +1,5 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+
 display_ports=$(~/.config/scripts/detect_monitor.sh)
 
 #######################################

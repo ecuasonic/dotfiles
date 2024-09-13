@@ -1,0 +1,128 @@
+configuration {
+	font:							"Terminus 10";
+    show-icons:                     true;
+	icon-theme: 					"Papirus";
+    display-drun: 					"";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
+    dpi:                            150;
+
+    kb-row-up:                      "Up";
+    kb-column-left:                 "Left";
+    kb-row-down:                    "Down";
+    kb-accept-entry:                "Return,KP_Enter";
+    terminal:                       "mate-terminal";
+    kb-clear-line:                  "Control-d";
+    kb-cancel:                      "Escape";
+    kb-move-front:                  "";
+    kb-remove-char-forward:         "";
+    kb-remove-to-eol:               "";
+    kb-mode-next:                   "";
+    kb-mode-previous:               "";
+    kb-element-next:                "";
+    kb-remove-char-back:            "BackSpace";
+
+}
+
+@import "colors.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @bg;
+    text-color:                     @fg;
+	border:							1px;
+	border-color:					@ac;
+    border-radius:                  0px;
+	width:							500;
+    location:                       center;
+    x-offset:                       0;
+    y-offset:                       0;
+}
+
+prompt {
+    enabled: 						false;
+    padding:                        10px 10px 10px 0px;
+	background-color: 				@al;
+	text-color: 					@ac;
+	font:							"Terminus 10";
+}
+
+entry {
+    background-color:               @al;
+    text-color:                     @ac;
+    placeholder-color:              @ac;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "File Name...";
+    padding:                        5px 5px 5px 5px;
+    border-radius:                  0px;
+    blink:                          true;
+}
+
+inputbar {
+	children: 						[ entry ];
+    background-color:               @al;
+    text-color:                     @fg;
+    expand:                         true;
+	border:							1px 1px 1px 1px;
+    border-radius:                  6px;
+	border-color:					@ac;
+    spacing:                        0px;
+}
+
+listview {
+    enabled:                        false;
+    background-color:               @al;
+    padding:                        0px;
+    columns:                        1;
+    lines:                          1;
+    spacing:                        10px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @al;
+	border:							0px;
+    border-radius:                  0px;
+	border-color:					@ac;
+    children:                       [ entry, listview ];
+    spacing:                       	10px;
+    padding:                        10px 10px 10px 10px;
+}
+
+element {
+    background-color:               @al;
+    text-color:                     @fg;
+    orientation:                    horizontal;
+    border-radius:                  0px;
+    padding:                        8px 8px 8px -16px;
+}
+
+element-icon {
+    background-color:               transparent;
+    text-color:               		inherit;
+    size:                           24px;
+    border:                         0px;
+}
+
+element-text {
+    background-color:               transparent;
+    text-color:               		inherit;
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         0px 2.5px 0px 2.5px;
+}
+
+element selected {
+    background-color:               @se;
+    text-color:                     @fg;
+	border:							1px 1px 1px 1px;
+    border-radius:                  3px;
+    border-color:                  	@ac;
+}

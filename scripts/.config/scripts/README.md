@@ -32,5 +32,8 @@ Date: 2024-08-18
     polybar/powermenu.sh
         i3/config
 
+**screenshot.sh**
+    i3/config
+
 **lock.sh**
 

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 ERROR_LOG=/home/ecuas/.config/scripts/i3_resurrect_error.log
 echo "" > $ERROR_LOG 2>&1

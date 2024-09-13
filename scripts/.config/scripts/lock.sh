@@ -1,4 +1,5 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+
 # ICON=$HOME/Pictures/lock.png
 TMPBG=/tmp/screen.png
 if [ -f "$TMPBG" ]

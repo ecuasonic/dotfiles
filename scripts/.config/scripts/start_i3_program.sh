@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Ex: ./start_i3_program.sh "xcape" "-e 'Control_L=Escape' -t 175"
 # Please test before using, minimal edge cases considered. Script made in a few minutes.
@@ -20,7 +20,7 @@ program=$(ps aux | awk -v input="$program_name" ' $11 == input { print $11 }')
 # Restarts program if already running, else start program
 if [ -n "$program" ]; then
     killall $program_name
-    sleep 0.1
+    sleep 0.2
 fi
 
 if (( $# == 1 )); then
