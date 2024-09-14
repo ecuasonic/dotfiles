@@ -89,7 +89,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search zsh-vi-mode git-auto-fetch)
-GIT_AUTO_FETCH_INTERVAL=900 # in seconds
 
 source $ZSH/oh-my-zsh.sh
 
