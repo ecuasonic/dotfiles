@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Path to the configuration file
-CONFIG_FILE="/home/ecuas/.config/kitty/kitty.conf"
+CONFIG_FILE=~/.config/kitty/kitty.conf
 
 # Read the current font size from the configuration file
 CURRENT_SIZE=$(grep "font_size" $CONFIG_FILE | awk '{print $2}')
