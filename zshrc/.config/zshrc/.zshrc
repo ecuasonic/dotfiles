@@ -88,7 +88,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search zsh-vi-mode)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search zsh-vi-mode git-auto-fetch)
+GIT_AUTO_FETCH_INTERVAL=900 # in seconds
 
 source $ZSH/oh-my-zsh.sh
 
@@ -236,7 +237,7 @@ bindkey -M vicmd '^[' undefined-key
 bindkey -M vicmd 'yy' vi-yank-whole-line
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'L' vi-end-of-line
-bindkey -M vicmd > ~/dotfiles/zshrc/.config/zshrc/bindkey.txt
+# bindkey -M vicmd > ~/dotfiles/zshrc/.config/zshrc/bindkey.txt
 
 function zvm_config() {
     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
