@@ -28,7 +28,7 @@ function en() {
     _go_to_then_return_ ".config/nvim/lua/ecuas" "init.lua"
 }
 function notes() {
-    _go_to_then_return_ "Documents/Obsidian-Notes" "To-do.md"
+    _go_to_then_return_ "Documents/Obsidian_Notes" "To-do.md"
 }
 function s() {
     _go_to_then_return_ ".config/scripts" "README.md"
