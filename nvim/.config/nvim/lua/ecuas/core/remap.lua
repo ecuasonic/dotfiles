@@ -4,6 +4,8 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local keymap = vim.keymap -- keymaps
 keymap.set('n', ';', "")
+keymap.set('n', '<C-o>', '<C-o>zz')
+keymap.set('n', '<C-i>', '<C-i>zz')
 
 -- Multi-line Indentation in Visual Mode
 keymap.set("v", "<Tab>", ">gv^")
@@ -20,9 +22,9 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down " 
 -- Removes newline char at end of line and keeps cursor at start of line
 keymap.set("n", "J", "mzJ'z")
 
--- Keeps search terms in the middle
-keymap.set("n", "n", "nzzzv")
-keymap.set("n", "N", "Nzzzv")
+-- Keeps search terms, top view
+keymap.set("n", "n", "nzt")
+keymap.set("n", "N", "Nzt")
 
 -- greatest remap ever
 -- You can paste to replace words, without the deleted words going into buffer
@@ -49,17 +51,9 @@ keymap.set("n", "<C-f>", function()
     end,
     { desc = "Format file" })
 
--- Quickfix list
-keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Quickfix next" })
-keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Quickfix prev" })
-
 keymap.set("n", "<leader>s",
     ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
     { desc = "Replace current word" })
-
---vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 
@@ -69,14 +63,24 @@ keymap.set('n', "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Mark
 --------- obsidian ---------
 keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
 keymap.set("n", "<leader>on", ":ObsidianNew ", { desc = "Obsidian New Page" })
-keymap.set("n", "<leader>od", "<cmd>ObsidianDailies<cr>", { desc = "Obsidian New Daily" })
+keymap.set("n", "<leader>od", "<cmd>ObsidianToday<cr>", { desc = "Obsidian New Daily" })
 keymap.set("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
 keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
 keymap.set("n", "<leader>om", "<cmd>ObsidianBridgeTelescopeCommand<cr>", { desc = "Obsidian Bridge Menu" })
+keymap.set("n", "<leader>oT", "<cmd>ObsidianTags<cr>", { desc = "Obsidian Tags" })
 keymap.set("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
-        return "m'<cmd>ObsidianFollowLink<CR> zz"
+        vim.cmd("normal! m'")
+        vim.cmd("ObsidianFollowLink")
+        --TODO: hook into the completion of the Obsidian link resolution itself
+        -- ensuring that the cursor positioning happens once the link is fully followed
+        -- and the note is opened.
+        -- Involves the callback or even that triggers when the link is fully opened.
+        vim.defer_fn(function()
+            vim.cmd("normal! zz")  -- Run zt after the link is followed
+        end, 50)
     else
-        return "gfzz"
+        vim.cmd("normal! gf")
+        vim.cmd("normal! zz")
     end
-end, { noremap = false, expr = true })
+end)
