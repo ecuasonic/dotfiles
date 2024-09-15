@@ -1,4 +1,5 @@
 alias f="~/.config/scripts/change_alacritty_font.sh"
+alias ud="~/.config/scripts/upload_download.sh"
 
 # Connect to Airpods
 alias airpods="bluetoothctl connect 70:AE:D5:D5:B4:26"
