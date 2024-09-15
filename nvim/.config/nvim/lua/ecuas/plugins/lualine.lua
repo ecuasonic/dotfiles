@@ -52,16 +52,8 @@ local filename = {
     },
 }
 
--- Copyright (c) 2020-2021 shadmansaleh
--- MIT license, see LICENSE for more details.
--- stylua: ignore
-local colors = {
-    bg   = '#090a15',
-    white    = '#ffffff'
-}
 
 local default_color = {fg = '#ffffff', bg = '#090a15'}
-
 local boring_color =  {
     replace = {
         a = default_color,
@@ -76,7 +68,7 @@ local boring_color =  {
     normal = {
         a = default_color,
         b = default_color,
-        c = default_color,
+        c = {fg = '#ffa500', bg = '#090a15'}
     },
     visual = {
         a = default_color,
@@ -142,28 +134,28 @@ return {
                     },
                     diagnostics,
                 },
-                lualine_c = {},
-                lualine_x = {
+                lualine_c = {
+                    {
+                        function()
+                            return _G.custom_status_message
+                        end,
+                        cond = function()
+                            return _G.custom_status_message ~= ''
+                        end
+                    }
+                },
+
+                lualine_x = {},
+                lualine_y = {
+                    {'hostname'},
                     {
                         'branch',
                         icons_enabled = true,
                         icon = {'', align='right', color = {fg='green'}}
                     },
-                    -- {
-                    --     'diff',
-                    --     colored = true,
-                    --     diff_color = {
-                    --         added = {fg='#a1cd5e'},
-                    --         modified = {fg='#e3d18a'},
-                    --         removed = {fg='#fc514e'},
-                    --     },
-                    --     symbols = {added = '+', modified = '~', removed = '-'},
-                    --     source = nil,
-                    -- },
                     { 'progress' },
                     { 'location' },
                 },
-                lualine_y = {},
                 lualine_z = {},
             },
             inactive_sections = {
