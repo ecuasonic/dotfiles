@@ -7,21 +7,28 @@ TMP_KEY=/tmp/notes_session
 while getopts 'se' option; do
     case $option in
         s)
-            rclone copy remote-google-drive:notes $NOTES
-            if [[ -e $LOCK ]]; then
-                cat $LOCK
+            if [[ -e $TMP_KEY ]]; then
+                echo "Session already started."
             else
                 chmod -R u+w $NOTES
-                touch $LOCK
-                echo "$(whoami)@$(hostname)" > $LOCK
-                rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false
-                touch $TMP_KEY
-                echo "Session started."
+                rclone copy remote-google-drive:notes $NOTES
+                sleep 0.5
+                if [[ -s $LOCK ]]; then
+                    cat $LOCK
+                    chmod -R u-w $NOTES
+                else
+                    echo "$(whoami)@$(hostname) $(date)" > $LOCK
+                    sleep 0.5
+                    rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false
+                    touch $TMP_KEY
+                    echo "Session started."
+                fi
             fi
             ;;
         e)
             if [[ -e $TMP_KEY ]]; then
-                rm $LOCK
+                : > $LOCK
+                sleep 0.5
                 rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false
                 chmod -R u-w $NOTES
                 rm $TMP_KEY
