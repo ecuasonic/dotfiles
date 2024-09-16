@@ -2,7 +2,7 @@
 
 NOTES=~/Documents/Obsidian_Notes/
 LOCK=$NOTES.lock
-TMP_KEY=/tmp/notes_session
+TMP_KEY=~/Documents/.notes_session
 
 while getopts 'se' option; do
     case $option in
