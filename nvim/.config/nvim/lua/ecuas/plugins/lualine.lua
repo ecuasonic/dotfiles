@@ -46,7 +46,7 @@ local filename = {
     shorting_target = 40,
     symbols = {
         modified = '',
-        readonly = '[-]',
+        readonly = '[READ-ONLY]',
         unnames = '[No Name]',
         newfile = '[New]',
     },
