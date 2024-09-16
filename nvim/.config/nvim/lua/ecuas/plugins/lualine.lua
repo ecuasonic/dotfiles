@@ -132,7 +132,6 @@ return {
                             end
                         end
                     },
-                    diagnostics,
                 },
                 lualine_c = {
                     {
@@ -209,7 +208,10 @@ return {
                 lualine_b = { filename },
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {'filesize'},
+                lualine_y = {
+                    diagnostics,
+                    {'filesize'},
+                },
                 lualine_z = {}
             },
             inactive_winbar = {
