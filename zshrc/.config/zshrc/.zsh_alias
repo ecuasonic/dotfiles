@@ -1,7 +1,7 @@
 alias f="~/.config/scripts/change_alacritty_font.sh"
 
-alias pull="~/.config/scripts/upload_download_manual.sh -d"
-alias push="~/.config/scripts/upload_download_manual.sh -u"
+alias start_notes="~/.config/scripts/notes_session.sh -s"
+alias end_notes="~/.config/scripts/notes_session.sh -e"
 
 # Connect to Airpods
 alias airpods="bluetoothctl connect 70:AE:D5:D5:B4:26"
