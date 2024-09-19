@@ -21,17 +21,22 @@ function Harpoon_files()
     return table.concat(contents)
 end
 
+local diff = {
+    'diff',
+    colored = true,
+    diff_color = {
+        added = {fg='#a1cd5e'},
+        modified = {fg='#e3d18a'},
+        removed = {fg='#fc514e'},
+    },
+    symbols = {added = '+', modified = '~', removed = '-'},
+    source = nil,
+}
+
 local diagnostics = {
     'diagnostics',
     sources = { 'nvim_lsp' },
     sections = { 'error', 'warn', 'info', 'hint' },
-    --diagnostics_color = {
-    --error = 'DiagnosticError',
-    --warn = 'DiagnosticWarn',
-    --info = 'DiagnosticInfo',
-    --hint = 'DiagnosticHint',
-    --},
-    --symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
     colored = true,
     update_in_insert = false,
     always_visible = false,
@@ -45,7 +50,7 @@ local filename = {
     path = 3,
     shorting_target = 40,
     symbols = {
-        modified = '',
+        modified = '[+]',
         readonly = '[READ-ONLY]',
         unnames = '[No Name]',
         newfile = '[New]',
@@ -133,24 +138,14 @@ return {
                         end
                     },
                 },
-                lualine_c = {
-                    {
-                        function()
-                            return _G.custom_status_message
-                        end,
-                        cond = function()
-                            return _G.custom_status_message ~= ''
-                        end
-                    }
-                },
-
+                lualine_c = {},
                 lualine_x = {},
                 lualine_y = {
                     {'hostname'},
                     {
                         'branch',
                         icons_enabled = true,
-                        icon = {'', align='right', color = {fg='green'}}
+                        icon = {'', align='right', color = {fg='green'}}
                     },
                     { 'progress' },
                     { 'location' },
@@ -170,31 +165,20 @@ return {
                             end
                         end
                     },
-                    diagnostics,
                 },
                 lualine_c = {},
-                lualine_x = {
+                lualine_x = {},
+                lualine_y = {
+                    {'hostname'},
                     {
                         'branch',
                         icons_enabled = true,
                         icon = {'', align='right', color = {fg='green'}}
                     },
-                    -- {
-                    --     'diff',
-                    --     colored = true,
-                    --     diff_color = {
-                    --         added = {fg='#a1cd5e'},
-                    --         modified = {fg='#e3d18a'},
-                    --         removed = {fg='#fc514e'},
-                    --     },
-                    --     symbols = {added = '+', modified = '~', removed = '-'},
-                    --     source = nil,
-                    -- },
                     { 'progress' },
                     { 'location' },
                 },
-                lualine_y = {},
-                lualine_z = {}
+                lualine_z = {},
             },
             tabline = {
                 lualine_a = { Harpoon_files },
@@ -205,10 +189,12 @@ return {
                 lualine_z = {},
             },
             winbar = {
+                lualine_a = {},
                 lualine_b = { filename },
                 lualine_c = {},
                 lualine_x = {},
                 lualine_y = {
+                    diff,
                     diagnostics,
                     {'filesize'},
                 },
@@ -219,7 +205,10 @@ return {
                 lualine_b = { filename },
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {'filesize'},
+                lualine_y = {
+                    diagnostics,
+                    {'filesize'},
+                },
                 lualine_z = {}
             },
 

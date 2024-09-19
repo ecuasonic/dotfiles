@@ -4,8 +4,8 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local keymap = vim.keymap -- keymaps
 keymap.set('n', ';', "")
-keymap.set('n', '<C-o>', '<C-o>zz')
-keymap.set('n', '<C-i>', '<C-i>zz')
+keymap.set('n', '<C-o>', '<C-o>zt')
+keymap.set('n', '<C-i>', '<C-i>zt')
 
 -- Multi-line Indentation in Visual Mode
 keymap.set("v", "<Tab>", ">gv^")
@@ -77,10 +77,10 @@ keymap.set("n", "gf", function()
         -- and the note is opened.
         -- Involves the callback or even that triggers when the link is fully opened.
         vim.defer_fn(function()
-            vim.cmd("normal! zz")  -- Run zt after the link is followed
+            vim.cmd("normal! zt")  -- Run zt after the link is followed
         end, 50)
     else
         vim.cmd("normal! gf")
-        vim.cmd("normal! zz")
+        vim.cmd("normal! zt")
     end
 end)
