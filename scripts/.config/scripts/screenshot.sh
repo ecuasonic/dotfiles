@@ -38,11 +38,10 @@ if [[ -s $TEMP_SCREENSHOT_PATH ]]; then
 
     location="$notes\n$pictures\n$clipboard"
     chosen="$(echo -e "$location" | $rofi_command -p "Location" -dmenu -selected-row 0)"
-    NOTES_PATH="$HOME/Documents/Obsidian_Notes"
+    NOTES_PATH="$HOME/Documents/Obsidian_Notes/Images"
     PHOTOS_PATH="$HOME/Pictures/Screenshots"
     NOW=$(date +%d-%b-%Y_%H_%M_%S)
     case $chosen in
-        #TODO: Reconfigure the rofi menu for naming the screenshots
         $notes)
             ss_name=$(echo "" | $rofi_command_2 -dmenu | awk '{$1=$1}1' | tr ' ' '_')
             if [[ -z $ss_name ]]; then
@@ -50,7 +49,6 @@ if [[ -s $TEMP_SCREENSHOT_PATH ]]; then
             else
                 cp $TEMP_SCREENSHOT_PATH "${NOTES_PATH}/${ss_name}.png"
             fi
-            rclone sync $NOTES_PATH remote-google-drive:notes --drive-use-trash=false
             ;;
         $pictures)
             ss_name=$(echo "" | $rofi_command_2 -dmenu | awk '{$1=$1}1' | tr ' ' '_')
