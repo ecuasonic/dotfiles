@@ -40,8 +40,8 @@ return {
             view = {
                 centralize_selection = true,
                 cursorline = true,
-                number = true,
-                relativenumber = true,
+                number = false,
+                relativenumber = false,
                 preserve_window_proportions = false,
                 signcolumn = "yes",
                 float = {
@@ -67,10 +67,11 @@ return {
                 symlink_destination = true,
                 highlight_git = "none",
                 highlight_diagnostics = "none",
-                highlight_opened_files = "none",
+                highlight_opened_files = "name",
                 highlight_modified = "none",
                 highlight_bookmarks = "none",
                 highlight_clipboard = "name",
+                highlight_hidden = "all",
 
                 --indent markers off
                 indent_markers = {
@@ -99,12 +100,12 @@ return {
                     modified_placement = "after",
                     diagnostics_placement = "signcolumn",
                     bookmarks_placement = "signcolumn",
-                    padding = " ",
+                    padding = "  ",
                     symlink_arrow = " ➛ ",
                     show = {
                         file = true,
                         folder = true,
-                        folder_arrow = true,
+                        folder_arrow = false,
                         git = true,
                         modified = true,
                         diagnostics = true,
@@ -184,7 +185,7 @@ return {
             },
             filters = {
                 enable = true,
-                git_ignored = true,
+                git_ignored = false,
                 dotfiles = true,
                 git_clean = false,
                 no_buffer = false,

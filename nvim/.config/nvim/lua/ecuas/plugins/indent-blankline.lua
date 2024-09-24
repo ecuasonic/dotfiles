@@ -1,8 +1,3 @@
-local highlight = {
-    "CursorColumn",
-    "Whitespace",
-}
-
 return {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -13,6 +8,16 @@ return {
             indent = { char = "┊" },
             whitespace = { highlight = { "Whitespace", "NonText" } },
             scope = { enabled = true },
+            exclude = {
+                filetypes = {
+                    'lspinfo',
+                    'checkhealth',
+                    'markdown',
+                    'man',
+                    'dashboard',
+                    '',
+                },
+            },
         }
     end,
 }

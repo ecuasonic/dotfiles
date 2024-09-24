@@ -3,9 +3,13 @@ vim.g.mapleader = " " -- space key
 
 -- for conciseness
 local keymap = vim.keymap -- keymaps
+
+keymap.set('v', '/', "\"fy/\\V<C-R>f<CR>")
+keymap.set('n', '<leader>/', "/\\V<C-R>+<CR>")
+
 keymap.set('n', ';', "")
-keymap.set('n', '<C-o>', '<C-o>zt')
-keymap.set('n', '<C-i>', '<C-i>zt')
+keymap.set('n', '<C-o>', '<C-o>zz')
+keymap.set('n', '<C-i>', '<C-i>zz')
 
 -- Multi-line Indentation in Visual Mode
 keymap.set("v", "<Tab>", ">gv^")
@@ -23,8 +27,8 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down " 
 keymap.set("n", "J", "mzJ'z")
 
 -- Keeps search terms, top view
-keymap.set("n", "n", "nzt")
-keymap.set("n", "N", "Nzt")
+keymap.set("n", "n", "nzz")
+keymap.set("n", "N", "Nzz")
 
 -- greatest remap ever
 -- You can paste to replace words, without the deleted words going into buffer
@@ -56,9 +60,6 @@ keymap.set("n", "<leader>s",
     { desc = "Replace current word" })
 
 vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
-
---------- Markdown ---------------
-keymap.set('n', "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown" })
 
 --------- obsidian ---------
 keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })

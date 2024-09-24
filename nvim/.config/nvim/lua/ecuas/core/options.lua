@@ -3,6 +3,7 @@ local opt = vim.opt -- vim options
 opt.iskeyword:remove('_')
 opt.iskeyword:remove('[')
 opt.iskeyword:remove(']')
+opt.mouse = ""
 
 opt.conceallevel = 2
 
