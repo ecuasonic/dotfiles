@@ -11,17 +11,33 @@ while getopts 'se' option; do
                 echo "Session already started."
             else
                 chmod -R u+w $NOTES
-                rclone copy remote-google-drive:notes $NOTES
+                echo ""
+                echo "======================="
+                echo "Pulling google drive..."
+                echo "======================="
+                echo ""
+                rclone sync remote-google-drive:notes $NOTES -v
                 sleep 0.5
                 if [[ -s $LOCK ]]; then
+                    echo "================================="
+                    echo "Other computer has notes session:"
                     cat $LOCK
+                    echo "================================="
+                    echo ""
                     chmod -R u-w $NOTES
                 else
                     echo "$(whoami)@$(hostname) $(date)" > $LOCK
                     sleep 0.5
-                    rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false
+                    echo "=================================="
+                    echo "Pushing google drive with .lock..."
+                    echo "=================================="
+                    echo ""
+                    rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false -v
                     touch $TMP_KEY
+                    echo "================"
                     echo "Session started."
+                    echo "================"
+                    echo ""
                 fi
             fi
             ;;
@@ -29,12 +45,24 @@ while getopts 'se' option; do
             if [[ -e $TMP_KEY ]]; then
                 : > $LOCK
                 sleep 0.5
-                rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false
+                echo ""
+                echo "======================================"
+                echo "Pushing google drive with new notes..."
+                echo "======================================"
+                echo ""
+                rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false -v
                 chmod -R u-w $NOTES
                 rm $TMP_KEY
+                echo "=============="
                 echo "Session ended."
+                echo "=============="
+                echo ""
             else
+                echo ""
+                echo "===================="
                 echo "Session not started."
+                echo "===================="
+                echo ""
             fi
             ;;
     esac
