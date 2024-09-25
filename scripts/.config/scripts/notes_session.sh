@@ -6,13 +6,15 @@
 function msg() {
     if (( $# == 2 )); then
         input_msg=$1
-        taken_msg=$(cat $2)
-        length=$(( ${#input_msg} > ${#taken_msg} ? ${#input_msg} : ${#taken_msg}))
+        device_name=$(cat $2 | awk '{ print $1 }')
+        date=$(cat $2 | sed 's/^[^ ]* //')
+        length=$(( ${#input_msg} > ${#date} ? ${#input_msg} : ${#date}))
     else
         length=${#1}
     fi
+
     for (( i=0; i < length; i++ )); do
-        border+="="
+        border+="-"
     done
 
     echo ""
@@ -21,13 +23,15 @@ function msg() {
     if (( $# == 2 )); then
         echo ""
         printf "    "
-        echo $taken_msg | awk '{ print $1 }'
+        echo $device_name
         printf "    "
-        echo $taken_msg | sed 's/^[^ ]* //'
+        echo $date
         echo ""
     fi
     echo $border
     echo ""
+
+    border=""
 }
 
 NOTES=~/Documents/Obsidian_Notes/
@@ -42,10 +46,10 @@ while getopts 'se' option; do
     case $option in
         s)
             if [[ -e $TMP_KEY ]]; then
-                echo "Session already started."
+                msg "Session already started."
             else
                 chmod -R u+w $NOTES
-                msg "Pulling google drive.."
+                msg "Pulling google drive..."
                 rclone sync $DRIVE $NOTES --track-renames --local-case-sensitive --progress
                 sleep 0.5
                 if [[ -s $LOCK ]]; then
