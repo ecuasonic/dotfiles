@@ -1,8 +1,42 @@
 #!/usr/bin/env bash
 
+# TODO: Implement checking system where if checks or transferred is not 100% then don't proceed.
+# If nothing transferred, then -% for transferred.
+
+function msg() {
+    if (( $# == 2 )); then
+        input_msg=$1
+        taken_msg=$(cat $2)
+        length=$(( ${#input_msg} > ${#taken_msg} ? ${#input_msg} : ${#taken_msg}))
+    else
+        length=${#1}
+    fi
+    for (( i=0; i < length; i++ )); do
+        border+="="
+    done
+
+    echo ""
+    echo $border
+    echo $1
+    if (( $# == 2 )); then
+        echo ""
+        printf "    "
+        echo $taken_msg | awk '{ print $1 }'
+        printf "    "
+        echo $taken_msg | sed 's/^[^ ]* //'
+        echo ""
+    fi
+    echo $border
+    echo ""
+}
+
 NOTES=~/Documents/Obsidian_Notes/
+DRIVE=remote-google-drive:notes
 LOCK=$NOTES.lock
 TMP_KEY=~/Documents/.notes_session
+TEMP=/tmp/transfer_progress
+
+SUB='s/([0-9]{1,3}%)/\x1b[1;36m\1\x1b[m/g'
 
 while getopts 'se' option; do
     case $option in
@@ -11,33 +45,19 @@ while getopts 'se' option; do
                 echo "Session already started."
             else
                 chmod -R u+w $NOTES
-                echo ""
-                echo "======================="
-                echo "Pulling google drive..."
-                echo "======================="
-                echo ""
-                rclone sync remote-google-drive:notes $NOTES -v
+                msg "Pulling google drive.."
+                rclone sync $DRIVE $NOTES --track-renames --local-case-sensitive --progress
                 sleep 0.5
                 if [[ -s $LOCK ]]; then
-                    echo "================================="
-                    echo "Other computer has notes session:"
-                    cat $LOCK
-                    echo "================================="
-                    echo ""
+                    msg "Other computer has notes session:" $LOCK
                     chmod -R u-w $NOTES
                 else
-                    echo "$(whoami)@$(hostname) $(date)" > $LOCK
+                    echo "$(whoami)@$(hostname) $(date +'%a %D %r')" > $LOCK
                     sleep 0.5
-                    echo "=================================="
-                    echo "Pushing google drive with .lock..."
-                    echo "=================================="
-                    echo ""
-                    rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false -v
+                    msg "Pushing google drive with .lock..."
+                    rclone sync $NOTES $DRIVE --drive-use-trash=false --progress
                     touch $TMP_KEY
-                    echo "================"
-                    echo "Session started."
-                    echo "================"
-                    echo ""
+                    msg "Session started."
                 fi
             fi
             ;;
@@ -45,24 +65,13 @@ while getopts 'se' option; do
             if [[ -e $TMP_KEY ]]; then
                 : > $LOCK
                 sleep 0.5
-                echo ""
-                echo "======================================"
-                echo "Pushing google drive with new notes..."
-                echo "======================================"
-                echo ""
-                rclone sync $NOTES remote-google-drive:notes --drive-use-trash=false -v
+                msg "Pushing google drive with new notes..."
+                rclone sync $NOTES $DRIVE --drive-use-trash=false --progress --track-renames --local-case-sensitive
                 chmod -R u-w $NOTES
                 rm $TMP_KEY
-                echo "=============="
-                echo "Session ended."
-                echo "=============="
-                echo ""
+                msg "Session ended."
             else
-                echo ""
-                echo "===================="
-                echo "Session not started."
-                echo "===================="
-                echo ""
+                msg "Session not started."
             fi
             ;;
     esac
