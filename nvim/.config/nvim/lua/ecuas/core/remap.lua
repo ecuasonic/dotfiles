@@ -4,8 +4,27 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local keymap = vim.keymap -- keymaps
 
-keymap.set('v', '/', "\"fy/\\V<C-R>f<CR>")
-keymap.set('n', '<leader>/', "/\\V<C-R>+<CR>")
+keymap.set(
+	{ "n", "o", "x" },
+	"w",
+	"<cmd>lua require('spider').motion('w')<CR>",
+	{ desc = "Spider-w" }
+)
+keymap.set(
+	{ "n", "o", "x" },
+	"e",
+	"<cmd>lua require('spider').motion('e')<CR>",
+	{ desc = "Spider-e" }
+)
+keymap.set(
+	{ "n", "o", "x" },
+	"b",
+	"<cmd>lua require('spider').motion('b')<CR>",
+	{ desc = "Spider-b" }
+)
+
+keymap.set('v', '/', "\"fy/<C-R>f<CR>")
+keymap.set('n', '<leader>/', "/<C-R>+<CR>")
 
 keymap.set('n', ';', "")
 keymap.set('n', '<C-o>', '<C-o>zz')
