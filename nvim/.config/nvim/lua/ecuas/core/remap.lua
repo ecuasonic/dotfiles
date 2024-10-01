@@ -23,11 +23,17 @@ keymap.set(
 	{ desc = "Spider-b" }
 )
 
+-- Search
 keymap.set('v', '/', "\"fy/<C-R>f<CR>")
 keymap.set('n', '<leader>/', "/<C-R>+<CR>")
 
+-- Jumplist
 keymap.set('n', '<C-o>', '<C-o>zz')
 keymap.set('n', '<C-i>', '<C-i>zz')
+
+-- Quickfix
+keymap.set('n', 'q]', '<cmd>cnext<CR>zz')
+keymap.set('n', 'q[', '<cmd>cprev<CR>zz')
 
 -- Multi-line Indentation in Visual Mode
 keymap.set("v", "<Tab>", ">gv^")
@@ -74,7 +80,7 @@ keymap.set("n", "<C-f>", function()
     { desc = "Format file" })
 
 keymap.set("n", "<leader>s",
-    ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+    ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>",
     { desc = "Replace current word" })
 
 vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])

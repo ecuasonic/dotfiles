@@ -197,8 +197,8 @@ return {
                 lualine_c = {},
                 lualine_x = {},
                 lualine_y = {
+                    diff,
                     diagnostics,
-                    {'filesize'},
                 },
                 lualine_z = {}
             },

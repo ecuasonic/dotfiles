@@ -8,6 +8,7 @@ opt.iskeyword:remove('_')
 opt.mouse = ""
 
 opt.conceallevel = 2
+opt.history = 100
 
 -- hide -- INSERT on lualine
 opt.showmode = false

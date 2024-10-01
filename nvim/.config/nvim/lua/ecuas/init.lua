@@ -47,32 +47,35 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "d]", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "d[", function() vim.diagnostic.goto_prev() end, opts)
-        vim.keymap.set("n", "gs", function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set("n", "gr", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("n", "gd", function() vim.lsp.buf.declaration() end, opts)
         vim.keymap.set("n", "gi", function() vim.lsp.buf.definition() end, opts)
+        -- In telescope.lua:
+        -- vim.keymap.set('n', 'gs', builtin.lsp_references, { desc = "Telescope References" })
+        -- vim.keymap.set('n', 'gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
     end,
 })
 
 local _border = "single"
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = _border
-  }
+    vim.lsp.handlers.hover, {
+        border = _border
+    }
 )
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = _border
-  }
+    vim.lsp.handlers.signature_help, {
+        border = _border
+    }
 )
 
 vim.diagnostic.config{
-  float={border=_border}
+    float={border=_border}
 }
 
 require('lspconfig.ui.windows').default_options = {
-  border = _border
+    border = _border
 }
 
 -- vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])

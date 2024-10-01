@@ -84,9 +84,11 @@ return {
             },
         })
 
+        --------------------------------------------------------------------
+        -------------- FZF/Grep Functions and Keymaps ----------------------
+        --------------------------------------------------------------------
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Fuzzy Find" })
-        vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = "Fuzzy Git" })
-
+        vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = "Fuzzy Text"})
         vim.keymap.set('v', '<leader>fs', function()
             local reg_unnamed = vim.fn.getreg('""')
             vim.cmd('normal! "zy')
@@ -95,13 +97,36 @@ return {
             builtin.grep_string({ search = selected_text })
         end, {desc = "Fuzzy Current Selected Text"})
 
-        vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = "Fuzzy Text"})
-        vim.keymap.set('n', '<leader>fh', builtin.search_history, { desc = "Telescope Search History" })
-        vim.keymap.set('n', '<leader>ft', builtin.tags, { desc = "Telescope tags" })
-        vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = "Telescope jumplist" })
-        vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = "Telescope References" })
-        vim.keymap.set('n', 'ge', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
 
+        ---------------------------------------------------------------
+        -------------- LSP Functions and Keymaps ----------------------
+        ---------------------------------------------------------------
+        vim.keymap.set('n', 'gs', builtin.lsp_references, { desc = "Telescope References" })
+        vim.keymap.set('n', 'gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
+
+        -- In init.lua:
+        -- vim.keymap.set("n", "gr", function() vim.lsp.buf.rename() end, opts)
+        -- vim.keymap.set("n", "gd", function() vim.lsp.buf.declaration() end, opts)
+        -- vim.keymap.set("n", "gi", function() vim.lsp.buf.definition() end, opts)
+
+        -- In remap.lua:
+        -- keymap.set("n", "gf", function()
+        --     if require("obsidian").util.cursor_on_markdown_link() then
+        --         vim.cmd("normal! m'")
+        --         vim.cmd("ObsidianFollowLink")
+        --         vim.defer_fn(function()
+        --             vim.cmd("normal! zt")  -- Run zt after the link is followed
+        --         end, 50)
+        --     else
+        --         vim.cmd("normal! gf")
+        --         vim.cmd("normal! zt")
+        --     end
+        -- end)
+
+
+        ------------------------------------------------------------------
+        --------------------------- Zoxide -------------------------------
+        ------------------------------------------------------------------
         telescope.load_extension('zoxide')
         vim.keymap.set('n', '<leader>cd', telescope.extensions.zoxide.list)
         vim.keymap.set('n', '<leader>fc', ":Telescope neoclip<CR>", { desc = "Telescope Symbols" })
