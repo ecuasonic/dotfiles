@@ -29,6 +29,7 @@ return {
         end
 
         require("nvim-tree").setup({
+            update_cwd = true,
             on_attach = my_on_attach,
             hijack_cursor = true,
             auto_reload_on_write = false,

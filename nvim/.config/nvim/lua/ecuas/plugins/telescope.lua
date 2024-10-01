@@ -1,30 +1,3 @@
-local second_color = "#202020"
-vim.api.nvim_create_autocmd("Filetype", {
-    pattern = "TelescopeResults",
-    callback = function(ctx)
-        vim.api.nvim_buf_call(ctx.buf, function()
-            vim.fn.matchadd("color", '| [^/]*/')
-            vim.api.nvim_set_hl(0, "color", { fg = second_color })
-
-            vim.fn.matchadd("white", "[^/]*:.*:.*/")
-            vim.api.nvim_set_hl(0, "white", { fg = "#FFFFFF" })
-
-            vim.fn.matchadd("recolor", "| .*:[0-9]*:[0-9]*:")
-            vim.api.nvim_set_hl(0, "recolor", { fg = second_color })
-        end)
-    end,
-})
-
-local function filename(_, path)
-    local tail = vim.fs.basename(path)
-    local parent = vim.fs.dirname(path)
-    if parent == "." then
-        return string.format("| %s", tail)
-    else
-        return string.format("| %s/%s", parent, tail)
-    end
-end
-
 return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
@@ -38,8 +11,32 @@ return {
     config = function()
         local telescope = require("telescope")
         local actions = require("telescope.actions")
+        local z_utils = require("telescope._extensions.zoxide.utils")
+        local builtin = require('telescope.builtin')
 
         telescope.setup({
+            extensions = {
+                zoxide = {
+                    prompt_title = "[ Zoxide List ]",
+                    list_command = "zoxide query -ls",
+                    mappings = {
+                        default = {
+                            action = function(selection)
+                                vim.cmd.cd(selection.path)
+                            end,
+                            after_action = function(selection)
+                                vim.notify("Directory changed to " .. selection.path)
+                            end,
+                        },
+                        ["<C-f>"] = {
+                            keepinsert = true,
+                            action = function(selection)
+                                builtin.find_files({ cwd = selection.path })
+                            end,
+                        }
+                    }
+                }
+            },
             defaults = {
                 vimgrep_arguments = {
                     "rg",
@@ -71,7 +68,7 @@ return {
                 layout_config = {
                     height = 0.95,
                 },
-                path_display = filename,
+                path_display = { shorten_path = 15 },
                 mappings = {
                     i = {
                         ["<ESC>"] = actions.close,
@@ -87,7 +84,6 @@ return {
             },
         })
 
-        local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Fuzzy Find" })
         vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = "Fuzzy Git" })
 
@@ -103,5 +99,11 @@ return {
         vim.keymap.set('n', '<leader>fh', builtin.search_history, { desc = "Telescope Search History" })
         vim.keymap.set('n', '<leader>ft', builtin.tags, { desc = "Telescope tags" })
         vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = "Telescope jumplist" })
+        vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = "Telescope References" })
+        vim.keymap.set('n', 'ge', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
+
+        telescope.load_extension('zoxide')
+        vim.keymap.set('n', '<leader>cd', telescope.extensions.zoxide.list)
+        vim.keymap.set('n', '<leader>fc', ":Telescope neoclip<CR>", { desc = "Telescope Symbols" })
     end
 }
