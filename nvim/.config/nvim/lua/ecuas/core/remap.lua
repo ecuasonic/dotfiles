@@ -26,7 +26,6 @@ keymap.set(
 keymap.set('v', '/', "\"fy/<C-R>f<CR>")
 keymap.set('n', '<leader>/', "/<C-R>+<CR>")
 
-keymap.set('n', ';', "")
 keymap.set('n', '<C-o>', '<C-o>zz')
 keymap.set('n', '<C-i>', '<C-i>zz')
 
