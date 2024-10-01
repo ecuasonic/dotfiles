@@ -168,16 +168,7 @@ return {
                 },
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {
-                    {'hostname'},
-                    {
-                        'branch',
-                        icons_enabled = true,
-                        icon = {'', align='right', color = {fg='green'}}
-                    },
-                    { 'progress' },
-                    { 'location' },
-                },
+                lualine_y = {},
                 lualine_z = {},
             },
             tabline = {
