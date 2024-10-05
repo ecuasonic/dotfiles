@@ -4,13 +4,17 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+
         "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
+
         "saadparwaiz1/cmp_luasnip",
+        "L3MON4D3/LuaSnip",
+        "onsails/lspkind-nvim",
         "windwp/nvim-autopairs"
     },
 
@@ -44,6 +48,8 @@ return {
 
         -- cmp
         local cmp = require('cmp')
+        local luasnip = require("luasnip")
+        local lspkind = require("lspkind")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
             "force",
@@ -79,6 +85,40 @@ return {
                         }
                     }
                 end,
+                ["clangd"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.clangd.setup({
+                        -- capabilities = capabilities,
+                        init_options = {
+                            fallbackFlags = { '-std=c++17' },
+                            completion = {
+                                placeholder = false,
+                            },
+                        },
+                        cmd = {
+                            'clangd',
+                            '--background-index',
+                            '--clang-tidy',
+                            '--log=verbose'
+                        },
+                        filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+                        single_file_support = false,
+                        root_dir = lspconfig.util.root_pattern(
+                            '.clangd',
+                            '.clang-tidy',
+                            '.clang-format',
+                            'compile_commands.json',
+                            'compile_flags.txt',
+                            'configure.ac',
+                            '.git'
+                        )
+                        -- root_dir = function(fname)
+                        --     local filename = util.path.is_absolute(fname) and fname
+                        --     or util.path.join(vim.loop.cwd(), fname)
+                        --     return root_pattern(filename) or util.path.dirname(filename)
+                        -- end;
+                    })
+                end
             }
         })
 
@@ -87,7 +127,7 @@ return {
         cmp.setup({
             snippet = {
                 expand = function(args)
-                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                    require('luasnip').lsp_expand(args.body)
                 end,
             },
             window = {
@@ -103,12 +143,35 @@ return {
             sources = cmp.config.sources(
                 {
                     { name = 'nvim_lsp' },
-                    { name = 'luasnip' }, -- For luasnip users.
+                    { name = 'nvim_lua' },
+                    { name = 'luasnip' },
+                    { name = 'vim_lsp' },
                 },
                 {
-                    { name = 'buffer' },
+                    { name = "path" },
+                    { name = 'buffer', keyword_length = 4 },
                 }),
-
+            formatting = {
+                fields = { "abbr", "kind", "menu" },
+                format = lspkind.cmp_format({
+                    mode = "symbol",
+                    with_text = true,
+                    menu = {
+                        nvim_lsp = "[LSP]",
+                        nvim_lua = "[NVLUA]",
+                        luasnip = "[SNIP]",
+                        path = "[PATH]",
+                        buffer = "[BUF]",
+                    },
+                    maxwidth = 50,
+                }),
+            },
+            view = {
+                entries = {
+                    name = "custom",
+                    selection_order = "near_cursor",
+                },
+            },
             enabled = function()
                 -- disable completion in comments
                 local context = require 'cmp.config.context'
@@ -119,6 +182,24 @@ return {
                     return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
                 end
             end
+        })
+
+        -- '/' cmdline setup
+        cmp.setup.cmdline({ "/", "?" }, {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = "buffer" },
+            }
+        })
+
+        -- ':' cmdline setup
+        cmp.setup.cmdline(":",{
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = "path" },
+            }, {
+                { name = "cmdline" },
+            }),
         })
 
         vim.diagnostic.config({

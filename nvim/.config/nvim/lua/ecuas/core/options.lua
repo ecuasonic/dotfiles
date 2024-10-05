@@ -3,8 +3,6 @@ local opt = vim.opt -- vim options
 
 opt.linebreak = true
 
-opt.iskeyword:remove('_')
-
 opt.mouse = ""
 
 opt.conceallevel = 2
@@ -37,6 +35,7 @@ opt.ignorecase = true
 
 -- cursor line
 opt.cursorline = true
+opt.cursorcolumn = false
 
 -- appearance
 opt.termguicolors = true

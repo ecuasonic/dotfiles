@@ -2,98 +2,75 @@
 vim.g.mapleader = " " -- space key
 
 -- for conciseness
-local keymap = vim.keymap -- keymaps
-
-keymap.set(
-	{ "n", "o", "x" },
-	"w",
-	"<cmd>lua require('spider').motion('w')<CR>",
-	{ desc = "Spider-w" }
-)
-keymap.set(
-	{ "n", "o", "x" },
-	"e",
-	"<cmd>lua require('spider').motion('e')<CR>",
-	{ desc = "Spider-e" }
-)
-keymap.set(
-	{ "n", "o", "x" },
-	"b",
-	"<cmd>lua require('spider').motion('b')<CR>",
-	{ desc = "Spider-b" }
-)
+local k = vim.keymap.set
 
 -- Search
-keymap.set('v', '/', "\"fy/<C-R>f<CR>")
-keymap.set('n', '<leader>/', "/<C-R>+<CR>")
+k('v', '/', "\"fy/<C-R>f<CR>")
+k('n', '<leader>/', "/<C-R>+<CR>")
 
 -- Jumplist
-keymap.set('n', '<C-o>', '<C-o>zz')
-keymap.set('n', '<C-i>', '<C-i>zz')
+k('n', '<C-o>', '<C-o>zz')
+k('n', '<C-i>', '<C-i>zz')
 
 -- Quickfix
-keymap.set('n', 'q]', '<cmd>cnext<CR>zz')
-keymap.set('n', 'q[', '<cmd>cprev<CR>zz')
+k('n', '<C-q>', '<cmd>copen<CR>zz')
+k('n', 'q]', '<cmd>cnext<CR>zz')
+k('n', 'q[', '<cmd>cprev<CR>zz')
 
 -- Multi-line Indentation in Visual Mode
-keymap.set("v", "<Tab>", ">gv^")
-keymap.set("v", "<S-Tab>", "<gv^")
+k("v", "<Tab>", ">gv^")
+k("v", "<S-Tab>", "<gv^")
 
 -- Creating space before or after line in Normal Mode
-keymap.set("n", "<A-o>", "o<ESC>")
-keymap.set("n", "<A-O>", "O<ESC>")
+k("n", "<A-o>", "o<ESC>")
+k("n", "<A-O>", "O<ESC>")
 
 -- Moves highlighted segments of code up and down
-keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted code up " })
-keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down " })
+k("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted code up " })
+k("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down " })
 
 -- Removes newline char at end of line and keeps cursor at start of line
-keymap.set("n", "J", "mzJ'z")
+k("n", "J", "mzJ'z")
 
 -- Keeps search terms, top view
-keymap.set("n", "n", "nzz")
-keymap.set("n", "N", "Nzz")
+k("n", "n", "nzz")
+k("n", "N", "Nzz")
 
 -- greatest remap ever
 -- You can paste to replace words, without the deleted words going into buffer
-keymap.set("x", "p", "\"_dP", { desc = "Paste over words, w/o going into buffer" })
-keymap.set("x", "<leader>p", "\"_d\"+P", { desc = "Paste over words, from clipboard, w/o going into buffer"})
-keymap.set("n", "<leader>p", "\"+p", { desc = "Paste from clipboard"})
-keymap.set("n", "<leader>P", "\"+P", { desc = "Paste from clipboard ()"})
+k("x", "p", "\"_dP", { desc = "Paste over words, w/o going into buffer" })
+k("x", "<leader>p", "\"_d\"+P", { desc = "Paste over words, from clipboard, w/o going into buffer"})
+k("n", "<leader>p", "\"+p", { desc = "Paste from clipboard"})
+k("n", "<leader>P", "\"+P", { desc = "Paste from clipboard ()"})
 
 -- next greatest remap ever : asbjornHaland
 -- Yank into system clipboard
-keymap.set("n", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
-keymap.set("v", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
-keymap.set("n", "<leader>yy", "\"+Y", { desc = "Yank line into sys-clipboard" })
+k("n", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
+k("v", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
+k("n", "<leader>yy", "\"+Y", { desc = "Yank line into sys-clipboard" })
 
 -- Delete to void register
-keymap.set("n", "<leader>d", "\"_d", { desc = "Delete into void register" })
-keymap.set("v", "<leader>d", "\"_d", { desc = "Delete into void register" })
-keymap.set("n", "<leader>dd", "\"_dd", { desc = "Delete line into void reigster" })
+k("n", "<leader>d", "\"_d", { desc = "Delete into void register" })
+k("v", "<leader>d", "\"_d", { desc = "Delete into void register" })
+k("n", "<leader>dd", "\"_dd", { desc = "Delete line into void reigster" })
 
-keymap.set("n", "Q", "<nop>")
--- keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-keymap.set("n", "<C-f>", function()
-        vim.lsp.buf.format()
-    end,
-    { desc = "Format file" })
+k("n", "Q", "<nop>")
 
-keymap.set("n", "<leader>s",
+k("n", "<leader>s",
     ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>",
     { desc = "Replace current word" })
 
 vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 
 --------- obsidian ---------
-keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
-keymap.set("n", "<leader>on", ":ObsidianNew ", { desc = "Obsidian New Page" })
-keymap.set("n", "<leader>od", "<cmd>ObsidianToday<cr>", { desc = "Obsidian New Daily" })
-keymap.set("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
-keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
-keymap.set("n", "<leader>om", "<cmd>ObsidianBridgeTelescopeCommand<cr>", { desc = "Obsidian Bridge Menu" })
-keymap.set("n", "<leader>oT", "<cmd>ObsidianTags<cr>", { desc = "Obsidian Tags" })
-keymap.set("n", "gf", function()
+k("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
+k("n", "<leader>on", ":ObsidianNew ", { desc = "Obsidian New Page" })
+k("n", "<leader>od", "<cmd>ObsidianToday<cr>", { desc = "Obsidian New Daily" })
+k("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
+k("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
+k("n", "<leader>om", "<cmd>ObsidianBridgeTelescopeCommand<cr>", { desc = "Obsidian Bridge Menu" })
+k("n", "<leader>oT", "<cmd>ObsidianTags<cr>", { desc = "Obsidian Tags" })
+k("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
         vim.cmd("normal! m'")
         vim.cmd("ObsidianFollowLink")

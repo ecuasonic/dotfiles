@@ -1,3 +1,16 @@
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "TelescopeResults",
+	callback = function(ctx)
+		vim.api.nvim_buf_call(ctx.buf, function()
+			vim.fn.matchadd("TelescopeParent", "(\\./[^)]*)")
+			vim.fn.matchadd("TelescopeParent", "(\\.)")
+			vim.api.nvim_set_hl(0, "TelescopeParent", {fg = 'gray'})
+            vim.fn.matchadd("Icon", "^[^a-zA-Z0-9]*")
+			vim.api.nvim_set_hl(0, "Icon", {fg = 'orange'})
+		end)
+	end,
+})
+
 return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
@@ -9,6 +22,7 @@ return {
     },
 
     config = function()
+
         local telescope = require("telescope")
         local actions = require("telescope.actions")
         local z_utils = require("telescope._extensions.zoxide.utils")
@@ -37,6 +51,17 @@ return {
                     }
                 }
             },
+            pickers = {
+                lsp_references = {
+                    path_display = function(opts, path)
+                        local filename = vim.fs.basename(path)
+                        local pwd_len = string.len(vim.fn.system('pwd'))
+                        local parent = vim.fs.dirname(path)
+                        parent = string.sub(parent,pwd_len,-1)
+                        return string.format("%s (%s)", filename, '.' .. parent)
+                    end,
+                }
+            },
             defaults = {
                 vimgrep_arguments = {
                     "rg",
@@ -58,17 +83,26 @@ return {
                 color_devicons = false,
                 selection_caret = ' ',
                 sorting_strategy = 'descending',
-                selection_strategy = 'row',
+                selection_strategy = 'reset',
                 scroll_strategy = 'limit',
                 layout_strategy = 'vertical',
-                wrap_results = true,
+                wrap_results = false,
                 entry_prefix = '\t',
                 initial_mode = 'insert',
                 border = true,
                 layout_config = {
                     height = 0.95,
                 },
-                path_display = { shorten_path = 15 },
+                -- Format path as "file.txt (path\to\file\)"
+                path_display = function(opts, path)
+                    local filename = vim.fs.basename(path)
+                    local dirname = vim.fs.dirname(path)
+                    if (dirname == '.') then
+                        return string.format("%s (.)", filename)
+                    else
+                        return string.format("%s (%s)", filename, "./" .. dirname)
+                    end
+                end,
                 mappings = {
                     i = {
                         ["<ESC>"] = actions.close,
@@ -101,13 +135,13 @@ return {
         ---------------------------------------------------------------
         -------------- LSP Functions and Keymaps ----------------------
         ---------------------------------------------------------------
-        vim.keymap.set('n', 'gs', builtin.lsp_references, { desc = "Telescope References" })
-        vim.keymap.set('n', 'gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
+        vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
+        vim.keymap.set('n', '<leader>ge', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
 
         -- In init.lua:
-        -- vim.keymap.set("n", "gr", function() vim.lsp.buf.rename() end, opts)
-        -- vim.keymap.set("n", "gd", function() vim.lsp.buf.declaration() end, opts)
-        -- vim.keymap.set("n", "gi", function() vim.lsp.buf.definition() end, opts)
+        -- vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.rename() end, opts)
+        -- vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.declaration() end, opts)
+        -- vim.keymap.set("n", "<leader>gi", function() vim.lsp.buf.definition() end, opts)
 
         -- In remap.lua:
         -- keymap.set("n", "gf", function()

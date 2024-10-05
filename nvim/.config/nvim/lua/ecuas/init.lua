@@ -47,12 +47,12 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "d]", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "d[", function() vim.diagnostic.goto_prev() end, opts)
-        vim.keymap.set("n", "gr", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.declaration() end, opts)
-        vim.keymap.set("n", "gi", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.declaration() end, opts)
+        vim.keymap.set("n", "<leader>gi", function() vim.lsp.buf.definition() end, opts)
         -- In telescope.lua:
-        -- vim.keymap.set('n', 'gs', builtin.lsp_references, { desc = "Telescope References" })
-        -- vim.keymap.set('n', 'gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
+        -- vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
+        -- vim.keymap.set('n', '<leader>gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
     end,
 })
 
@@ -80,3 +80,5 @@ require('lspconfig.ui.windows').default_options = {
 
 -- vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 vim.cmd([[hi Comment guifg=yellow ctermfg=yellow]])
+vim.cmd([[hi RenderMarkdownCodeInline ctermfg=11 guifg=#FFC133 guibg=#383838]])
+vim.cmd([[hi @markup.raw.markdown_inline ctermfg=11 guifg=#FFC133 guibg=#383838]])

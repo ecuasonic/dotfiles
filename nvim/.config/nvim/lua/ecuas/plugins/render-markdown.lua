@@ -265,6 +265,8 @@ return {
                 highlight = 'RenderMarkdownSign',
             },
         })
+        vim.cmd([[hi @markup.raw.markdown_inline guifg=#FFFFFF guibg=#080808]])
+        vim.cmd([[hi RenderMarkdownCodeInline ctermfg=11 guifg=Cyan guibg=#080808]])
     end,
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
