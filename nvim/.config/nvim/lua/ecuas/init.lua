@@ -44,12 +44,12 @@ autocmd('LspAttach', {
     group = ecuasGroup,
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "d]", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "d[", function() vim.diagnostic.goto_prev() end, opts)
-        vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.declaration() end, opts)
-        vim.keymap.set("n", "<leader>gi", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { desc = "Description of current word.", buffer = e.buf })
+        vim.keymap.set("n", "d]", function() vim.diagnostic.goto_next() end, { desc = "Go to next diagnostic.", buffer = e.buf })
+        vim.keymap.set("n", "d[", function() vim.diagnostic.goto_prev() end, { desc = "Go to previous diagnostic.", buffer = e.buf })
+        vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.rename() end, { desc = "Rename current object throughout entire project.", buffer = e.buf })
+        vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.declaration() end, { desc = "Go to object's declaration.", buffer = e.buf })
+        vim.keymap.set("n", "<leader>gi", function() vim.lsp.buf.definition() end, { desc = "Go to object's implementation.", buffer = e.buf })
         -- In telescope.lua:
         -- vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
         -- vim.keymap.set('n', '<leader>gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })

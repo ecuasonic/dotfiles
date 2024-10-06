@@ -5,60 +5,54 @@ vim.g.mapleader = " " -- space key
 local k = vim.keymap.set
 
 -- Search
-k('v', '/', "\"fy/<C-R>f<CR>")
-k('n', '<leader>/', "/<C-R>+<CR>")
+k('v', '/', "\"fy/<C-R>f<CR>", { desc = "Search highlighted text in current buffer." })
+k('n', '<leader>/', "/<C-R>+<CR>", { desc = "Search clipboarded text in current buffer." })
 
 -- Jumplist
-k('n', '<C-o>', '<C-o>zz')
-k('n', '<C-i>', '<C-i>zz')
+k('n', '<C-o>', '<C-o>zz', { desc = "Go to previous jumplist centered." })
+k('n', '<C-i>', '<C-i>zz', { desc = "Go to next jumplist centered." })
 
 -- Quickfix
-k('n', '<C-q>', '<cmd>copen<CR>zz')
-k('n', 'q]', '<cmd>cnext<CR>zz')
-k('n', 'q[', '<cmd>cprev<CR>zz')
+k('n', '<C-q>', '<cmd>copen<CR>zz', { desc = "Open Quickfix." })
+k('n', 'q[', '<cmd>cprev<CR>zz', { desc = "Go to previous quickfix centered." })
+k('n', 'q]', '<cmd>cnext<CR>zz', { desc = "Go to next quickfix centered." })
 
 -- Multi-line Indentation in Visual Mode
-k("v", "<Tab>", ">gv^")
-k("v", "<S-Tab>", "<gv^")
-
--- Creating space before or after line in Normal Mode
-k("n", "<A-o>", "o<ESC>")
-k("n", "<A-O>", "O<ESC>")
+k("v", "<Tab>", ">gv^", { desc = "Tab highlighted text." })
+k("v", "<S-Tab>", "<gv^", { desc = "UnTab highlighted text." })
 
 -- Moves highlighted segments of code up and down
-k("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted code up " })
-k("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down " })
+k("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted code up." })
+k("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted code down." })
 
 -- Removes newline char at end of line and keeps cursor at start of line
-k("n", "J", "mzJ'z")
+k("n", "J", "mzJ'z", { desc = "Remove newline character at end of line." })
 
 -- Keeps search terms, top view
-k("n", "n", "nzz")
-k("n", "N", "Nzz")
+k("n", "N", "Nzz", { desc = "Go to previous search centered" })
+k("n", "n", "nzz", { desc = "Go to next search centered." })
 
 -- greatest remap ever
 -- You can paste to replace words, without the deleted words going into buffer
-k("x", "p", "\"_dP", { desc = "Paste over words, w/o going into buffer" })
-k("x", "<leader>p", "\"_d\"+P", { desc = "Paste over words, from clipboard, w/o going into buffer"})
-k("n", "<leader>p", "\"+p", { desc = "Paste from clipboard"})
-k("n", "<leader>P", "\"+P", { desc = "Paste from clipboard ()"})
+k("x", "p", "\"_dP", { desc = "Paste over words, w/o going into buffer." })
+k("x", "<leader>p", "\"_d\"+P", { desc = "Paste over words from clipboard, w/o going into buffer."})
+k("n", "<leader>p", "\"+p", { desc = "Paste (p) from clipboard."})
+k("n", "<leader>P", "\"+P", { desc = "Paste (P) from clipboard."})
 
 -- next greatest remap ever : asbjornHaland
 -- Yank into system clipboard
-k("n", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
-k("v", "<leader>y", "\"+y", { desc = "Yank into sys-clipboard" })
-k("n", "<leader>yy", "\"+Y", { desc = "Yank line into sys-clipboard" })
+k({"v", "n"}, "<leader>y", "\"+y", { desc = "Yank into sys-clipboard." })
+k("n", "<leader>yy", "\"+yy", { desc = "Yank line into sys-clipboard." })
 
 -- Delete to void register
-k("n", "<leader>d", "\"_d", { desc = "Delete into void register" })
-k("v", "<leader>d", "\"_d", { desc = "Delete into void register" })
-k("n", "<leader>dd", "\"_dd", { desc = "Delete line into void reigster" })
+k({"v", "n"}, "<leader>d", "\"_d", { desc = "Delete into void register." })
+k("n", "<leader>dd", "\"_dd", { desc = "Delete line into void reigster." })
 
 k("n", "Q", "<nop>")
 
 k("n", "<leader>s",
     ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>",
-    { desc = "Replace current word" })
+    { desc = "Replace current word within current buffer." })
 
 vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 
@@ -86,3 +80,5 @@ k("n", "gf", function()
         vim.cmd("normal! zt")
     end
 end)
+
+k({"n", "v"}, "<leader>wk", "<cmd>WhichKey<CR>", { desc = "Open Which-Key"} )
