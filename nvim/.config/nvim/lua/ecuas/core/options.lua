@@ -1,6 +1,10 @@
 -- for conciseness
 local opt = vim.opt -- vim options
 
+opt.foldmethod = "marker"
+opt.foldmarker = "{,}"
+vim.lsp.set_log_level("off")
+
 opt.linebreak = true
 
 opt.mouse = ""

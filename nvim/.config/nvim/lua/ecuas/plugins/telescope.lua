@@ -73,6 +73,7 @@ return {
                     "--smart-case",
                 },
                 file_ignore_patterns = {
+                    "%.o",
                     "%.png",
                     "%.jpg",
                     "%.pdf",

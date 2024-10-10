@@ -4,6 +4,9 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local k = vim.keymap.set
 
+k("n", "+", "<C-a>", { desc = "Increment numbers", noremap = true })
+k("n", "-", "<C-x>", { desc = "Decrement numbers", noremap = true })
+
 -- Search
 k('v', '/', "\"fy/<C-R>f<CR>", { desc = "Search highlighted text in current buffer." })
 k('n', '<leader>/', "/<C-R>+<CR>", { desc = "Search clipboarded text in current buffer." })
@@ -14,8 +17,8 @@ k('n', '<C-i>', '<C-i>zz', { desc = "Go to next jumplist centered." })
 
 -- Quickfix
 k('n', '<C-q>', '<cmd>copen<CR>zz', { desc = "Open Quickfix." })
-k('n', 'q[', '<cmd>cprev<CR>zz', { desc = "Go to previous quickfix centered." })
-k('n', 'q]', '<cmd>cnext<CR>zz', { desc = "Go to next quickfix centered." })
+k('n', '[q', '<cmd>cprev<CR>zz', { desc = "Go to previous quickfix centered." })
+k('n', ']q', '<cmd>cnext<CR>zz', { desc = "Go to next quickfix centered." })
 
 -- Multi-line Indentation in Visual Mode
 k("v", "<Tab>", ">gv^", { desc = "Tab highlighted text." })
@@ -81,4 +84,7 @@ k("n", "gf", function()
     end
 end)
 
-k({"n", "v"}, "<leader>wk", "<cmd>WhichKey<CR>", { desc = "Open Which-Key"} )
+k({"n", "v"}, "<leader>wk", "<cmd>WhichKey<CR>", { desc = "Open Which-Key" })
+k({"n", "v"}, "zc", "zM", { desc = "Close all folds." })
+k({"n", "v"}, "zo", "zR", { desc = "Open all folds." })
+k({"n", "v"}, "za", "zA", { desc = "Toggle all folds on cursor." })

@@ -16,5 +16,6 @@ return {
                 -- Do not tint `terminal` or floating windows, tint everything else
                 return buftype == "terminal" or floating
             end
-        })    end
+        })
+    end
 }

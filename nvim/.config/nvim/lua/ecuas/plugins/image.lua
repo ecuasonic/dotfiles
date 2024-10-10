@@ -7,26 +7,13 @@ return {
             integrations = {
                 markdown = {
                     enabled = true,
-                    clear_in_insert_mode = false,
-                    download_remote_images = true,
-                    only_render_image_at_cursor = true,
-                    filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
-                    -- resolve_image_path = function(document_path, image_path, fallback)
-                    --     return fallback(document_path, image_path)
-                    -- end,
-                },
-                neorg = {
-                    enabled = false,
                     clear_in_insert_mode = true,
                     download_remote_images = true,
                     only_render_image_at_cursor = true,
-                    filetypes = { "norg" },
-                },
-                html = {
-                    enabled = false,
-                },
-                css = {
-                    enabled = false,
+                    filetypes = { "markdown" }, -- markdown extensions (ie. quarto) can go here
+                    -- resolve_image_path = function(document_path, image_path, fallback)
+                    --     return fallback(document_path, image_path)
+                    -- end,
                 },
             },
 
