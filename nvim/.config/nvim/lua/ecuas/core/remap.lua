@@ -4,6 +4,8 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local k = vim.keymap.set
 
+k("n", "<ESC>", "<cmd>noh<CR>")
+
 k("n", "+", "<C-a>", { desc = "Increment numbers", noremap = true })
 k("n", "-", "<C-x>", { desc = "Decrement numbers", noremap = true })
 

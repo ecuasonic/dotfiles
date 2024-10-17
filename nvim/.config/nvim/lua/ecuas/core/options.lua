@@ -66,7 +66,7 @@ opt.fillchars = { eob = " " }
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo")
 
-opt.hlsearch = false
+opt.hlsearch = true
 opt.incsearch = false
 
 opt.scrolloff = 8
@@ -80,7 +80,6 @@ opt.foldcolumn = '1'
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
-
 
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
