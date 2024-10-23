@@ -1,6 +1,11 @@
 -- for conciseness
 local opt = vim.opt -- vim options
 
+opt.path:append("/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/")
+
+-- xxd would interpret \n at end of file.
+opt.fixendofline = false
+
 opt.foldmethod = "marker"
 opt.foldmarker = "{,}"
 vim.lsp.set_log_level("off")

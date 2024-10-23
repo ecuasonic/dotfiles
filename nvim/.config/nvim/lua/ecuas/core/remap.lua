@@ -4,6 +4,9 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local k = vim.keymap.set
 
+
+k("n", "<leader>x", ":!", {desc = "Execute Shell Command"})
+k("n", "<leader>X", ":%!", { desc = "Change Entire File to Sheel Command" })
 k("n", "<ESC>", "<cmd>noh<CR>")
 
 k("n", "+", "<C-a>", { desc = "Increment numbers", noremap = true })

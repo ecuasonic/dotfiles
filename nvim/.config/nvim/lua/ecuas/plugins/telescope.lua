@@ -163,7 +163,7 @@ return {
         --------------------------- Zoxide -------------------------------
         ------------------------------------------------------------------
         telescope.load_extension('zoxide')
-        vim.keymap.set('n', '<leader>cd', telescope.extensions.zoxide.list)
+        vim.keymap.set('n', '<leader>cd', telescope.extensions.zoxide.list, {desc = "Telescope cd"})
         vim.keymap.set('n', '<leader>fc', ":Telescope neoclip<CR>", { desc = "Telescope Symbols" })
     end
 }
