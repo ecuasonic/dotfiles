@@ -208,7 +208,7 @@ return {
             sort_reversed = true,
 
             -- Set the maximum number of lines to read from notes on disk when performing certain searches.
-            search_max_lines = 1000,
+            search_max_lines = 2000,
 
             -- Optional, determines how certain commands open notes. The valid options are:
             -- 1. "current" (the default) - to always open in the current window
