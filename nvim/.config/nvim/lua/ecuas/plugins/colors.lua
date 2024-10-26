@@ -33,7 +33,7 @@ return {
                 styles = {
                     sidebars = transparent and "transparent" or "dark",
                     floats = transparent and "transparent" or "dark",
-                    comments = { italic = true },
+                    comments = { italic = false },
                     keywords = { italic = false },
                     functions = { bold = false },
                     variables = {}
