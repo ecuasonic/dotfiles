@@ -106,12 +106,13 @@ return {
                 end,
                 mappings = {
                     i = {
+                        ["<c-d>"] = require('telescope.actions').delete_buffer,
                         ["<ESC>"] = actions.close,
                         ["<C-k>"] = actions.move_selection_previous,
                         ["<C-j>"] = actions.move_selection_next,
 
-                        ["<C-u>"] = actions.preview_scrolling_up,
-                        ["<C-d>"] = actions.preview_scrolling_down,
+                        ["<C-y>"] = actions.preview_scrolling_up,
+                        ["<C-e>"] = actions.preview_scrolling_down,
 
                         ["<C-/>"] = actions.which_key,
                     },
@@ -131,6 +132,7 @@ return {
             vim.fn.setreg('""', reg_unnamed)
             builtin.grep_string({ search = selected_text })
         end, {desc = "Fuzzy Current Selected Text"})
+        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope Buffers' })
 
 
         ---------------------------------------------------------------

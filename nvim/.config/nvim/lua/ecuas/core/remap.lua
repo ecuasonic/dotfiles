@@ -67,10 +67,8 @@ vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
 --------- obsidian ---------
 k("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
 k("n", "<leader>on", ":ObsidianNew ", { desc = "Obsidian New Page" })
-k("n", "<leader>od", "<cmd>ObsidianToday<cr>", { desc = "Obsidian New Daily" })
 k("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Obsidian Rename" })
 k("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "Obsidian Links" })
-k("n", "<leader>om", "<cmd>ObsidianBridgeTelescopeCommand<cr>", { desc = "Obsidian Bridge Menu" })
 k("n", "<leader>oT", "<cmd>ObsidianTags<cr>", { desc = "Obsidian Tags" })
 k("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then

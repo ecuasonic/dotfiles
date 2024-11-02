@@ -117,6 +117,6 @@ require('lspconfig.ui.windows').default_options = {
 }
 
 -- vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
-vim.cmd([[hi Comment guifg=yellow ctermfg=yellow]])
-vim.cmd([[hi RenderMarkdownCodeInline ctermfg=11 guifg=#FFC133 guibg=#383838]])
-vim.cmd([[hi @markup.raw.markdown_inline ctermfg=11 guifg=#FFC133 guibg=#383838]])
+vim.cmd([[hi Comment guifg=yellow guibg=NONE]])
+vim.cmd([[hi RenderMarkdownCodeInline guifg=#FFC133 guibg=NONE]])
+vim.cmd([[hi @markup.raw.markdown_inline guifg=#FFC133 guibg=NONE]])
