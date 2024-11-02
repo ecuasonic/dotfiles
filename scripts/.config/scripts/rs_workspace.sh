@@ -1,32 +1,39 @@
 #!/usr/bin/env bash
 
 ERROR_LOG=/home/ecuas/.config/scripts/i3_resurrect_error.log
-echo "" > $ERROR_LOG 2>&1
+: > $ERROR_LOG
 
-main() {
-
-    if (( $# != 1 )); then
-        echo "You must include either -r (restore) or -s (save)!"
+show_usage() {
+        echo "Usage: $0 [-r (restore) | -s (save)]"
         exit 1
-    fi
-
-    while getopts "rs" option; do
-        case $option in
-            r)
-                for (( i=1; i<5; i++ )); do
-                    python -m i3_resurrect.main restore -w $i >> $ERROR_LOG 2>&1
-                    sleep 1
-                done
-                i3-msg 'workspace 1' --quiet
-                ;;
-            s)
-                for (( i=1; i<5; i++ )); do
-                    python -m i3_resurrect.main save -w $i >> $ERROR_LOG 2>&1
-                    sleep 0.5
-                done
-                ;;
-        esac
-    done
 }
 
-main $1
+run_command() {
+        local action=$1
+        local delay=$2
+        for workspace in {1..4}; do
+                python -m i3_resurrect.main "$action" -w "$workspace" >> "$ERROR_LOG" 2>&1
+                sleep "$delay"
+        done
+}
+
+main() {
+        [[ $# -ne 1 ]] && show_usage
+
+        while getopts "rs" option; do
+                case $option in
+                        r)
+                                run_command "restore" 1
+                                i3-msg 'workspace 1' --quiet
+                                ;;
+                        s)
+                                run_command "save" 0.5
+                                ;;
+                        *)
+                                show_usage
+                                ;;
+                esac
+        done
+}
+
+main "$@"
