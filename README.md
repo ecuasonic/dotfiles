@@ -1,8 +1,8 @@
-Zephyrus G14 2022 had no issues.
-MacBook Pro 2012 Issues:
-	No wifi access and no wifi driver to begin with.
-	Had to connect to ethernet to connect online.
-	Network Controller: Broadcom Inc. BCM4331 802.11 a/b/g/n (rev 02)
+Zephyrus G14 2022 had no issues. <br>
+MacBook Pro 2012 Issues: <br>
+- No wifi access and no wifi driver to begin with.
+- Had to connect to ethernet to connect online.
+- Network Controller: Broadcom Inc. BCM4331 802.11 a/b/g/n (rev 02)
 ```sh
 sudo dnf update
 
