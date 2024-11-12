@@ -8,6 +8,11 @@ opt.fixendofline = false
 
 opt.foldmethod = "marker"
 opt.foldmarker = "{,}"
+opt.foldcolumn = '1'
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
+
 vim.lsp.set_log_level("off")
 
 opt.linebreak = true
@@ -80,11 +85,6 @@ opt.isfname:append("@-@")
 opt.updatetime = 50
 
 opt.colorcolumn = "80"
-
-opt.foldcolumn = '1'
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.foldenable = true
 
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"

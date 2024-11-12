@@ -4,13 +4,24 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local k = vim.keymap.set
 
+k('v', '<leader><cr>',
+        function()
+                return require("obsidian").util.toggle_checkbox()
+        end, {desc = "Markdown Checkbox"})
 
-k("n", "<leader>x", ":!", {desc = "Execute Shell Command"})
-k("n", "<leader>X", ":%!", { desc = "Change Entire File to Sheel Command" })
+k('n', '<leader>z',
+        function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end,
+        {desc = "Enable Inlay Hints for Functions."}
+)
+
+k("n", "<leader>x", ":!", {desc = "Execute Shell Command."})
+k("n", "<leader>X", ":%!", { desc = "Change Entire File to Sheel Command." })
 k("n", "<ESC>", "<cmd>noh<CR>")
 
-k("n", "+", "<C-a>", { desc = "Increment numbers", noremap = true })
-k("n", "-", "<C-x>", { desc = "Decrement numbers", noremap = true })
+k("n", "+", "<C-a>", { desc = "Increment numbers.", noremap = true })
+k("n", "-", "<C-x>", { desc = "Decrement numbers.", noremap = true })
 
 -- Search
 k('v', '/', "\"fy/<C-R>f<CR>", { desc = "Search highlighted text in current buffer." })
