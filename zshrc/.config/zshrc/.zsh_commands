@@ -1,59 +1,67 @@
+function eth() {
+        nmcli con down Fios-7wSK6
+        nmcli con down Wired\ connection\ 1
+        nmcli con up Wired\ connection\ 1
+}
 # --------------- Helper Function ------
 function _go_to_then_return_() {
-    cd $HOME/"$1"
-    nvim "$2"
-    cd - > /dev/null
+        cd $HOME/"$1"
+        nvim "$2"
+        cd - > /dev/null
 }
 # --------------- Edit Config ----------
 
 function ez() {
-    _go_to_then_return_ ".config/zshrc" ".zshrc"
+        _go_to_then_return_ ".config/zshrc" ".zshrc"
 }
 function ea() {
-    _go_to_then_return_ ".config/zshrc" ".zsh_alias"
+        _go_to_then_return_ ".config/zshrc" ".zsh_alias"
 }
 function ec() {
-    _go_to_then_return_ ".config/zshrc" ".zsh_commands"
+        _go_to_then_return_ ".config/zshrc" ".zsh_commands"
 }
 function et() {
-    _go_to_then_return_ ".config/tmux" "tmux.conf"
+        _go_to_then_return_ ".config/tmux" "tmux.conf"
 }
 function ei3() {
-    _go_to_then_return_ ".config/i3" "config"
+        _go_to_then_return_ ".config/i3" "config"
+}
+function ek() {
+        _go_to_then_return_ ".config/kitty" "kitty.conf"
 }
 function ep() {
-    _go_to_then_return_ ".config/polybar/hack" "config.ini"
+        _go_to_then_return_ ".config/polybar/hack" "config.ini"
 }
 function en() {
-    _go_to_then_return_ ".config/nvim/lua/ecuas" "init.lua"
+        _go_to_then_return_ ".config/nvim/lua/ecuas" "init.lua"
 }
 function notes() {
-    _go_to_then_return_ "Documents/Obsidian_Notes" "To-do.md"
+        _go_to_then_return_ "Documents/Obsidian_Notes" "To-do.md"
 }
 function s() {
-    _go_to_then_return_ ".config/scripts" "README.md"
+        _go_to_then_return_ ".config/scripts" "README.md"
 }
 
 function integrated() {
-    display_ports=$(~/.config/custom_scripts/detect_monitor.sh)
+        display_ports=$(~/.config/custom_scripts/detect_monitor.sh)
 
-    if [ "$(supergfxctl -g)" = "Hybrid" ]; then
-        supergfxctl -m Integrated
-        echo "Switching to Integrated..."
-        sleep 0.5
-        i3-msg exit
-    fi
+        if [ "$(supergfxctl -g)" = "Hybrid" ]; then
+                supergfxctl -m Integrated
+                echo "Switching to Integrated..."
+                sleep 0.5
+                i3-msg exit
+        fi
 
-    if [ $display_ports = "eDP-2" ] || [ $display_ports = "eDP-1" ]; then
-        xrandr -r 60
-    fi
+        if [ $display_ports = "eDP-2" ] || [ $display_ports = "eDP-1" ]; then
+                xrandr -r 60
+        fi
 }
 
 function hybrid() {
-    if [ "$(supergfxctl -g)" = "Integrated" ]; then
-        supergfxctl -m Hybrid
-        echo "Switching to Hybrid..."
-        sleep 0.5
-        i3-msg exit
-    fi
+        if [ "$(supergfxctl -g)" = "Integrated" ]; then
+                supergfxctl -m Hybrid
+                echo "Switching to Hybrid..."
+                sleep 0.5
+                i3-msg exit
+        fi
 }
