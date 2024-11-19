@@ -3,6 +3,11 @@ function eth() {
         nmcli con down Wired\ connection\ 1
         nmcli con up Wired\ connection\ 1
 }
+
+function pwd() {
+        builtin pwd
+        builtin pwd | xclip -selection clipboard
+}
 # --------------- Helper Function ------
 function _go_to_then_return_() {
         cd $HOME/"$1"

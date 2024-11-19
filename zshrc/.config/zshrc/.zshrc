@@ -13,6 +13,9 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=$HOME/.config/zshrc
 export SIZE="2560x1600"
 export EDITOR="$(which nvim)"
+export DEVKITPRO=/opt/devkitpro
+export DEVKITARM=/opt/devkitpro/devkitARM
+export DEVKITPPC=/opt/devkitpro/devkitppc
 
 # # Sets Control to be both escape and Control (set in i3 config)
 # setxkbmap -option ctrl:nocaps
@@ -243,3 +246,5 @@ function zvm_config() {
 }
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zshrc/.config/zshrc/.p10k.zsh.
+
+export PATH=$PATH:$HOME/go/bin
