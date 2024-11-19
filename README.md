@@ -36,7 +36,7 @@ sudo dnf install stow git-delta
 # -------------------------------------------------------------------
 # Install needed programs
 # -------------------------------------------------------------------
-sudo dnf install alacritty luarocks btop zsh zoxide
+sudo dnf install kitty luarocks btop zsh zoxide shellcheck
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # -------------------------------------------------------------------
