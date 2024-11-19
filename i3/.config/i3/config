@@ -19,8 +19,9 @@ focus_on_window_activation none
 for_window [class=".*"] border pixel 5
 # ----------------------------------------------------------------------------
 
-# Set the keyboard repeat and delay
-exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xset" "r rate 200 40" 2> $ERROR_LOG
+# Set the keyboard repeat and delay.
+# Also sets screen off delay.
+exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xset" "dpms 0 0 1800 r rate 200 40" 2> $ERROR_LOG
 
 # Sets Control to be both escape and Control
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "setxkbmap" "-option ctrl:nocaps" 2>> $ERROR_LOG
