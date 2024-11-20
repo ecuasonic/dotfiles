@@ -6,10 +6,27 @@ local k = vim.keymap.set
 
 k('n', '<leader>=', function() vim.lsp.buf.format() end, { desc = "Format Entire File." })
 
+-- Checkbox entire v-line selected.
 k('v', '<leader><cr>',
     function()
-        return require("obsidian").util.toggle_checkbox()
-    end, { desc = "Markdown Checkbox" })
+        local start_line = vim.fn.line('v')
+        local end_line = vim.fn.line('.');
+
+        -- Ensure the range is in the correct order
+        if start_line > end_line then
+            start_line, end_line = end_line, start_line
+        end
+
+        -- Iterate over each line in the range
+        for line_num = start_line, end_line do
+            vim.api.nvim_win_set_cursor(0, { line_num, 0 })
+            require("obsidian").util.toggle_checkbox()
+        end
+        local t = function(str)
+            return vim.api.nvim_replace_termcodes(str, true, true, true)
+        end
+        vim.api.nvim_feedkeys(t('<ESC>'), 'n', true)
+    end, { desc = "Markdown Checkbox V-Line Select." })
 
 k('n', '<leader>t', "<cmd>TimerlyToggle<cr>", { desc = "Toggle Timer." })
 
@@ -94,7 +111,7 @@ k("n", "gf", function()
         -- and the note is opened.
         -- Involves the callback or even that triggers when the link is fully opened.
         vim.defer_fn(function()
-            vim.cmd("normal! zt")             -- Run zt after the link is followed
+            vim.cmd("normal! zt") -- Run zt after the link is followed
         end, 50)
     else
         vim.cmd("normal! gf")
