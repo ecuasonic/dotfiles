@@ -8,7 +8,7 @@ return {
     config = function()
         local configs = require("nvim-treesitter.configs")
 
-        configs.setup ({
+        configs.setup({
             -- A list of parser names, or "all"
             ensure_installed = {
                 "json",
@@ -60,7 +60,7 @@ return {
         treesitter_parser_config.templ = {
             install_info = {
                 url = "https://github.com/vrischmann/tree-sitter-templ.git",
-                files = {"src/parser.c", "src/scanner.c"},
+                files = { "src/parser.c", "src/scanner.c" },
                 branch = "master",
             },
         }

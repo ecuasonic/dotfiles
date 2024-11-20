@@ -42,9 +42,9 @@ return {
                         select = '<cr>',
                         paste = '<c-p>',
                         paste_behind = '<c-`>',
-                        replay = '<c-q>',  -- replay a macro
-                        delete = '<c-d>',  -- delete an entry
-                        edit = '<c-e>',  -- edit an entry
+                        replay = '<c-q>', -- replay a macro
+                        delete = '<c-d>', -- delete an entry
+                        edit = '<c-e>',   -- edit an entry
                         custom = {},
                     },
                 },

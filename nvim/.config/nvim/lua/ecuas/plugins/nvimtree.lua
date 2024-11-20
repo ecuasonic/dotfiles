@@ -283,7 +283,8 @@ return {
         })
 
         -- set keymaps
-        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
+        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>",
+            { desc = "Toggle file explorer on current file" })                                                                 -- toggle file explorer on current file
         -- vim.keymap.set("n", "<esc>", "<cmd>NvimTreeClose<CR>")
         -- vim.keymap.set("n", "<leader>pr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
     end

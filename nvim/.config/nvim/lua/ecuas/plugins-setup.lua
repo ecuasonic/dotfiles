@@ -1,7 +1,7 @@
 -- require lazy in safety mode
 local status, lazy = pcall(require, "lazy")
 if not status then
-  return vim.notify("lazy is not installed.")
+    return vim.notify("lazy is not installed.")
 end
 
 vim.g.mapleader = " "
@@ -13,5 +13,5 @@ lazy.setup({
     ui = {
         border = "single",
     },
-        change_detection = { notify = false }
+    change_detection = { notify = false }
 })

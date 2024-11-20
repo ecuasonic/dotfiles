@@ -4,19 +4,23 @@ vim.g.mapleader = " " -- space key
 -- for conciseness
 local k = vim.keymap.set
 
+k('n', '<leader>=', function() vim.lsp.buf.format() end, { desc = "Format Entire File." })
+
 k('v', '<leader><cr>',
-        function()
-                return require("obsidian").util.toggle_checkbox()
-        end, {desc = "Markdown Checkbox"})
+    function()
+        return require("obsidian").util.toggle_checkbox()
+    end, { desc = "Markdown Checkbox" })
+
+k('n', '<leader>t', "<cmd>TimerlyToggle<cr>", { desc = "Toggle Timer." })
 
 k('n', '<leader>z',
-        function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end,
-        {desc = "Enable Inlay Hints for Functions."}
+    function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end,
+    { desc = "Enable Inlay Hints for Functions." }
 )
 
-k("n", "<leader>x", ":!", {desc = "Execute Shell Command."})
+k("n", "<leader>x", ":!", { desc = "Execute Shell Command." })
 k("n", "<leader>X", ":%!", { desc = "Change Entire File to Sheel Command." })
 k("n", "<ESC>", "<cmd>noh<CR>")
 
@@ -54,17 +58,17 @@ k("n", "n", "nzz", { desc = "Go to next search centered." })
 -- greatest remap ever
 -- You can paste to replace words, without the deleted words going into buffer
 k("x", "p", "\"_dP", { desc = "Paste over words, w/o going into buffer." })
-k("x", "<leader>p", "\"_d\"+P", { desc = "Paste over words from clipboard, w/o going into buffer."})
-k("n", "<leader>p", "\"+p", { desc = "Paste (p) from clipboard."})
-k("n", "<leader>P", "\"+P", { desc = "Paste (P) from clipboard."})
+k("x", "<leader>p", "\"_d\"+P", { desc = "Paste over words from clipboard, w/o going into buffer." })
+k("n", "<leader>p", "\"+p", { desc = "Paste (p) from clipboard." })
+k("n", "<leader>P", "\"+P", { desc = "Paste (P) from clipboard." })
 
 -- next greatest remap ever : asbjornHaland
 -- Yank into system clipboard
-k({"v", "n"}, "<leader>y", "\"+y", { desc = "Yank into sys-clipboard." })
+k({ "v", "n" }, "<leader>y", "\"+y", { desc = "Yank into sys-clipboard." })
 k("n", "<leader>yy", "\"+yy", { desc = "Yank line into sys-clipboard." })
 
 -- Delete to void register
-k({"v", "n"}, "<leader>d", "\"_d", { desc = "Delete into void register." })
+k({ "v", "n" }, "<leader>d", "\"_d", { desc = "Delete into void register." })
 k("n", "<leader>dd", "\"_dd", { desc = "Delete line into void reigster." })
 
 k("n", "Q", "<nop>")
@@ -90,7 +94,7 @@ k("n", "gf", function()
         -- and the note is opened.
         -- Involves the callback or even that triggers when the link is fully opened.
         vim.defer_fn(function()
-            vim.cmd("normal! zt")  -- Run zt after the link is followed
+            vim.cmd("normal! zt")             -- Run zt after the link is followed
         end, 50)
     else
         vim.cmd("normal! gf")
@@ -98,7 +102,7 @@ k("n", "gf", function()
     end
 end)
 
-k({"n", "v"}, "<leader>wk", "<cmd>WhichKey<CR>", { desc = "Open Which-Key" })
-k({"n", "v"}, "zc", "zM", { desc = "Close all folds." })
-k({"n", "v"}, "zo", "zR", { desc = "Open all folds." })
-k({"n", "v"}, "za", "zA", { desc = "Toggle all folds on cursor." })
+k({ "n", "v" }, "<leader>wk", "<cmd>WhichKey<CR>", { desc = "Open Which-Key" })
+k({ "n", "v" }, "zc", "zM", { desc = "Close all folds." })
+k({ "n", "v" }, "zo", "zR", { desc = "Open all folds." })
+k({ "n", "v" }, "za", "zA", { desc = "Toggle all folds on cursor." })

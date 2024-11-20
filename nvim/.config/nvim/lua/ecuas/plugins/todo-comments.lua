@@ -14,12 +14,12 @@ return {
         end, { desc = "Previous todo comment" })
 
         vim.keymap.set("n", "]f", function()
-            todo_comments.jump_next({keywords={"FIX"}})
+            todo_comments.jump_next({ keywords = { "FIX" } })
         end, { desc = "Next fix comment" })
 
 
         vim.keymap.set("n", "[f", function()
-            todo_comments.jump_prev({keywords={"FIX"}})
+            todo_comments.jump_prev({ keywords = { "FIX" } })
         end, { desc = "Next fix comment" })
 
         todo_comments.setup()

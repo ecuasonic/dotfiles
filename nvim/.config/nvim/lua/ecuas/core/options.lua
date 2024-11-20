@@ -33,9 +33,31 @@ opt.number = true
 -- vim.opt.statuscolumn = "%#GreyNum#%l%=%#WhiteNum#%r │"
 
 -- tabs & indentation
-opt.tabstop = 8
-opt.softtabstop = 8
-opt.shiftwidth = 8
+-- Set tabstop to 8 for C, C++, and header files
+-- opt.tabstop = 8
+-- opt.softtabstop = 8
+-- opt.shiftwidth = 8
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "c", "cpp", "h" },
+    callback = function()
+        opt.tabstop = 8
+        opt.softtabstop = 8
+        opt.shiftwidth = 8
+    end,
+})
+
+-- Set tabstop to 4 for all other files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        if vim.bo.filetype ~= "c" and vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "h" then
+            opt.tabstop = 4
+            opt.softtabstop = 4
+            opt.shiftwidth = 4
+        end
+    end,
+})
+
 opt.expandtab = true
 opt.autoindent = true
 opt.smartindent = true

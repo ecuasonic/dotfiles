@@ -7,7 +7,7 @@ return {
     opts = {
         preset = "helix",
         triggers = {
-            { "<leader><leader><leader>", mode = {"n", "v"} },
+            { "<leader><leader><leader>", mode = { "n", "v" } },
         },
         keys = {
             scroll_down = "<c-e>",

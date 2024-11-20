@@ -16,7 +16,7 @@ return {
                     -- end,
                 },
             },
-            kitty_method= "normal",
+            kitty_method = "normal",
 
             max_width = nil,
             max_height = nil,

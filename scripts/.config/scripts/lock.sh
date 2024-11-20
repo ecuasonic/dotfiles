@@ -4,7 +4,7 @@
 TMPBG=/tmp/screen.png
 if [ -f "$TMPBG" ]
 then
-        rm /tmp/screen.png
+    rm /tmp/screen.png
 fi
 scrot /tmp/screen.png
 # convert $TMPBG -scale 10% -scale 1000% $TMPBG

@@ -7,29 +7,43 @@ function Harpoon_files()
         local file_name = harpoon_file_path == "" and "(empty)" or vim.fn.fnamemodify(harpoon_file_path, ':t')
 
         if current_file_path == harpoon_file_path then
-            contents[index] = string.format("%%#HarpoonNumberActive# %s. %%#HarpoonActive#%s ", index, file_name)
+            contents[index] = string.format("%%#HarpoonNumberActive# %s. %%#HarpoonActive#%s ", index,
+                file_name)
         else
-            contents[index] = string.format("%%#HarpoonNumberInactive# %s. %%#HarpoonInactive#%s ", index, file_name)
+            contents[index] = string.format("%%#HarpoonNumberInactive# %s. %%#HarpoonInactive#%s ", index,
+                file_name)
         end
         vim.cmd([[highlight HarpoonNumberActive ctermfg=255 guifg=orange]])
         vim.cmd([[highlight HarpoonActive ctermfg=255 guifg=cyan]])
         vim.cmd([[highlight HarpoonNumberInactive ctermfg=255 guifg=orange]])
         vim.cmd([[highlight HarpoonInactive ctermfg=255 guifg=white]])
-
     end
 
     return table.concat(contents)
+end
+
+local function get_timerly_status()
+    local state = require("timerly.state")
+    if state.progress == 0 then
+        return ""
+    end
+
+    local total = math.max(0, state.total_secs + 1) -- Add 1 to sync with timer display
+    local mins = math.floor(total / 60)
+    local secs = total % 60
+
+    return string.format("%s %02d:%02d", state.mode:gsub("^%l", string.upper), mins, secs)
 end
 
 local diff = {
     'diff',
     colored = true,
     diff_color = {
-        added = {fg='#a1cd5e'},
-        modified = {fg='#e3d18a'},
-        removed = {fg='#fc514e'},
+        added = { fg = '#a1cd5e' },
+        modified = { fg = '#e3d18a' },
+        removed = { fg = '#fc514e' },
     },
-    symbols = {added = '+', modified = '~', removed = '-'},
+    symbols = { added = '+', modified = '~', removed = '-' },
     source = nil,
 }
 
@@ -58,37 +72,37 @@ local filename = {
 }
 
 
-local default_color = {fg = '#ffffff', bg = '#090a15'}
-local boring_color =  {
+local default_color = { fg = '#ffffff', bg = '#090a15' }
+local boring_color = {
     replace = {
         a = default_color,
         b = default_color,
-        c = default_color,
+        c = { fg = '#ffa500', bg = '#090a15' }
     },
     inactive = {
         a = default_color,
         b = default_color,
-        c = default_color,
+        c = { fg = '#ffa500', bg = '#090a15' }
     },
     normal = {
         a = default_color,
         b = default_color,
-        c = {fg = '#ffa500', bg = '#090a15'}
+        c = { fg = '#ffa500', bg = '#090a15' }
     },
     visual = {
         a = default_color,
         b = default_color,
-        c = default_color,
+        c = { fg = '#ffa500', bg = '#090a15' }
     },
     insert = {
         a = default_color,
         b = default_color,
-        c = default_color,
+        c = { fg = '#ffa500', bg = '#090a15' }
     },
     command = {
         a = default_color,
         b = default_color,
-        c = default_color,
+        c = { fg = '#ffa500', bg = '#090a15' }
     }
 }
 
@@ -99,7 +113,6 @@ return {
         "theprimeagen/harpoon"
     },
     config = function()
-
         -- custom_nightfly.tabline = { fg = '#ffffff'}
 
         require('lualine').setup {
@@ -110,7 +123,7 @@ return {
                 -- component_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
                 -- section_separators = { left = '', right = ''},
-                section_separators = { left = '', right = ''},
+                section_separators = { left = '', right = '' },
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},
@@ -139,13 +152,13 @@ return {
                     },
                 },
                 lualine_c = {},
-                lualine_x = {},
+                lualine_x = { get_timerly_status },
                 lualine_y = {
-                    {'hostname'},
+                    { 'hostname' },
                     {
                         'branch',
                         icons_enabled = true,
-                        icon = {'', align='right', color = {fg='green'}}
+                        icon = { '', align = 'right', color = { fg = 'green' } }
                     },
                     { 'progress' },
                     { 'location' },
@@ -187,7 +200,7 @@ return {
                 lualine_y = {
                     diff,
                     diagnostics,
-                    {'filesize'},
+                    { 'filesize' },
                 },
                 lualine_z = {}
             },

@@ -61,6 +61,7 @@ return {
                     }
                 end,
 
+
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
@@ -68,7 +69,13 @@ return {
                         settings = {
                             Lua = {
                                 diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
+                                    globals = {
+                                        "vim",
+                                        "it",
+                                        "describe",
+                                        "before_each",
+                                        "after_each"
+                                    },
                                 }
                             }
                         }
@@ -106,11 +113,36 @@ return {
                         --     return root_pattern(filename) or util.path.dirname(filename)
                         -- end;
                     })
+                end,
+                ["bashls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.bashls.setup({
+                        cmd = {
+                            "bash-language-server",
+                            "start"
+                        },
+                        settings = {
+                            bashIde = {
+                                globPattern = vim.env.GLOB_PATTERN or
+                                    '*@(.sh|.inc|.bash|.command)',
+                            }
+                        },
+                        filetypes = {
+                            "sh"
+                        },
+                        root_dir = lspconfig.util.root_pattern(
+                            '.root'
+                        )
+                    })
                 end
             }
         })
 
         require("luasnip.loaders.from_vscode").lazy_load()
+
+        local t = function(str)
+            return vim.api.nvim_replace_termcodes(str, true, true, true)
+        end
 
         cmp.setup({
             snippet = {
@@ -122,12 +154,68 @@ return {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
             },
-            mapping = cmp.mapping.preset.insert({
-                ['<C-j>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-k>'] = cmp.mapping.scroll_docs(4),
+            mapping = {
+                ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+                ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+                ['<c-n>'] = cmp.mapping({
+                    c = function()
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
+                        end
+                    end,
+                    i = function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            fallback()
+                        end
+                    end
+                }),
+                ['<c-p>'] = cmp.mapping({
+                    c = function()
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
+                        end
+                    end,
+                    i = function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            fallback()
+                        end
+                    end
+                }),
+                ['<c-j>'] = cmp.mapping({
+                    c = function()
+                        vim.api.nvim_feedkeys(t('<down>'), 'n', true)
+                    end,
+                    i = function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            fallback()
+                        end
+                    end
+                }),
+                ['<c-k>'] = cmp.mapping({
+                    c = function()
+                        vim.api.nvim_feedkeys(t('<up>'), 'n', true)
+                    end,
+                    i = function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            fallback()
+                        end
+                    end
+                }),
                 ['<C-a>'] = cmp.mapping.abort(),
                 ['<Tab>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
-            }),
+            },
             sources = cmp.config.sources(
                 {
                     { name = 'nvim_lsp' },
@@ -167,29 +255,38 @@ return {
                 if vim.api.nvim_get_mode().mode == 'c' then
                     return true
                 else
-                    return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+                    return not context.in_treesitter_capture("comment") and
+                        not context.in_syntax_group("Comment")
                 end
-            end
+            end,
+            experimental = {
+                ghost_text = { hl_group = "LineNr" }
+            }
         })
 
         -- -- '/' cmdline setup
         -- cmp.setup.cmdline({ "/", "?" }, {
-        --     mapping = cmp.mapping.preset.cmdline(),
-        --     sources = {
-        --         { name = "buffer" },
-        --     }
+        --         mapping = cmp.mapping.preset.cmdline(),
+        --         sources = {
+        --                 { name = "buffer" },
+        --         }
         -- })
         --
         -- -- ':' cmdline setup
-        -- cmp.setup.cmdline(":",{
-        --     mapping = cmp.mapping.preset.cmdline(),
-        --     sources = cmp.config.sources({
-        --         { name = "path" },
-        --     }, {
-        --         { name = "cmdline" },
-        --     }),
+        -- cmp.setup.cmdline(":", {
+        --         mapping = cmp.mapping.preset.cmdline(),
+        --         sources = cmp.config.sources({
+        --                 { name = "path" },
+        --         }, {
+        --                 {
+        --                         name = "cmdline",
+        --                         option = {
+        --                                 ignore_cmds = { 'Man', '!' }
+        --                         }
+        --                 },
+        --         }),
         -- })
-        --
+
         vim.diagnostic.config({
             -- update_in_insert = true,
             float = {

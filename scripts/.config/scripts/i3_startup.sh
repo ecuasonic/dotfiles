@@ -7,5 +7,3 @@ $SCRIPTS/switch_monitor.sh 2>> $ERROR_LOG
 sleep 1
 $SCRIPTS/rs_workspace.sh -r 2>> $ERROR_LOG
 $SCRIPTS/lock_suspend.sh
-sleep 1
-$SCRIPTS/remove_tmux_server_errors.sh
