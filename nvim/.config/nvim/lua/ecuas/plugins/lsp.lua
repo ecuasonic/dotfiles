@@ -220,12 +220,12 @@ return {
                 {
                     { name = 'nvim_lsp' },
                     { name = 'nvim_lua' },
-                    { name = 'luasnip' },
                     { name = 'vim_lsp' },
                 },
                 {
                     { name = "path" },
-                    { name = 'buffer', keyword_length = 4 },
+                    { name = 'luasnip' },
+                    { name = 'buffer', keyword_length = 3 },
                 }),
             formatting = {
                 fields = { "abbr", "kind", "menu" },

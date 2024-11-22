@@ -6,6 +6,8 @@ opt.path:append("/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/in
 -- xxd would interpret \n at end of file.
 opt.fixendofline = false
 
+opt.shell = "/bin/zsh"
+
 opt.foldmethod = "marker"
 opt.foldmarker = "{,}"
 opt.foldcolumn = '1'
