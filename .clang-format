@@ -1,0 +1,55 @@
+
+# Based on the Linux Kernel coding style guidelines.
+
+BasedOnStyle: LLVM
+IndentWidth: 8                     # Linux style uses 8-space indentation
+TabWidth: 8                        # Set tab width to 8 spaces
+UseTab: ForIndentation                     # Prefer tabs for indentation, aligning with Linux style
+ContinuationIndentWidth: 8         # Continuation indent also uses 8 spaces
+AllowShortIfStatementsOnASingleLine: false  # Avoid single-line if statements
+AllowShortLoopsOnASingleLine: false  # No single-line while or for loops
+AllowShortBlocksOnASingleLine: false # Avoid single-line blocks without braces
+
+AlignConsecutiveAssignments: false  # Linux style doesn’t align assignments or declarations
+AlignConsecutiveDeclarations: false
+AlignTrailingComments: true        # Don’t align comments to the right of code
+ReflowComments: true
+AlignAfterOpenBracket: DontAlign    # Do not align after opening brackets
+AlignOperands: false                # Do not align operands
+AlignEscapedNewlines: Left          # Linux style aligns escaped newlines to the left
+
+ColumnLimit: 80                     # Standard column width in Linux code is 80 characters
+BreakBeforeBraces: Linux            # Brace style similar to Linux style guide
+BraceWrapping:
+  AfterFunction: false              # Function braces on the same line as the function name
+  AfterClass: true                  # Class braces on a new line
+  AfterStruct: true                 # Struct braces on a new line
+  AfterControlStatement: false      # Control statement braces on the same line
+  BeforeElse: false                 # Else on the same line as the closing brace of if
+  SplitEmptyFunction: false         # Empty functions on a single line, if possible
+
+PointerAlignment: Right              # Align pointers to the left as per Linux style
+
+# Control line breaking penalties for more "Linux-style" line splitting.
+PenaltyReturnTypeOnItsOwnLine: 9999 # High penalty to avoid putting return types on their own line
+PenaltyBreakBeforeFirstCallParameter: 100  # Lower penalty for breaking function parameters
+PenaltyBreakAssignment: 0           # Low penalty for breaking assignments
+
+# Avoid packing arguments to avoid tightly packed lines
+BinPackArguments: false
+BinPackParameters: false
+
+# Function declarations on new lines when arguments wrap
+AllowAllParametersOfDeclarationOnNextLine: false
+
+# Allow C++11-style braces and a few formatting tweaks
+Cpp11BracedListStyle: false
+
+# Include directive options (Linux Kernel uses specific ordering rules)
+IncludeBlocks: Preserve             # Keep include blocks in order as they are
+
+IndentPPDirectives: AfterHash       # Indent preprocessor directives to after the hash
+SortIncludes: false                 # Keep includes in the order they are written
+SpacesInParentheses: false          # No spaces within parentheses
+SpaceBeforeParens: ControlStatements  # Spaces before control statement parentheses only
+SpaceAfterLogicalNot: true          # Space after `!` (logical not operator)
