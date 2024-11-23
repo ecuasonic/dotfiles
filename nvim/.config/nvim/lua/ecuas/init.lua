@@ -151,3 +151,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         end
     end
 })
+
+vim.cmd([[hi LineNr guifg=orange gui=bold]])
+
+-- Cmdline color
+-- vim.cmd([[hi MsgArea guifg=#FFFFFF guibg=#010005]])

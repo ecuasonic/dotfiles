@@ -25,7 +25,7 @@ return {
             return
         end
 
-        npairs.setup {
+        npairs.setup({
             check_ts = true,
             ts_config = {
                 lua = { "string", "source" },
@@ -33,7 +33,7 @@ return {
                 java = false,
             },
             disable_filetype = { "TelescopePrompt", "spectre_panel" },
-        }
+        })
 
         -- cmp
         local cmp = require('cmp')
@@ -219,12 +219,11 @@ return {
             sources = cmp.config.sources(
                 {
                     { name = 'nvim_lsp' },
+                    { name = 'luasnip', keyword_length = 2 },
                     { name = 'nvim_lua' },
-                    { name = 'vim_lsp' },
                 },
                 {
-                    { name = "path" },
-                    { name = 'luasnip' },
+                    { name = "path",   keyword_length = 3 },
                     { name = 'buffer', keyword_length = 3 },
                 }),
             formatting = {
@@ -260,7 +259,7 @@ return {
                 end
             end,
             experimental = {
-                ghost_text = { hl_group = "LineNr" }
+                ghost_text = { hl_group = "SpecialKey" }
             }
         })
 

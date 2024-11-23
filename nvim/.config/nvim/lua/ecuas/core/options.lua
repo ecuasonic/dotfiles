@@ -72,7 +72,7 @@ opt.smartcase = true
 opt.ignorecase = true
 
 -- cursor line
-opt.cursorline = true
+opt.cursorline = false
 opt.cursorcolumn = false
 
 -- appearance

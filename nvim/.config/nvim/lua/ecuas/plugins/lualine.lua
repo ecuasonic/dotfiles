@@ -13,10 +13,10 @@ function Harpoon_files()
             contents[index] = string.format("%%#HarpoonNumberInactive# %s. %%#HarpoonInactive#%s ", index,
                 file_name)
         end
-        vim.cmd([[highlight HarpoonNumberActive ctermfg=255 guifg=orange]])
-        vim.cmd([[highlight HarpoonActive ctermfg=255 guifg=cyan]])
-        vim.cmd([[highlight HarpoonNumberInactive ctermfg=255 guifg=orange]])
-        vim.cmd([[highlight HarpoonInactive ctermfg=255 guifg=white]])
+        vim.cmd([[highlight HarpoonNumberActive ctermfg=255 guifg=orange guibg=#010005]])
+        vim.cmd([[highlight HarpoonActive ctermfg=255 guifg=cyan guibg=#010005]])
+        vim.cmd([[highlight HarpoonNumberInactive ctermfg=255 guifg=orange guibg=#010005]])
+        vim.cmd([[highlight HarpoonInactive ctermfg=255 guifg=white guibg=#010005]])
     end
 
     return table.concat(contents)
@@ -72,37 +72,46 @@ local filename = {
 }
 
 
-local default_color = { fg = '#ffffff', bg = '#090a15' }
+-- local background = '#090a15'
+local background = '#010005'
+local active = { fg = '#ffffff' }
+local inactive = { fg = '#ffffff', bg = '#23242F' }
+local important = { fg = '#ffa500' }
 local boring_color = {
     replace = {
-        a = default_color,
-        b = default_color,
-        c = { fg = '#ffa500', bg = '#090a15' }
+        a = active,
+        b = active,
+        c = important,
     },
     inactive = {
-        a = default_color,
-        b = default_color,
-        c = { fg = '#ffa500', bg = '#090a15' }
+        a = inactive,
+        b = inactive,
+        c = important,
     },
     normal = {
-        a = default_color,
-        b = default_color,
-        c = { fg = '#ffa500', bg = '#090a15' }
+        a = active,
+        b = active,
+        c = important,
     },
     visual = {
-        a = default_color,
-        b = default_color,
-        c = { fg = '#ffa500', bg = '#090a15' }
+        a = active,
+        b = active,
+        c = important,
     },
     insert = {
-        a = default_color,
-        b = default_color,
-        c = { fg = '#ffa500', bg = '#090a15' }
+        a = active,
+        b = active,
+        c = important,
     },
     command = {
-        a = default_color,
-        b = default_color,
-        c = { fg = '#ffa500', bg = '#090a15' }
+        a = active,
+        b = active,
+        c = important,
+    },
+    tabline = {
+        a = active,
+        b = active,
+        c = important,
     }
 }
 
