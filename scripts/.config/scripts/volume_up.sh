@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
 max_volume_pc=$1
-current_volume_pc=$(pactl list sinks |
-    grep '^[[:space:]]Volume:' |
-    head -n $(( SINK + 1 )) |
-    tail -n 1 |
+current_volume_pc=$(pactl get-sink-volume @DEFAULT_SINK@ |
+    head -n 1 |
     sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
 
-if (( current_volume_pc < max_volume_pc - 5 )) ; then
+if (( current_volume_pc < max_volume_pc )) ; then
     pactl set-sink-volume @DEFAULT_SINK@ +5%
 else
-    a=$(( max_volume_pc - current_volume_pc ))
-    pactl set-sink-volume @DEFAULT_SINK@ +$a%
+    pactl set-sink-volume @DEFAULT_SINK@ "$max_volume_pc"%
 fi
 
