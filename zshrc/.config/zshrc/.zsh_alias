@@ -3,8 +3,6 @@ alias f="~/.config/scripts/change_kitty_font.sh"
 alias start_notes="~/.config/scripts/notes_session.sh -s"
 alias end_notes="~/.config/scripts/notes_session.sh -e"
 
-alias rm_tmux="~/.config/scripts/remove_tmux_server_errors.sh"
-
 # Connect to Airpods
 alias airpods="bluetoothctl connect 70:AE:D5:D5:B4:26"
 
