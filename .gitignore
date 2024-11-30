@@ -1,12 +1,1 @@
-tmux/.config/tmux/plugins
-
-zshrc/.config/zshrc/.zcompdump*
-
-nvim/.config/nvim/undo
-nvim/.config/nvim/lazy-lock.json
-
-i3/.config/i3/error.log
-
-custom_scripts/.config/custom_scripts/i3_resurrect_error.log
-
 */server\ exited\ unexpectedly
