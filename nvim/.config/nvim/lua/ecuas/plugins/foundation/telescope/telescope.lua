@@ -29,6 +29,12 @@ return {
 
         telescope.setup({
             extensions = {
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = "smart_case",
+                },
                 zoxide = {
                     prompt_title = "[ Zoxide List ]",
                     list_command = "zoxide query -ls",
@@ -48,10 +54,11 @@ return {
                             end,
                         }
                     }
-                }
+                },
             },
             pickers = {
                 lsp_references = {
+                    layout_strategy = 'vertical',
                     path_display = function(opts, path)
                         local filename = vim.fs.basename(path)
                         local pwd_len = string.len(vim.fn.system('pwd'))
@@ -61,6 +68,7 @@ return {
                     end,
                 },
                 find_files = {
+                    layout_strategy = 'vertical',
                     -- Format path as "file.txt (path\to\file\)"
                     path_display = function(opts, path)
                         local filename = vim.fs.basename(path)
@@ -73,6 +81,7 @@ return {
                     end,
                 },
                 live_grep = {
+                    layout_strategy = 'vertical',
                     path_display = function(opts, path)
                         local filename = vim.fs.basename(path)
                         local dirname = vim.fs.dirname(path)
@@ -84,6 +93,7 @@ return {
                     end,
                 },
                 grep_string = {
+                    layout_strategy = 'vertical',
                     path_display = function(opts, path)
                         local filename = vim.fs.basename(path)
                         local dirname = vim.fs.dirname(path)
@@ -93,7 +103,7 @@ return {
                             return string.format("%s (%s)", filename, "./" .. dirname)
                         end
                     end,
-                }
+                },
             },
             defaults = {
                 vimgrep_arguments = {
@@ -110,7 +120,7 @@ return {
                 sorting_strategy = 'descending',
                 selection_strategy = 'reset',
                 scroll_strategy = 'limit',
-                layout_strategy = 'vertical',
+                layout_strategy = 'horizontal',
                 wrap_results = false,
                 entry_prefix = ' ',
                 initial_mode = 'insert',
@@ -190,7 +200,12 @@ return {
         --------------------------- Zoxide -------------------------------
         ------------------------------------------------------------------
         telescope.load_extension('zoxide')
-        vim.keymap.set('n', '<leader>cd', telescope.extensions.zoxide.list, { desc = "Telescope cd" })
-        vim.keymap.set('n', '<leader>fc', ":Telescope neoclip<CR>", { desc = "Telescope Symbols" })
+        vim.keymap.set('n', '<leader>cd', telescope.extensions.zoxide.list, { desc = "Telescope cd." })
+        vim.keymap.set('n', '<leader>fc', ":Telescope neoclip<CR>", { desc = "Telescope Clipboard." })
+
+        ------------------------------------------------------------------
+        ------------------------------ FZF -------------------------------
+        ------------------------------------------------------------------
+        telescope.load_extension('fzf')
     end
 }

@@ -1,3 +1,4 @@
+-- Put this into tabline.
 function Harpoon_files()
     local contents = {}
     local marks_length = require("harpoon"):list():length()
@@ -141,9 +142,9 @@ return {
                 always_divide_middle = true,
                 globalstatus = false,
                 refresh = {
-                    statusline = 1500,
-                    tabline = 1500,
-                    winbar = 1500,
+                    statusline = 1,
+                    tabline = 100,
+                    winbar = 100,
                 }
             },
             sections = {
@@ -163,12 +164,11 @@ return {
                 lualine_c = {},
                 lualine_x = { get_timerly_status },
                 lualine_y = {
-                    { 'hostname' },
                     {
                         'branch',
-                        icons_enabled = true,
-                        icon = { '', align = 'right', color = { fg = 'green' } }
+                        icons_enabled = false,
                     },
+                    { 'hostname' },
                     { 'progress' },
                     { 'location' },
                 },

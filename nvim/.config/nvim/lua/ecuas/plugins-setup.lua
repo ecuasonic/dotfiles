@@ -7,7 +7,11 @@ end
 vim.g.mapleader = " "
 
 lazy.setup({
-    { import = "ecuas.plugins" }
+    { import = "ecuas.plugins" },
+    { import = "ecuas.plugins.looks" },
+    { import = "ecuas.plugins.keys" },
+    { import = "ecuas.plugins.keys.telescope" },
+    { import = "ecuas.plugins.commands" },
 }, {
     -- options
     ui = {

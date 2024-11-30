@@ -81,6 +81,8 @@ k("n", "<leader>P", "\"+P", { desc = "Paste (P) from clipboard." })
 
 -- next greatest remap ever : asbjornHaland
 -- Yank into system clipboard
+-- Trust that this is what you want for neoclip.
+--      When using "+, you automatically use "" as well.
 k({ "v", "n" }, "<leader>y", "\"+y", { desc = "Yank into sys-clipboard." })
 k("n", "<leader>yy", "\"+yy", { desc = "Yank line into sys-clipboard." })
 

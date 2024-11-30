@@ -2,6 +2,7 @@
 local opt = vim.opt -- vim options
 
 opt.path:append("/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/")
+vim.g.leetcode_browser = "firefox" -- or "chrome"
 
 -- xxd would interpret \n at end of file.
 opt.fixendofline = false
@@ -10,7 +11,7 @@ opt.shell = "/bin/zsh"
 
 opt.foldmethod = "marker"
 opt.foldmarker = "{,}"
-opt.foldcolumn = '1'
+opt.foldcolumn = '0'
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
@@ -27,18 +28,22 @@ opt.history = 100
 -- hide -- INSERT on lualine
 opt.showmode = false
 
--- line numbers
+-- StatusColumn
+-- Cause of much concern.
 opt.relativenumber = true
 opt.number = true
--- vim.cmd('highlight WhiteNum guifg=white')
--- vim.cmd('highlight GreyNum guifg=grey')
--- vim.opt.statuscolumn = "%#GreyNum#%l%=%#WhiteNum#%r │"
+opt.numberwidth = 1
+vim.opt.statuscolumn = "%!v:lua.require('ecuas.core.statuscolumn').statuscol()";
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    callback = function()
+        if vim.bo.filetype == "help" then
+            vim.wo.statuscolumn = ""
+        end
+    end
+})
 
 -- tabs & indentation
 -- Set tabstop to 8 for C, C++, and header files
--- opt.tabstop = 8
--- opt.softtabstop = 8
--- opt.shiftwidth = 8
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp", "h" },
     callback = function()
@@ -77,7 +82,6 @@ opt.cursorcolumn = false
 
 -- appearance
 opt.termguicolors = true
-opt.signcolumn = "yes"
 
 -- split window
 opt.splitright = true

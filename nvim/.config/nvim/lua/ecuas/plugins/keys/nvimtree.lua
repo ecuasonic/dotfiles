@@ -4,7 +4,6 @@ return {
         "nvim-tree/nvim-web-devicons"
     },
     config = function()
-        -- Last updated on 5/3/2024
         -- Recommended settings from nvim-tree documentation
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
@@ -41,8 +40,8 @@ return {
             view = {
                 centralize_selection = true,
                 cursorline = true,
-                number = false,
-                relativenumber = false,
+                number = true,
+                relativenumber = true,
                 preserve_window_proportions = false,
                 signcolumn = "yes",
                 float = {
@@ -63,7 +62,7 @@ return {
                 group_empty = false,
                 full_name = false,
                 root_folder_label = ":~:s?$?/..?",
-                indent_width = 3,
+                indent_width = 4,
                 special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                 symlink_destination = true,
                 highlight_git = "none",
@@ -129,12 +128,12 @@ return {
                         },
                         git = {
                             unstaged = "✗",
-                            staged = "✓",
+                            staged = "󰸞",
                             unmerged = "",
                             renamed = "➜",
                             untracked = "★",
                             deleted = "",
-                            ignored = "◌",
+                            ignored = "",
                         },
                     },
                 },
@@ -284,7 +283,7 @@ return {
 
         -- set keymaps
         vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>",
-            { desc = "Toggle file explorer on current file" })                                                                 -- toggle file explorer on current file
+            { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
         -- vim.keymap.set("n", "<esc>", "<cmd>NvimTreeClose<CR>")
         -- vim.keymap.set("n", "<leader>pr", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
     end
