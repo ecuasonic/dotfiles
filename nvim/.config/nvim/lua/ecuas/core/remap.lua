@@ -108,13 +108,9 @@ k("n", "gf", function()
     if require("obsidian").util.cursor_on_markdown_link() then
         vim.cmd("normal! m'")
         vim.cmd("ObsidianFollowLink")
-        --TODO: hook into the completion of the Obsidian link resolution itself
-        -- ensuring that the cursor positioning happens once the link is fully followed
-        -- and the note is opened.
-        -- Involves the callback or even that triggers when the link is fully opened.
         vim.defer_fn(function()
             vim.cmd("normal! zt") -- Run zt after the link is followed
-        end, 50)
+        end, 100)
     else
         vim.cmd("normal! gf")
         vim.cmd("normal! zt")

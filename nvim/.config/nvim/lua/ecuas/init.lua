@@ -126,6 +126,7 @@ require('lspconfig.ui.windows').default_options = {
 vim.cmd([[hi Comment guifg=yellow guibg=NONE]])
 vim.cmd([[hi RenderMarkdownCodeInline guifg=#FFC133 guibg=NONE]])
 vim.cmd([[hi @markup.raw.markdown_inline guifg=#FFC133 guibg=NONE]])
+vim.cmd([[hi TreesitterContext guibg=NONE]])
 -- vim.cmd [[ autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 --         vim.lsp.diagnostic.on_publish_diagnostics, {

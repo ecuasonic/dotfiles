@@ -3,6 +3,7 @@ local M = {}
 -- Highlight groups
 vim.cmd([[hi CustomLineNr guifg=white guibg=#74125C gui=bold]])
 vim.cmd([[hi White guifg=white]])
+vim.opt.signcolumn = "yes"
 
 M.numbers = function()
     local text = ""
@@ -21,7 +22,7 @@ end
 M.statuscol = function()
     local text = ""
     text = table.concat({
-        "%s",
+        " %s",
         M.numbers(),
     })
     return text

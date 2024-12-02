@@ -4,6 +4,12 @@ return {
     opts = {
         enable = true, -- enable on all buffers by default
         -- separator = "-", -- ─, -, .
-        separator = "-",
+        separator = "─",
+        -- on_attach = function()
+        --     if vim.bo.filetype == "markdown" then
+        --         return false
+        --     end
+        --     return true
+        -- end
     },
 }
