@@ -8,6 +8,12 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+command_not_found_handler() {
+    # echo "zsh: command not found: $1"
+    # kill -SIGINT $$
+    return 127
+}
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=$HOME/.config/zshrc
