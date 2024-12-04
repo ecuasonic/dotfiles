@@ -28,8 +28,6 @@ k('v', '<leader><cr>',
         vim.api.nvim_feedkeys(t('<ESC>'), 'n', true)
     end, { desc = "Markdown Checkbox V-Line Select." })
 
-k('n', '<leader>t', "<cmd>TimerlyToggle<cr>", { desc = "Toggle Timer." })
-
 k('n', '<leader>z',
     function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
