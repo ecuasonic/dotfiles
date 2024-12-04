@@ -3,6 +3,7 @@
 
 set $ERROR_LOG ~/.config/i3/error.log
 set $SCRIPTS ~/dotfiles/scripts/.config/scripts
+set $mouse_warping ~/dotfiles/scripts/.config/scripts/mouse_warping.sh
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 # ----------------------------------------------------------------------------
@@ -11,8 +12,11 @@ set $mod_win Mod4
 # ----------------------------------------------------------------------------
 
 focus_follows_mouse no
+mouse_warping output
 no_focus [all]
 focus_on_window_activation none
+
+bindsym button1 [all] move left
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 # ----------------------------------------------------------------------------
@@ -21,7 +25,7 @@ for_window [class=".*"] border pixel 5
 
 # Set the keyboard repeat and delay.
 # Also sets screen off delay.
-exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xset" "dpms 0 0 1800 r rate 200 40" 2> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xset" "dpms 0 0 0 r rate 200 40" 2> $ERROR_LOG
 
 # Sets Control to be both escape and Control
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "setxkbmap" "-option ctrl:nocaps" 2>> $ERROR_LOG
@@ -95,24 +99,24 @@ bindsym $mod_alt+d exec "rofi -no-config -sort -sorting-method 'fzf' -no-lazy-gr
 bindsym $mod_win+d exec "rofi -no-config -sort -sorting-method 'fzf' -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/hack/scripts/rofi/launcher.rasi"
 
 # change focus
-bindsym $mod_alt+h focus left
-bindsym $mod_win+h focus left
-bindsym $mod_alt+j focus down
-bindsym $mod_win+j focus down
-bindsym $mod_alt+k focus up
-bindsym $mod_win+k focus up
-bindsym $mod_alt+l focus right
-bindsym $mod_win+l focus right
+bindsym $mod_alt+h exec --no-startup-id $mouse_warping -f -h
+bindsym $mod_win+h exec --no-startup-id $mouse_warping -f -h
+bindsym $mod_alt+j exec --no-startup-id $mouse_warping -f -j
+bindsym $mod_win+j exec --no-startup-id $mouse_warping -f -j
+bindsym $mod_alt+k exec --no-startup-id $mouse_warping -f -k
+bindsym $mod_win+k exec --no-startup-id $mouse_warping -f -k
+bindsym $mod_alt+l exec --no-startup-id $mouse_warping -f -l
+bindsym $mod_win+l exec --no-startup-id $mouse_warping -f -l
 
 # move focused window
-bindsym $mod_alt+Shift+h move left
-bindsym $mod_win+Shift+h move left
-bindsym $mod_alt+Shift+j move down
-bindsym $mod_win+Shift+j move down
-bindsym $mod_alt+Shift+k move up
-bindsym $mod_win+Shift+k move up
-bindsym $mod_alt+Shift+l move right
-bindsym $mod_win+Shift+l move right
+bindsym $mod_alt+Shift+h exec --no-startup-id $mouse_warping -m -h
+bindsym $mod_win+Shift+h exec --no-startup-id $mouse_warping -m -h
+bindsym $mod_alt+Shift+j exec --no-startup-id $mouse_warping -m -j
+bindsym $mod_win+Shift+j exec --no-startup-id $mouse_warping -m -j
+bindsym $mod_alt+Shift+k exec --no-startup-id $mouse_warping -m -k
+bindsym $mod_win+Shift+k exec --no-startup-id $mouse_warping -m -k
+bindsym $mod_alt+Shift+l exec --no-startup-id $mouse_warping -m -l
+bindsym $mod_win+Shift+l exec --no-startup-id $mouse_warping -m -l
 
 # enter fullscreen mode for the focused container
 bindsym $mod_alt+f fullscreen toggle
