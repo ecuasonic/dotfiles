@@ -1,4 +1,4 @@
-return {
+M = {
     "OXY2DEV/helpview.nvim",
     lazy = false, -- Recommended
 
@@ -9,3 +9,6 @@ return {
         "nvim-treesitter/nvim-treesitter"
     }
 }
+
+--return {}
+return M

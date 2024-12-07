@@ -1,4 +1,4 @@
-return {
+M = {
     "levouh/tint.nvim",
     config = function()
         -- Override some defaults
@@ -19,3 +19,6 @@ return {
         })
     end
 }
+
+--return {}
+return M

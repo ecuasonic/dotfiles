@@ -1,4 +1,4 @@
-return {
+M = {
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
@@ -13,3 +13,6 @@ return {
         -- end
     },
 }
+
+-- return {}
+return M

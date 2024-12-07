@@ -1,4 +1,4 @@
-return {
+M = {
     "3rd/image.nvim",
     config = function()
         -- default config
@@ -41,3 +41,6 @@ return {
         })
     end
 }
+
+-- return {}
+return M

@@ -1,4 +1,4 @@
-return {
+M = {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -305,3 +305,6 @@ return {
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
     end
 }
+
+-- return {}
+return M

@@ -1,5 +1,5 @@
 vim.cmd([[hi IndentLine guifg=#505050]])
-return {
+M = {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPre", "BufNewFile" },
     main = "ibl",
@@ -23,3 +23,6 @@ return {
         }
     end,
 }
+
+--return {}
+return M

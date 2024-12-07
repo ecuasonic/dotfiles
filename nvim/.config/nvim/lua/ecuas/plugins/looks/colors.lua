@@ -9,7 +9,7 @@ function ColorMyPencils(color)
     vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "white" })
 end
 
-return {
+M = {
     {
         "folke/tokyonight.nvim",
         priority = 1000,
@@ -64,3 +64,6 @@ return {
         end,
     },
 }
+
+--return {}
+return M

@@ -1,4 +1,4 @@
-return {
+M = {
     "theprimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -20,3 +20,6 @@ return {
         vim.keymap.set("n", "<Space>8", function() harpoon:list():select(8) end, { desc = "harpoon to file 8" })
     end
 }
+
+--return {}
+return M

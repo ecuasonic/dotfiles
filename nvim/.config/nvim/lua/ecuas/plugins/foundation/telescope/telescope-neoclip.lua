@@ -1,4 +1,4 @@
-return {
+M = {
     "AckslD/nvim-neoclip.lua",
     dependencies = {
         'nvim-telescope/telescope.nvim',
@@ -53,3 +53,6 @@ return {
         })
     end,
 }
+
+-- return {}
+return M

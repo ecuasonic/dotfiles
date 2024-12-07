@@ -1,4 +1,4 @@
-return {
+M = {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
@@ -317,3 +317,6 @@ return {
         -- see below for full list of optional dependencies 👇
     },
 }
+
+-- return {}
+return M

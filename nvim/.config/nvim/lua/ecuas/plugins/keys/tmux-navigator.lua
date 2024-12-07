@@ -1,4 +1,4 @@
-return {
+M = {
     "christoomey/vim-tmux-navigator",
     cmd = {
         "TmuxNavigateLeft",
@@ -14,3 +14,6 @@ return {
         { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
     },
 }
+
+--return {}
+return M

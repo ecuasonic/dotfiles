@@ -1,4 +1,4 @@
-local local_plugins = {
+local M = {
     {
         "undotree",
         dir = "~/local/undotree",
@@ -9,4 +9,5 @@ local local_plugins = {
     },
 }
 
-return local_plugins
+-- return {}
+return M

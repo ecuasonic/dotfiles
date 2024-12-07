@@ -1,4 +1,4 @@
-return {
+M = {
     'MeanderingProgrammer/render-markdown.nvim',
     config = function()
         require('render-markdown').setup({
@@ -268,3 +268,6 @@ return {
     end,
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
 }
+
+--return {}
+return M

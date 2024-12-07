@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-return {
+M = {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
     dependencies = {
@@ -209,3 +209,6 @@ return {
         telescope.load_extension('fzf')
     end
 }
+
+-- return {}
+return M

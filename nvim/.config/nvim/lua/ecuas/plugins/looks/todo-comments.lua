@@ -1,4 +1,4 @@
-return {
+M = {
     "folke/todo-comments.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -25,3 +25,6 @@ return {
         todo_comments.setup()
     end,
 }
+
+--return {}
+return M

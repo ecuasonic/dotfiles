@@ -1,4 +1,4 @@
-return {
+M = {
     "danymat/neogen",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -24,3 +24,6 @@ return {
     -- Uncomment next line if you want to follow only stable versions
     -- version = "*"
 }
+
+--return {}
+return M

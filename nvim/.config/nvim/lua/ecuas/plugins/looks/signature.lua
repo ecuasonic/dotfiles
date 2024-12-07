@@ -16,9 +16,12 @@ local cfg = {
     -- toggle_key = "m-l",
 }
 
-return {
+M = {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
     opts = {},
     config = function() require 'lsp_signature'.setup(cfg) end
 }
+
+--return {}
+return M

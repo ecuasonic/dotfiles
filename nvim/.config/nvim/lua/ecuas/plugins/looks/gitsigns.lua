@@ -1,4 +1,4 @@
-return {
+M = {
     "lewis6991/gitsigns.nvim",
     config = function()
         require('gitsigns').setup({
@@ -53,3 +53,6 @@ return {
         })
     end
 }
+
+--return {}
+return M

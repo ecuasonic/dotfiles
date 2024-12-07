@@ -1,4 +1,4 @@
-return {
+M = {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
@@ -73,3 +73,6 @@ return {
         vim.treesitter.language.register("templ", "templ")
     end
 }
+
+-- return {}
+return M

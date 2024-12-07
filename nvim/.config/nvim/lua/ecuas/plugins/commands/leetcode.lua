@@ -1,4 +1,4 @@
-return {
+M = {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html",
     dependencies = {
@@ -17,3 +17,6 @@ return {
         lang = "c",
     }
 }
+
+-- return {}
+return M

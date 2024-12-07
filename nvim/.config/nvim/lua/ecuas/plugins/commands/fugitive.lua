@@ -25,6 +25,9 @@
 -- (ca) - commit --amend
 -- (ce) - commit --amend --no-edit
 -- (cw) - commit --amend --only-reword
-return {
+M = {
     "tpope/vim-fugitive"
 }
+
+-- return {}
+return M

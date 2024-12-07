@@ -116,7 +116,7 @@ local boring_color = {
     }
 }
 
-return {
+M = {
     "nvim-lualine/lualine.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -229,3 +229,6 @@ return {
         }
     end
 }
+
+--return {}
+return M

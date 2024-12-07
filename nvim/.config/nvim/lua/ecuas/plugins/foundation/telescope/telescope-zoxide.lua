@@ -1,4 +1,4 @@
-return {
+M = {
     "jvgrootveld/telescope-zoxide",
     dependencies = {
         "nvim-lua/popup.nvim",
@@ -6,3 +6,6 @@ return {
         "nvim-telescope/telescope.nvim",
     }
 }
+
+-- return {}
+return M
