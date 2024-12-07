@@ -35,6 +35,8 @@ k('n', '<leader>z',
     { desc = "Enable Inlay Hints for Functions." }
 )
 
+k('n', "yc", "yy<cmd>normal gcc<CR>p", { desc = "Yank, comment out, then paste." })
+
 k("n", "<leader>x", ":!", { desc = "Execute Shell Command." })
 k("n", "<leader>X", ":%!", { desc = "Change Entire File to Sheel Command." })
 k("n", "<ESC>", "<cmd>noh<CR>")
