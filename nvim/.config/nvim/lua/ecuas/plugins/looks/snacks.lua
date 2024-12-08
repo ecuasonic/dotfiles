@@ -2,5 +2,5 @@ M = {
     "folke/snacks.nvim"
 }
 
---return {}
+-- return {}
 return M

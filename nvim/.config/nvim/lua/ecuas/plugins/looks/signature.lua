@@ -23,5 +23,5 @@ M = {
     config = function() require 'lsp_signature'.setup(cfg) end
 }
 
---return {}
+-- return {}
 return M
