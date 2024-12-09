@@ -1,8 +1,9 @@
+-- lazy plugin manager.
+require("ecuas.plugin-manager")
+
 -- core setup.
-require("ecuas.core.plugin-manager")
 require("ecuas.core.options")
 require("ecuas.core.remap")
-require("ecuas.core.config")
 
 -- load plugins.
 require("ecuas.plugins-setup")
@@ -20,6 +21,5 @@ vim.filetype.add({
 })
 
 -- load everything else last.
-require("ecuas.autocmds")
-require("ecuas.highlights")
-require("ecuas.border")
+require("ecuas.core.autocmds")
+require("ecuas.core.highlights")

@@ -70,7 +70,6 @@ local filename = {
 
 
 -- local background = '#090a15'
-local background = '#010005'
 local active = { fg = '#ffffff' }
 local inactive = { fg = '#ffffff', bg = '#23242F' }
 local important = { fg = '#ffa500' }

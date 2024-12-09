@@ -1,6 +1,5 @@
 -- Core highlights.
 vim.cmd([[hi Comment guifg=yellow guibg=NONE]])
-vim.cmd([[hi ColorColumn ctermbg=235 guibg=#383c44]])
 vim.cmd([[hi TreesitterContext guibg=NONE]])
 
 -- Markdown highlights.
@@ -22,3 +21,22 @@ vim.cmd([[hi White guifg=white]])
 
 -- Indent line plugin.
 vim.cmd([[hi IndentLine guifg=#505050]])
+
+-- set diagnostic signs highlights and symbols
+local signs = {
+    Error = " ",
+    Warn = " ",
+    Hint = "󰛩 ",
+    Info = " "
+}
+for type, icon in pairs(signs) do
+    -- define diagnostic type
+    local hl = "DiagnosticSign" .. type
+
+    -- set icon for diagnostic type
+    vim.fn.sign_define(hl, {
+        text = icon,
+        texthl = hl,
+        numhl = hl,
+    })
+end

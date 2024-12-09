@@ -2,6 +2,7 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 local yank_group = augroup('HighlightYank', {})
+-- highlight before yanking.
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
@@ -14,12 +15,22 @@ autocmd('TextYankPost', {
 })
 
 local ecuasGroup = augroup('ecuas', {})
+-- remove whitespace in file.
 autocmd({ "BufWritePre" }, {
     group = ecuasGroup,
     pattern = "*",
-    command = [[%s/\s\+$//e]],
+    callback = function()
+        -- save current position
+        local pos = vim.api.nvim_win_get_cursor(0)
+
+        vim.cmd([[%s/\s\+$//e]])
+
+        -- restore cursor position
+        vim.api.nvim_win_set_cursor(0, pos)
+    end
 })
 
+-- set keymaps when lsp attaches.
 autocmd('LspAttach', {
     group = ecuasGroup,
     callback = function(e)
