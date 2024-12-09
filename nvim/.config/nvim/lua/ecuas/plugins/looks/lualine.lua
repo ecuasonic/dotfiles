@@ -14,10 +14,6 @@ function Harpoon_files()
             contents[index] = string.format("%%#HarpoonNumberInactive# %s. %%#HarpoonInactive#%s ", index,
                 file_name)
         end
-        vim.cmd([[highlight HarpoonNumberActive ctermfg=255 guifg=orange guibg=#010005]])
-        vim.cmd([[highlight HarpoonActive ctermfg=255 guifg=cyan guibg=#010005]])
-        vim.cmd([[highlight HarpoonNumberInactive ctermfg=255 guifg=orange guibg=#010005]])
-        vim.cmd([[highlight HarpoonInactive ctermfg=255 guifg=white guibg=#010005]])
     end
 
     return table.concat(contents)

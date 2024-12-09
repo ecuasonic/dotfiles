@@ -20,7 +20,6 @@ M = {
         "BurntSushi/ripgrep",
         "folke/todo-comments.nvim",
     },
-
     config = function()
         local telescope = require("telescope")
         local actions = require("telescope.actions")
@@ -174,7 +173,7 @@ M = {
         -------------- LSP Functions and Keymaps ----------------------
         ---------------------------------------------------------------
         vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
-        vim.keymap.set('n', '<leader>ge', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
+        vim.keymap.set('n', '<leader>fe', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
 
         -- In init.lua:
         -- vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.rename() end, opts)

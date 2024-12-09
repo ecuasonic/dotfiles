@@ -96,8 +96,6 @@ k("n", "<leader>s",
     ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>",
     { desc = "Replace current word within current buffer." })
 
-vim.cmd([[highlight ColorColumn ctermbg=235 guibg=#383c44]])
-
 --------- obsidian ---------
 k("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Obsidian templates" })
 k("n", "<leader>on", ":ObsidianNew ", { desc = "Obsidian New Page" })

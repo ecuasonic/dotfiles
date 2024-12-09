@@ -2,6 +2,9 @@ M = {
     'MeanderingProgrammer/render-markdown.nvim',
     config = function()
         require('render-markdown').setup({
+            enabled = true,
+            max_file_size = 10.0,
+            debounce = 100,
             render_modes = true,
             latex = {
                 enabled = true,

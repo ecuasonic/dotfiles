@@ -1,5 +1,6 @@
 M = {
     "3rd/image.nvim",
+    ft = "markdown",
     config = function()
         -- default config
         require("image").setup({

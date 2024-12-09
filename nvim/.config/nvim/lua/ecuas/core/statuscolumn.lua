@@ -1,8 +1,5 @@
 local M = {}
 
--- Highlight groups
-vim.cmd([[hi CustomLineNr guifg=white guibg=#74125C gui=bold]])
-vim.cmd([[hi White guifg=white]])
 vim.opt.signcolumn = "yes"
 
 M.numbers = function()

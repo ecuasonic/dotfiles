@@ -1,5 +1,8 @@
 M = {
     "nvim-tree/nvim-tree.lua",
+    keys = {
+        "<leader>e"
+    },
     dependencies = {
         "nvim-tree/nvim-web-devicons"
     },
@@ -9,9 +12,6 @@ M = {
         vim.g.loaded_netrwPlugin = 1
 
         vim.opt.termguicolors = true
-
-        -- change color for arrows in tree to light blue
-        vim.cmd([[ highlight NvimTreeIndentMarker guifg = #3FC5FF ]])
 
         local function my_on_attach(bufnr)
             local api = require "nvim-tree.api"

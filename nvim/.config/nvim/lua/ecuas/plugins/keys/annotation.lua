@@ -1,9 +1,11 @@
 M = {
     "danymat/neogen",
-    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "nvim-treesitter/nvim-treesitter",
         "L3MON4D3/LuaSnip",
+    },
+    keys = {
+        { "<leader>n" }
     },
     config = function()
         local neogen = require("neogen")
