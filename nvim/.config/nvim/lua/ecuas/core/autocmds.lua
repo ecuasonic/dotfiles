@@ -15,18 +15,35 @@ autocmd('TextYankPost', {
 })
 
 local ecuasGroup = augroup('ecuas', {})
--- remove whitespace in file.
-autocmd({ "BufWritePre" }, {
+-- Format code with clang-format on save without losing cursor position
+autocmd("BufWritePre", {
     group = ecuasGroup,
     pattern = "*",
     callback = function()
-        -- save current position
-        local pos = vim.api.nvim_win_get_cursor(0)
+        -- pos = (row, col)
+        -- table indices start at 1!!
+        -- stores old cursor position.
+        local pos = vim.api.nvim_win_get_cursor(0) -- Save cursor position
+        local old_row = pos[1]
+        local old_col = pos[2]
 
+        -- remove trailing whitespace.
         vim.cmd([[%s/\s\+$//e]])
 
-        -- restore cursor position
-        vim.api.nvim_win_set_cursor(0, pos)
+        -- format file.
+        if vim.bo.filetype == "c" or vim.bo.filetype == "cpp" or vim.bo.filetype == "h" then
+            vim.cmd("silent! undojoin | silent! %!clang-format")
+        else
+            vim.lsp.buf.format()
+        end
+
+        -- restore old cursor position
+        local lines = vim.api.nvim_buf_line_count(0)
+        if (lines < old_row) then
+            vim.api.nvim_win_set_cursor(0, { lines, old_col })
+        else
+            vim.api.nvim_win_set_cursor(0, pos)
+        end
     end
 })
 
@@ -89,23 +106,4 @@ autocmd('LspAttach', {
         -- vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
         -- vim.keymap.set('n', '<leader>gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
     end,
-})
-
--- Format code with clang-format on save without losing cursor position
-autocmd("BufWritePre", {
-    pattern = { "*.c", "*.cpp", "*.h" },
-    callback = function()
-        local pos = vim.api.nvim_win_get_cursor(0) -- Save cursor position
-        vim.cmd("silent! undojoin | silent! %!clang-format")
-        vim.api.nvim_win_set_cursor(0, pos)        -- Restore cursor position
-    end
-})
-
-autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        if vim.bo.filetype ~= "c" and vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "h" then
-            vim.lsp.buf.format()
-        end
-    end
 })
