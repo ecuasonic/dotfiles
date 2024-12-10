@@ -45,11 +45,6 @@ AllowAllParametersOfDeclarationOnNextLine: false
 # Allow C++11-style braces and a few formatting tweaks
 Cpp11BracedListStyle: false
 
-# Include directive options (Linux Kernel uses specific ordering rules)
-IncludeBlocks: Preserve             # Keep include blocks in order as they are
-
-IndentPPDirectives: AfterHash       # Indent preprocessor directives to after the hash
 SortIncludes: false                 # Keep includes in the order they are written
 SpacesInParentheses: false          # No spaces within parentheses
 SpaceBeforeParens: ControlStatements  # Spaces before control statement parentheses only
-SpaceAfterLogicalNot: true          # Space after `!` (logical not operator)
