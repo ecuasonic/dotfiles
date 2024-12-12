@@ -1,0 +1,21 @@
+Diagnostics:
+    UnusedIncludes: Strict
+    MissingIncludes: Strict
+
+InlayHints:
+    BlockEnd: No
+    Designators: Yes
+    Enabled: Yes
+    ParameterNames: Yes
+    DeducedTypes: Yes
+    TypeNameLimit: 24
+
+Hover:
+    ShowAKA: No
+
+CompileFlags:
+    Add: [-Wall, -Wextra]
+
+Index:
+    Background: Skip
+    StandardLibrary: No

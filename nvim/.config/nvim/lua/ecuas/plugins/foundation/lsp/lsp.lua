@@ -64,24 +64,22 @@ local function mason_setup(capabilities)
             ["clangd"] = function()
                 local lspconfig = require("lspconfig")
                 lspconfig.clangd.setup({
-                    -- capabilities = capabilities,
-                    init_options = {
-                        completion = {
-                            placeholder = false,
-                        },
-                    },
+                    on_attach = function(client, bufnr)
+                        require("lsp_signature").on_attach()
+                    end,
+                    capabilities = capabilities,
                     cmd = {
                         'clangd',
                         '--background-index',
                         '--clang-tidy',
-                        '--log=verbose'
+                        '--log=verbose',
+                        '--enable-config',
+                        '--function-arg-placeholders=false',
                     },
                     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
                     single_file_support = false,
                     root_dir = lspconfig.util.root_pattern(
-                        '.clangd',
                         '.clang-tidy',
-                        '.clang-format',
                         'compile_commands.json',
                         'compile_flags.txt',
                         'configure.ac',

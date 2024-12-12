@@ -32,7 +32,7 @@ autocmd("BufWritePre", {
 
         -- format file.
         if vim.bo.filetype == "c" or vim.bo.filetype == "cpp" or vim.bo.filetype == "h" then
-            vim.cmd("silent! undojoin | silent! %!clang-format")
+            vim.cmd("silent! undojoin | silent! %!clang-format -style=file:$HOME/.config/clangd/.clang-format")
         else
             vim.lsp.buf.format()
         end
