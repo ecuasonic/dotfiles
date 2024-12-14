@@ -5,8 +5,10 @@ vim.g.mapleader = " " -- space key
 local k = vim.keymap.set
 
 k('n', '<leader>=', function() vim.lsp.buf.format() end, { desc = "Format Entire File." })
-k('n', '<c-w>\\', '<c-w>v', { desc = "Open new window vertically." })
-k('n', '<c-w>-', '<c-w>s', { desc = "Open new window horizontally." })
+k('n', '<leader>\\', '<c-w>v', { desc = "Open new window vertically." })
+k('n', '<leader>-', '<c-w>s', { desc = "Open new window horizontally." })
+k('n', '<leader>q', '<c-w>q', { desc = "Close window." })
+k('n', '<leader>w', '<cmd>w<cr>', { desc = "Save window." })
 
 -- Checkbox entire v-line selected.
 k('v', '<leader><cr>',
@@ -117,7 +119,7 @@ k("n", "gf", function()
     end
 end)
 
-k({ "n", "v" }, "<leader>wk", "<cmd>WhichKey<CR>", { desc = "Open Which-Key" })
+k({ "n", "v" }, "<leader>k", "<cmd>WhichKey<CR>", { desc = "Open Which-Key" })
 k({ "n", "v" }, "zc", "zM", { desc = "Close all folds." })
 k({ "n", "v" }, "zo", "zR", { desc = "Open all folds." })
 k({ "n", "v" }, "za", "zA", { desc = "Toggle all folds on cursor." })

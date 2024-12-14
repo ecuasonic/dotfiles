@@ -4,7 +4,7 @@
 
 --- [Set up textDocument/hover and textDocument/signatureHelp borders.]
 local function borders()
-    local _border = "single"
+    local _border = "rounded"
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
         vim.lsp.handlers.hover, {
