@@ -26,7 +26,7 @@ end
 local function truncation(path, components, half_width)
     local truncated_path = path
     for i, component in ipairs(components) do
-        if #component > 1 then
+        if #component > 1 and i ~= #components then
             local first_char = component:sub(1, 1)
             components[i] = first_char == '.' and component:sub(1, 2) or first_char
             truncated_path = table.concat(components, "/")
@@ -38,14 +38,29 @@ local function truncation(path, components, half_width)
     return truncated_path
 end
 
-M.truncate_winbar = function(contents, win_width)
+-- Main function to truncate winbar contents.
+--
+---@param contents string: Untrucated winbar string.
+---@param max_path_length integer: Maximum length of path.
+---@param win_width integer: Window width.
+---@return string truncated_winbar: Truncated winbar string.
+M.truncate_winbar = function(contents, max_path_length, win_width)
+    if not contents then
+        return contents
+    end
     local path = string.match(contents, "^%s*(%S+)")
     local half_width = math.floor(win_width / 2)
+
+    -- if max_path_length is valid and less than half_width:
+    if max_path_length and max_path_length > 0 and max_path_length < half_width then
+        half_width = max_path_length
+    end
+
     if #path <= half_width then
         return contents
     end
 
-    -- split the path into components
+    -- split the path into components.
     local components = {}
     for component in string.gmatch(path, "([^/]+)") do
         table.insert(components, component)
@@ -62,14 +77,16 @@ M.truncate_winbar = function(contents, win_width)
     else
         path = truncation(path, components, half_width)
     end
+    path = (string.sub(path, 1, 1) == "~" and "" or "/") .. path
 
+    -- reconstruct winbar.
     local path_striped_winbar = contents:gsub("^%s*(%S+)", "")
     return " " .. path .. path_striped_winbar
 end
 
 M.get_filepath = function()
     local path = vim.fn.expand("%:p")
-    path = string.gsub(path, "^/home/ecuas", "~")
+    path = string.gsub(path, "^/home/[^/]*", "~")
     return path
 end
 

@@ -21,7 +21,6 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd({ "BufWinEnter", "CursorHold" }, {
     callback = function()
         -- update statusline table.
-        local row_col = " %4l:%-2c "
         local contents = table.concat({
             "%=",
             statusline.get_branch(),
@@ -29,7 +28,9 @@ autocmd({ "BufWinEnter", "CursorHold" }, {
             vim.loop.os_gethostname(),
             " ",
             statusline.get_percentage(),
-            row_col
+            " ",
+            "%4l:%-2c",
+            " "
         })
 
         local win_id = vim.fn.win_getid()
