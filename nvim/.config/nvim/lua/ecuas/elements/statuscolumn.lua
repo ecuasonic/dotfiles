@@ -1,7 +1,6 @@
 local M = {}
 
-vim.opt.signcolumn = "yes"
-
+-- set highlight and number value for current line and non-current lines.
 M.numbers = function()
     local text = ""
 
@@ -16,13 +15,18 @@ M.numbers = function()
     return text
 end
 
+-- convert table into string
 M.statuscol = function()
     local text = ""
     text = table.concat({
-        " %s",
+        "%s",
         M.numbers(),
     })
     return text
 end
+
+-- set statuscolumn
+vim.opt.signcolumn = "yes"
+vim.opt.statuscolumn = "%!v:lua.require('ecuas.elements.statuscolumn').statuscol()";
 
 return M

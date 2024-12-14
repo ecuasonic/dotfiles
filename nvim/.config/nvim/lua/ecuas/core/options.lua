@@ -25,22 +25,13 @@ opt.mouse = ""
 opt.conceallevel = 2
 opt.history = 100
 
--- hide -- INSERT on lualine
-opt.showmode = false
+opt.showmode = true
 
 -- StatusColumn
 -- Cause of much concern.
 opt.relativenumber = true
 opt.number = true
 opt.numberwidth = 1
-vim.opt.statuscolumn = "%!v:lua.require('ecuas.core.statuscolumn').statuscol()";
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    callback = function()
-        if vim.bo.filetype == "help" then
-            vim.wo.statuscolumn = ""
-        end
-    end
-})
 
 -- tabs & indentation
 -- Set tabstop to 8 for C, C++, and header files

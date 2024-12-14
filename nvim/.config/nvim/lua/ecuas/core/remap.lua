@@ -5,6 +5,8 @@ vim.g.mapleader = " " -- space key
 local k = vim.keymap.set
 
 k('n', '<leader>=', function() vim.lsp.buf.format() end, { desc = "Format Entire File." })
+k('n', '<c-w>\\', '<c-w>v', { desc = "Open new window vertically." })
+k('n', '<c-w>-', '<c-w>s', { desc = "Open new window horizontally." })
 
 -- Checkbox entire v-line selected.
 k('v', '<leader><cr>',

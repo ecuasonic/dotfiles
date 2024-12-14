@@ -48,6 +48,11 @@ local function mason_setup(capabilities)
                     capabilities = capabilities,
                     settings = {
                         Lua = {
+                            runtime = {
+                                version = "LuaJIT",
+                                path = vim.split(package.path, ';')
+                            },
+                            ["completion.enable"] = false,
                             diagnostics = {
                                 globals = {
                                     "vim",
@@ -56,6 +61,16 @@ local function mason_setup(capabilities)
                                     "before_each",
                                     "after_each"
                                 },
+                            },
+                            workspace = {
+                                library = {
+                                    vim.env.VIMRUNTIME,
+                                    vim.fn.stdpath('config'),
+                                },
+                                checkThirdParty = false,
+                            },
+                            telemetry = {
+                                enable = false
                             }
                         }
                     }

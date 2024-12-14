@@ -14,6 +14,14 @@ autocmd('TextYankPost', {
     end,
 })
 
+autocmd({ "BufEnter", "BufWinEnter" }, {
+    callback = function()
+        if vim.bo.filetype == "help" then
+            vim.wo.statuscolumn = ""
+        end
+    end
+})
+
 local ecuasGroup = augroup('ecuas', {})
 -- Format code with clang-format on save without losing cursor position
 autocmd("BufWritePre", {
@@ -101,6 +109,8 @@ autocmd('LspAttach', {
             end,
             { desc = "Code Action, such as fix." }
         )
+
+        vim.cmd [[mode]]
 
         -- In telescope.lua:
         -- vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
