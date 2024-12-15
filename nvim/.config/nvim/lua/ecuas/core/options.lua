@@ -27,12 +27,6 @@ opt.history = 100
 
 opt.showmode = true
 
--- StatusColumn
--- Cause of much concern.
-opt.relativenumber = true
-opt.number = true
-opt.numberwidth = 1
-
 -- tabs & indentation
 -- Set tabstop to 8 for C, C++, and header files
 vim.api.nvim_create_autocmd("FileType", {
@@ -101,9 +95,4 @@ opt.incsearch = false
 opt.scrolloff = 8
 opt.isfname:append("@-@")
 
-opt.updatetime = 50
-
 opt.colorcolumn = "80"
-
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"

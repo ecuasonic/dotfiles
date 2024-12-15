@@ -1,3 +1,7 @@
+-- packages
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
 -- lazy plugin manager.
 require("ecuas.plugin-manager")
 
@@ -5,15 +9,8 @@ require("ecuas.plugin-manager")
 require("ecuas.core.options")
 require("ecuas.core.remap")
 
--- element setup
-require("ecuas.elements.statuscolumn")
-
 -- load plugins.
 require("ecuas.plugins-setup")
-
-require("ecuas.elements.winbar")     -- needs gitsigns
-require("ecuas.elements.statusline") -- needs fugitive
-require("ecuas.elements.tabline")    -- needs harpoon
 
 -- vim.o.path = vim.o.path .. "/usr/avr/include,/home/ecuas/.arduino15/,/usr/lib/gcc/avr/14.1.0/include,/usr/lib/gcc/avr/14.1.0/include-fixed"
 
