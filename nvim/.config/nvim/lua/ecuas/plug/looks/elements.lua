@@ -1,6 +1,5 @@
 local M = {
-    "elements",
-    dir = "~/local/elements",
+    "ecuasonic/elements.nvim",
     dependencies = {
         "theprimeagen/harpoon",
         "tpope/vim-fugitive",

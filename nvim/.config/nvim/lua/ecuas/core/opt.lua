@@ -32,9 +32,10 @@ opt.showmode = true
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp", "h" },
     callback = function()
+        opt.expandtab = false
         opt.tabstop = 8
-        opt.softtabstop = 8
         opt.shiftwidth = 8
+        opt.softtabstop = 8
     end,
 })
 
@@ -50,7 +51,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-opt.expandtab = true
+opt.expandtab = false
 opt.autoindent = true
 opt.smartindent = true
 
