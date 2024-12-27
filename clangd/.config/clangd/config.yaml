@@ -5,7 +5,7 @@ Diagnostics:
 InlayHints:
     BlockEnd: No
     Designators: Yes
-    Enabled: Yes
+    Enabled: No
     ParameterNames: Yes
     DeducedTypes: Yes
     TypeNameLimit: 24
@@ -13,8 +13,30 @@ InlayHints:
 Hover:
     ShowAKA: No
 
+If:
+    PathMatch: [ .*\.c ]
 CompileFlags:
-    Add: [-Wall, -Wextra]
+    Add: [
+        -Wall,
+        -Wextra,
+        -Weverything,
+        -fparse-all-comments,
+        -Wno-documentation,
+        -Wno-documentation-unknown-command,
+        -Wno-unsafe-buffer-usage,
+        -Wno-covered-switch-default,
+        -ferror-limit=0,
+    ]
+
+If:
+    PathMatch: [.*\.h, .*\.hh, .*\.hpp ]
+CompileFlags:
+    Add: [
+        -Wno-empty-translation-unit,
+        -Wno-unused-macros,
+        -Wno-unused-functions,
+        -Wno-reserved-id-macro,
+    ]
 
 Index:
     Background: Skip
