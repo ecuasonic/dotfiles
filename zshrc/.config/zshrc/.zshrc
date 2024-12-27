@@ -22,6 +22,7 @@ export EDITOR="$(which nvim)"
 export DEVKITPRO=/opt/devkitpro
 export DEVKITARM=/opt/devkitpro/devkitARM
 export DEVKITPPC=/opt/devkitpro/devkitppc
+export PATH=$DEVKITARM/bin:$DEVKITPRO/tools/bin:$PATH
 
 # # Sets Control to be both escape and Control (set in i3 config)
 # setxkbmap -option ctrl:nocaps
