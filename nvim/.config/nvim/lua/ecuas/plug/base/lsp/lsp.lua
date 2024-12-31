@@ -100,11 +100,6 @@ local function mason_setup(capabilities)
 						'configure.ac',
 						'.git'
 					)
-					-- root_dir = function(fname)
-					--     local filename = util.path.is_absolute(fname) and fname
-					--     or util.path.join(vim.loop.cwd(), fname)
-					--     return root_pattern(filename) or util.path.dirname(filename)
-					-- end;
 				})
 			end,
 			["bashls"] = function()

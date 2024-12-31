@@ -15,12 +15,24 @@ local function path_dirname(opts, path)
 	local filename = vim.fs.basename(path)
 	local dirname = vim.fs.dirname(path)
 	local output = ""
-	if (dirname == '.' or vim.fn.expand(dirname)) then
+	if (dirname == '.') then
 		output = string.format("%s (.)", filename)
 	else
 		output = string.format("%s (%s)", filename, "./" .. dirname)
 	end
 	return string.format("%-30s", output)
+end
+
+function Path_Current_File(opts, path)
+	local filename = vim.fs.basename(path)
+	local dirname = vim.fs.dirname(path)
+	local output = ""
+	if (dirname == '.' or vim.fn.expand(dirname)) then
+		output = string.format("%s (.)", filename)
+	else
+		output = string.format("%s (%s)", filename, "./" .. dirname)
+	end
+	return string.format("%-15s", output)
 end
 
 local function path_parent(opts, path)
@@ -29,6 +41,53 @@ local function path_parent(opts, path)
 	local parent = vim.fs.dirname(path)
 	parent = string.sub(parent, pwd_len, -1)
 	return string.format("%s (%s)", filename, '.' .. parent)
+end
+
+local function setup_keys(builtin)
+	vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Fuzzy Find." })
+	-- This allows for multiple words on same target line.
+	vim.keymap.set('n', '<leader>fs', function()
+		local opts = {
+			shorten_path = true,
+			word_match = "-w",
+			only_sort_text = true,
+			search = '',
+		}
+		require("telescope.builtin").grep_string(opts)
+	end, { desc = "Fuzzy Search." })
+	-- Stores highlighted word into register then search through grep_string.
+	vim.keymap.set('v', '<leader>fs', function()
+		local old_reg_unnamed = vim.fn.getreg('""')
+		vim.cmd('normal! "zy')
+		local selected_text = vim.fn.getreg('z') .. " "
+		vim.fn.setreg('""', old_reg_unnamed)
+		local opts = {
+			shorten_path = true,
+			word_match = "-w",
+			only_sort_text = true,
+			search = '',
+		}
+		require("telescope.builtin").grep_string(opts)
+		vim.api.nvim_feedkeys(selected_text, "n", true)
+	end, { desc = "Fuzzy Current Selected Text" })
+	vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope Buffers.' })
+	vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = 'Telescope Jumplist' })
+	vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Telescope Diagnostics' })
+	vim.keymap.set('n', '<leader>ft', "<cmd>TodoTelescope<CR>", { desc = 'Telescope Todos' })
+	vim.keymap.set('n', '<leader>f/',
+		function()
+			local opts = {
+				search_dirs = {
+					vim.fn.expand("%:p")
+				},
+				shorten_path = true,
+				word_match = "-w",
+				only_sort_text = true,
+				search = '',
+			}
+			require("telescope.builtin").grep_string(opts)
+		end,
+		{ desc = 'Fuzzy Find in current buffer' })
 end
 
 M = {
@@ -81,6 +140,12 @@ M = {
 				},
 				find_files = {
 					path_display = path_dirname,
+					previewer = false,
+					layout_strategy = "vertical",
+					layout_config = {
+						height = 0.50,
+						width = 0.40,
+					},
 				},
 				live_grep = {
 					path_display = path_dirname
@@ -140,33 +205,6 @@ M = {
 			},
 		})
 
-		--------------------------------------------------------------------
-		-------------- FZF/Grep Functions and Keymaps ----------------------
-		--------------------------------------------------------------------
-		vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Fuzzy Find." })
-		-- This allows for multiple words on same target line.
-		vim.keymap.set('n', '<leader>fs', function()
-				vim.cmd [[lua require("telescope.builtin").grep_string({search=""})]]
-			end,
-			{ desc = "Fuzzy Search." })
-		-- Stores highlighted word into register then search through grep_string.
-		vim.keymap.set('v', '<leader>fs', function()
-			local old_reg_unnamed = vim.fn.getreg('""')
-			vim.cmd('normal! "zy')
-			local selected_text = vim.fn.getreg('z') .. " "
-			vim.fn.setreg('""', old_reg_unnamed)
-			vim.cmd [[lua require("telescope.builtin").grep_string({search=""})]]
-			vim.api.nvim_feedkeys(selected_text, "n", true)
-		end, { desc = "Fuzzy Current Selected Text" })
-		vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope Buffers.' })
-		vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = 'Telescope Jumplist' })
-		vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Telescope Diagnostics' })
-		vim.keymap.set('n', '<leader>ft', "<cmd>TodoTelescope<CR>", { desc = 'Telescope Todos' })
-		vim.keymap.set('n', '<leader>f/',
-			function()
-				vim.cmd [[lua require("telescope.builtin").grep_string({search="", search_dirs={vim.fn.expand("%:p")}})]]
-			end,
-			{ desc = 'Fuzzy Find in current buffer' })
 
 		---------------------------------------------------------------
 		-------------- LSP Functions and Keymaps ----------------------
@@ -209,6 +247,8 @@ M = {
 		------------------------------ FZF -------------------------------
 		------------------------------------------------------------------
 		telescope.load_extension('fzf')
+
+		setup_keys(builtin)
 	end
 }
 

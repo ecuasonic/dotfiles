@@ -30,25 +30,25 @@ opt.showmode = true
 -- tabs & indentation
 -- Set tabstop to 8 for C, C++, and header files
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp", "h" },
-    callback = function()
-        opt.expandtab = false
-        opt.tabstop = 8
-        opt.shiftwidth = 8
-        opt.softtabstop = 8
-    end,
+	pattern = { "c", "cpp", "h" },
+	callback = function()
+		opt.expandtab = false
+		opt.tabstop = 8
+		opt.shiftwidth = 8
+		opt.softtabstop = 8
+	end,
 })
 
 -- Set tabstop to 4 for all other files
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-        if vim.bo.filetype ~= "c" and vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "h" then
-            opt.tabstop = 4
-            opt.softtabstop = 4
-            opt.shiftwidth = 4
-        end
-    end,
+	pattern = "*",
+	callback = function()
+		if vim.bo.filetype ~= "c" and vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "h" then
+			opt.tabstop = 4
+			opt.softtabstop = 4
+			opt.shiftwidth = 4
+		end
+	end,
 })
 
 opt.expandtab = false
@@ -84,7 +84,7 @@ opt.autoread = true
 opt.pumheight = 10
 
 -- hide empty lines symbol ~
-opt.fillchars = { eob = " " }
+-- opt.fillchars = { eob = " " }
 
 -- undotree options
 opt.undofile = true

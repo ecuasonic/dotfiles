@@ -13,3 +13,6 @@ vim.cmd([[hi NvimTreeIndentMarker guifg=#3FC5FF ]])
 
 -- Indent line plugin.
 vim.cmd([[hi IndentLine guifg=#505050]])
+
+-- End of buffer highlight
+vim.cmd([[hi EndOfBuffer guifg=grey]])
