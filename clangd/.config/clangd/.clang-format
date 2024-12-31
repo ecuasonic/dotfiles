@@ -16,7 +16,7 @@ MacroBlockEnd:      DoNotWrap
 AllowShortIfStatementsOnASingleLine:    false   # Avoid single-line if statements
 AllowShortLoopsOnASingleLine:           false   # No single-line while or for loops
 AllowShortBlocksOnASingleLine:          Empty   # Avoid single-line blocks without braces
-AllowShortFunctionsOnASingleLine:       Empty   # Avoid single-line functions.
+AllowShortFunctionsOnASingleLine:       true   # Avoid single-line functions.
 AllowShortEnumsOnASingleLine:           true
 
 # Align Consective ...
@@ -49,7 +49,7 @@ SpaceAfterCStyleCast:           false
 SpaceBeforeCaseColon:           false
 SpaceBeforeAssignmentOperators: true
 SpacesBeforeTrailingComments:   1
-ReflowComments:                 false
+ReflowComments:                 true
 
 ColumnLimit:            80              # Standard column width in Linux code is 80 characters
 BreakBeforeBraces:      Linux           # Brace style similar to Linux style guide
