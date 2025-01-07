@@ -30,6 +30,7 @@ CompileFlags:
         -Wno-documentation-unknown-command,
         -Wno-unsafe-buffer-usage,
         -Wno-covered-switch-default,
+        -Wno-switch,
         -std=c99,
         -fparse-all-comments,
         -ferror-limit=0,

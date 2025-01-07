@@ -6,6 +6,7 @@ BasedOnStyle:               LLVM
 IndentWidth:                8           # Linux style uses 8-space indentation
 TabWidth:                   8           # Set tab width to 8 spaces
 UseTab:                     Never       # Prefer tabs for indentation, aligning with Linux style
+# SwitchCaseIndentation:      false
 ContinuationIndentWidth:    8           # Continuation indent also uses 8 spaces
 
 AllowAllParametersOfDeclarationOnNextLine: true
