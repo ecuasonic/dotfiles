@@ -52,7 +52,7 @@ M = {
             auto_install = true,
 
             --enable indentation
-            indent = { enable = true },
+            indent = { enable = false },
 
             -- enable autotagging (w/ nvim-ts-autotag plugin)
             autotag = { diegoulloaoenable = true },
