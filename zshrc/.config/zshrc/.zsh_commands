@@ -54,8 +54,6 @@ function s() {
 }
 
 function integrated() {
-    display_ports=$(~/.config/custom_scripts/detect_monitor.sh)
-
     if [ "$(supergfxctl -g)" = "Hybrid" ]; then
         supergfxctl -m Integrated
         echo "Switching to Integrated..."
@@ -63,6 +61,7 @@ function integrated() {
         i3-msg exit
     fi
 
+    display_ports=$(~/.config/scripts/detect_monitor.sh)
     if [ $display_ports = "eDP-2" ] || [ $display_ports = "eDP-1" ]; then
         xrandr -r 60
     fi
