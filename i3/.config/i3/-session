@@ -34,7 +34,6 @@ exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xcape" "-e 'Control_L=
 exec --no-startup-id $SCRIPTS/i3_startup.sh
 
 bindsym Print exec --no-startup-id $SCRIPTS/screenshot.sh
-bindsym F6 exec --no-startup-id $SCRIPTS/screenshot.sh
 bindsym F12 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F11 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F10 exec --no-startup-id zsh -c "$SCRIPTS/switch_monitor.sh 2>> $ERROR_LOG"
@@ -141,7 +140,6 @@ set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
 
 # switch to workspace
 bindsym $mod_alt+1 workspace number $ws1
@@ -160,8 +158,6 @@ bindsym $mod_alt+7 workspace number $ws7
 bindsym $mod_win+7 workspace number $ws7
 bindsym $mod_alt+8 workspace number $ws8
 bindsym $mod_win+8 workspace number $ws8
-bindsym $mod_alt+9 workspace number $ws9
-bindsym $mod_win+9 workspace number $ws9
 
 
 # move focused container to workspace
@@ -181,8 +177,6 @@ bindsym $mod_alt+Shift+7 move container to workspace number $ws7
 bindsym $mod_win+Shift+7 move container to workspace number $ws7
 bindsym $mod_alt+Shift+8 move container to workspace number $ws8
 bindsym $mod_win+Shift+8 move container to workspace number $ws8
-bindsym $mod_alt+Shift+9 move container to workspace number $ws9
-bindsym $mod_win+Shift+9 move container to workspace number $ws9
 
 
 # reload the configuration file

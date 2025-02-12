@@ -23,6 +23,25 @@ local function borders()
     }
 end
 
+local function on_attach(client, bufnr)
+    require("lsp_signature").on_attach()
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gd", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gi", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>.", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+    vim.cmd [[mode]]
+
+    -- In telescope.lua:
+    -- vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
+    -- vim.keymap.set('n', '<leader>gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
+end
+
 --- Set up mason lsp manager.
 ---@param capabilities table Default capabilties to set to lsp servers.
 local function mason_setup(capabilities)
@@ -32,7 +51,7 @@ local function mason_setup(capabilities)
             "lua_ls",
             "rust_analyzer",
             "clangd",
-            "arduino_language_server"
+            "arduino_language_server",
         },
         handlers = {
             function(server_name) -- default handler (optional)
@@ -45,6 +64,7 @@ local function mason_setup(capabilities)
             ["lua_ls"] = function()
                 local lspconfig = require("lspconfig")
                 lspconfig.lua_ls.setup {
+                    on_attach = on_attach,
                     capabilities = capabilities,
                     settings = {
                         Lua = {
@@ -79,9 +99,7 @@ local function mason_setup(capabilities)
             ["clangd"] = function()
                 local lspconfig = require("lspconfig")
                 lspconfig.clangd.setup({
-                    on_attach = function(client, bufnr)
-                        require("lsp_signature").on_attach()
-                    end,
+                    on_attach = on_attach,
                     capabilities = capabilities,
                     cmd = {
                         'clangd',
@@ -103,9 +121,23 @@ local function mason_setup(capabilities)
                     )
                 })
             end,
+            ["asm_lsp"] = function()
+                local lspconfig = require("lspconfig")
+                lspconfig.asm_lsp.setup({
+                    on_attach = on_attach,
+                    capabilities = capabilities,
+                    -- filetypes = { "s", "S" },
+                    single_file_support = false,
+                    root_dir = lspconfig.util.root_pattern(
+                        'compile_commands.json',
+                        '.git'
+                    )
+                })
+            end,
             ["bashls"] = function()
                 local lspconfig = require("lspconfig")
                 lspconfig.bashls.setup({
+                    on_attach = on_attach,
                     cmd = {
                         "bash-language-server",
                         "start"
@@ -122,6 +154,14 @@ local function mason_setup(capabilities)
                     root_dir = lspconfig.util.root_pattern(
                         '.root'
                     )
+                })
+            end,
+            ["verible"] = function()
+                local lspconfig = require("lspconfig")
+                lspconfig.verible.setup({
+                    on_attach = on_attach,
+                    cmd = { 'verible-verilog-ls', '--rules_config_search' },
+                    filetypes = { "systemverilog", "verilog" },
                 })
             end
         }

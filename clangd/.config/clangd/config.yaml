@@ -1,6 +1,6 @@
 Diagnostics:
     UnusedIncludes: Strict
-    MissingIncludes: Strict
+    MissingIncludes: Relaxed
 
 InlayHints:
     BlockEnd: No
@@ -31,7 +31,28 @@ CompileFlags:
         -Wno-unsafe-buffer-usage,
         -Wno-covered-switch-default,
         -Wno-switch,
-        -std=c99,
+        # -std=c99,
+        -fparse-all-comments,
+        -ferror-limit=0,
+    ]
+If:
+    PathMatch: [ .*\.cpp ]
+CompileFlags:
+    Add: [
+        -Wall,
+        -Wextra,
+        -Wpedantic,
+        -Wconversion,
+        -Wshadow,
+        -Wnull-dereference,
+        -Weverything,
+        -Wno-declaration-after-statement,   #"Mixing declarations and code is incompatible with standards before c99."
+        -Wno-cast-align,                    # Misalignment occurs when casting from u16* to u32* or similar.
+        -Wno-documentation,
+        -Wno-documentation-unknown-command,
+        -Wno-unsafe-buffer-usage,
+        -Wno-covered-switch-default,
+        -Wno-switch,
         -fparse-all-comments,
         -ferror-limit=0,
     ]

@@ -1,5 +1,6 @@
 function eth() {
     nmcli con down Fios-7wSK6
+    nmcli con down eduroam
     nmcli con down Wired\ connection\ 1
     nmcli con up Wired\ connection\ 1
 }

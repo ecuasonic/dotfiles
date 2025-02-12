@@ -12,6 +12,11 @@ run_command() {
     local action=$1
     local delay=$2
     for workspace in {1..4}; do
+		i3_resurrect=$(which i3-resurrect 2>/dev/null)
+		if [ -z "$i3_resurrect" ]; then
+			echo "Error: i3-resurrect not found. Exiting function."
+			return 1
+		fi
         python -m i3_resurrect.main "$action" -w "$workspace" >> "$ERROR_LOG" 2>&1
         sleep "$delay"
     done

@@ -1,5 +1,5 @@
 -- Core highlights.
-vim.cmd([[hi Comment guifg=yellow guibg=NONE]])
+-- vim.cmd([[hi Comment guifg=grey guibg=NONE]])
 vim.cmd([[hi TreesitterContext guibg=NONE]])
 
 -- Markdown highlights.
