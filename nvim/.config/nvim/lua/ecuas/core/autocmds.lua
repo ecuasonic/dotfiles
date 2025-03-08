@@ -6,16 +6,29 @@ local autocmd = vim.api.nvim_create_autocmd
 local opt = vim.opt -- vim options
 -- tabs & indentation
 -- Set tabstop to 8 for C, C++, and header files
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
     pattern = { "c", "cpp", "h" },
     callback = function()
         vim.schedule(function()
-            opt.tabstop = 4
-            opt.shiftwidth = 4
-            opt.softtabstop = 4
+            opt.tabstop = 2
+            opt.shiftwidth = 2
+            opt.softtabstop = 2
         end)
     end,
 })
+
+-- For tmux keys in :Ex or netrw.
+autocmd("FileType", {
+    pattern = "netrw",
+    callback = function()
+        local opts = { noremap = true, silent = true }
+        vim.api.nvim_buf_set_keymap(0, "n", "<C-h>", ":TmuxNavigateLeft<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<C-j>", ":TmuxNavigateDown<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<C-k>", ":TmuxNavigateUp<CR>", opts)
+        vim.api.nvim_buf_set_keymap(0, "n", "<C-l>", ":TmuxNavigateRight<CR>", opts)
+    end
+})
+
 
 -- Format code with clang-format on save without losing cursor position
 autocmd("BufWritePre", {

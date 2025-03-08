@@ -4,8 +4,14 @@ local opt = vim.opt -- vim options
 opt.path:append("/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/")
 vim.g.leetcode_browser = "firefox" -- or "chrome"
 
+-- ssh/scp gatech
+vim.g.netrw_list_hide = "^\\(Any\\|Data\\|By\\|This\\|authorized\\|expectation\\|intercepted\\|policies\\).*"
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
 -- xxd would interpret \n at end of file.
 opt.fixendofline = false
+opt.jumpoptions:append("stack")
 
 opt.shell = "/bin/zsh"
 

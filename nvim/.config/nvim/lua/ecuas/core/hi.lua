@@ -8,6 +8,8 @@ vim.cmd([[hi @markup.raw.markdown_inline guifg=#FFC133 guibg=NONE]])
 vim.cmd([[hi @markup.link.label guifg=#c792ea guibg=NONE]])
 vim.cmd([[hi link RenderMarkdownLink_Custom SpecialChar]])
 
+vim.cmd([[hi Folded guifg=#FFC133 guibg=NONE]])
+
 -- Change color for arrows in tree to light blue.
 vim.cmd([[hi NvimTreeIndentMarker guifg=#3FC5FF ]])
 
