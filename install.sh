@@ -3,7 +3,7 @@ sudo dnf update
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-       release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/ rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Install needed programs:
-sudo dnf install @base-x i3 stow nvim
+sudo dnf install @base-x i3 stow nvim # telescope-fzf for nvim may need to make within folder.
 sudo dnf install gh git git-delta
 sudo dnf install kitty luarocks btop zsh zoxide shellcheck
 
