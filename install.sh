@@ -17,6 +17,9 @@ pip3 install --user --upgrade i3-resurrect
 # Get background, open up nitrogen, then select it.
 # Update scripts if necessary.
 
+# Install fonts:
+# Copy /dotfiles/fonts/ into ~/.local/share/fonts/
+
 # Install xcape for ctrl/esc:
 sudo dnf install gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
 cd ~/local
@@ -28,7 +31,6 @@ sudo make install
 sudo dnf install tmux
 git clone https:/github.com/tmux-plugins/tmp ~/.tmux/plugins/tpm
 # prefix + I: To install plugins
-
 
 # Power management:
 sudo dnf install tlp
