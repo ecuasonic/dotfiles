@@ -15,7 +15,7 @@ screen_size="$sel_full\n$sel_window\n$sel_region"
 chosen="$(echo -e "$screen_size" | $rofi_command -p "Screenshot Size" -dmenu -selected-row 0)"
 case $chosen in
     "$sel_full")
-        sleep 0.1
+        sleep 1
         maim > $TEMP_SCREENSHOT_PATH
         ;;
     "$sel_window")
