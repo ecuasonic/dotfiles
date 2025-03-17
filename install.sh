@@ -5,7 +5,7 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-      
 # Install needed programs:
 sudo dnf install @base-x i3 stow nvim # telescope-fzf for nvim may need to make within folder.
 sudo dnf install gh git git-delta
-sudo dnf install kitty luarocks btop zsh zoxide shellcheck xdotool
+sudo dnf install kitty luarocks btop zsh zoxide shellcheck xdotool bear
 
 # Install programs for i3:
 sudo dnf install rofi polybar picom nitrogen xrandr xset cargo brightnessctl bat python3-pip scrot i3-gaps
