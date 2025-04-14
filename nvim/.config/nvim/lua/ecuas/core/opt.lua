@@ -26,7 +26,7 @@ vim.lsp.set_log_level("off")
 
 opt.linebreak = true
 
-opt.mouse = ""
+opt.mouse = "nv"
 
 opt.conceallevel = 2
 opt.history = 100

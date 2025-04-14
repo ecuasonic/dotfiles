@@ -233,10 +233,7 @@ bindsym $mod_alt+r exec --no-startup-id "i3-msg 'border pixel 3'; i3-msg mode 'r
 bindsym $mod_win+r exec --no-startup-id "i3-msg 'border pixel 3'; i3-msg mode 'resize'"
 
 # target                 title     bg    text      indicator    border
-# client.focused           $mantle   $mauve $mantle  $rosewater #1e88e5
-# client.focused           $mantle   $mauve $mantle  $rosewater #B41825
 client.focused           $mantle   $mauve $mantle  $rosewater #FFA500
-# client.unfocused         $overlay0 $base  $text    $rosewater $base
 client.unfocused         $overlay0 $base  $text    $rosewater #141C21
 client.focused_inactive  $overlay0 $base  $text    $rosewater #141C21
 client.urgent            $peach    $base  $peach   $overlay0  $peach

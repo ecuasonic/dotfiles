@@ -18,7 +18,7 @@ elif (( $# == 1 )); then
     fi
     # Print a message indicating the change
     sleep 0.1
-    clear
+    # clear
     echo "New Font Size: $1"
 else
     echo "No parameters = show current font size"

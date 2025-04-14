@@ -3,6 +3,7 @@ alias f="~/.config/scripts/change_kitty_font.sh"
 alias start_notes="~/.config/scripts/notes_session.sh -s"
 alias end_notes="~/.config/scripts/notes_session.sh -e"
 alias nvim_si="nvim scp://rbarrezueta3@ece-rschsrv.ece.gatech.edu/"
+alias nvim_ice="nvim scp://rbarrezueta3@login-ice.pace.gatech.edu/"
 
 # Connect to Airpods
 alias airpods="bluetoothctl connect 70:AE:D5:D5:B4:26"

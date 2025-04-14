@@ -258,8 +258,8 @@ local function cmp_setup(cmp, lspkind)
                 { name = 'nvim_lua' },
             },
             {
-                { name = "path", keyword_length = 3 },
-                -- { name = 'buffer', keyword_length = 3 },
+                { name = "path",   keyword_length = 3 },
+                { name = 'buffer', keyword_length = 3 },
             }),
         formatting = {
             fields = { "abbr", "kind", "menu" },
@@ -271,7 +271,7 @@ local function cmp_setup(cmp, lspkind)
                     -- nvim_lua = "[NVLUA]",
                     -- luasnip = "[SNIP]",
                     path = "[PATH]",
-                    -- buffer = "[BUF]",
+                    buffer = "[BUF]",
                 },
                 maxwidth = 50,
             }),
@@ -312,7 +312,7 @@ M = {
 
         "hrsh7th/cmp-nvim-lsp",
         -- "hrsh7th/cmp-nvim-lua",
-        -- "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         -- "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
