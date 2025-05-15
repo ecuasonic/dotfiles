@@ -44,7 +44,11 @@ function M.run_command_if_no_errors(path, args, filename)
     M.run_command_if_changed(path, args, filename)
 end
 
-function M.format(func, args)
+function M.format(func, args, whitespace_only)
+    local function trim_trailing_whitespace()
+        vim.cmd([[%s/\s\+$//e]])
+    end
+
     -- pos = (row, col)
     -- table indices start at 1!!
     -- stores old cursor position.
@@ -53,10 +57,11 @@ function M.format(func, args)
     local old_col = pos[2]
 
     -- format file.
-    func(args);
+    if (not whitespace_only) then
+        func(args);
+    end
 
-    -- remove trailing whitespace.
-    vim.cmd([[%s/\s\+$//e]])
+    trim_trailing_whitespace()
 
     -- restore old cursor position
     local lines = vim.api.nvim_buf_line_count(0)

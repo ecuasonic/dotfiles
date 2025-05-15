@@ -18,3 +18,6 @@ vim.cmd([[hi IndentLine guifg=#505050]])
 
 -- End of buffer highlight
 vim.cmd([[hi EndOfBuffer guifg=grey]])
+
+-- LSP hover (-> Visual)
+vim.cmd([[hi LspReferenceText guibg=#275378]])

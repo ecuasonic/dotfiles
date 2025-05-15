@@ -2,172 +2,6 @@
 -- main function starts at M
 --
 
---- [Set up textDocument/hover and textDocument/signatureHelp borders.]
-local function borders()
-    local _border = "rounded"
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover, {
-            border = _border
-        }
-    )
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help, {
-            border = _border
-        }
-    )
-
-    require('lspconfig.ui.windows').default_options = {
-        border = _border
-    }
-end
-
-local function on_attach(client, bufnr)
-    require("lsp_signature").on_attach()
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gd", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gi", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>.", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-
-    vim.cmd [[mode]]
-
-    -- In telescope.lua:
-    -- vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
-    -- vim.keymap.set('n', '<leader>gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
-end
-
---- Set up mason lsp manager.
----@param capabilities table Default capabilties to set to lsp servers.
-local function mason_setup(capabilities)
-    require("mason").setup()
-    require("mason-lspconfig").setup({
-        ensure_installed = {
-            "lua_ls",
-            "rust_analyzer",
-            "clangd",
-            "arduino_language_server",
-        },
-        handlers = {
-            function(server_name) -- default handler (optional)
-                require("lspconfig")[server_name].setup {
-                    capabilities = capabilities
-                }
-            end,
-
-
-            ["lua_ls"] = function()
-                local lspconfig = require("lspconfig")
-                lspconfig.lua_ls.setup {
-                    on_attach = on_attach,
-                    capabilities = capabilities,
-                    settings = {
-                        Lua = {
-                            runtime = {
-                                version = "LuaJIT",
-                                path = vim.split(package.path, ';')
-                            },
-                            ["completion.enable"] = false,
-                            diagnostics = {
-                                globals = {
-                                    "vim",
-                                    "it",
-                                    "describe",
-                                    "before_each",
-                                    "after_each"
-                                },
-                            },
-                            workspace = {
-                                library = {
-                                    vim.env.VIMRUNTIME,
-                                    vim.fn.stdpath('config'),
-                                },
-                                checkThirdParty = false,
-                            },
-                            telemetry = {
-                                enable = false
-                            }
-                        }
-                    }
-                }
-            end,
-            ["clangd"] = function()
-                local lspconfig = require("lspconfig")
-                lspconfig.clangd.setup({
-                    on_attach = on_attach,
-                    capabilities = capabilities,
-                    cmd = {
-                        'clangd',
-                        '--background-index',
-                        '--clang-tidy',
-                        '--log=verbose',
-                        '--enable-config',
-                        '--function-arg-placeholders=false',
-                        -- '--indent-case-labels=false'
-                    },
-                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-                    single_file_support = false,
-                    root_dir = lspconfig.util.root_pattern(
-                        '.clang-tidy',
-                        'compile_commands.json',
-                        'compile_flags.txt',
-                        'configure.ac',
-                        '.git'
-                    )
-                })
-            end,
-            ["asm_lsp"] = function()
-                local lspconfig = require("lspconfig")
-                lspconfig.asm_lsp.setup({
-                    on_attach = on_attach,
-                    capabilities = capabilities,
-                    -- filetypes = { "s", "S" },
-                    single_file_support = false,
-                    root_dir = lspconfig.util.root_pattern(
-                        'compile_commands.json',
-                        '.git'
-                    )
-                })
-            end,
-            ["bashls"] = function()
-                local lspconfig = require("lspconfig")
-                lspconfig.bashls.setup({
-                    on_attach = on_attach,
-                    cmd = {
-                        "bash-language-server",
-                        "start"
-                    },
-                    settings = {
-                        bashIde = {
-                            globPattern = vim.env.GLOB_PATTERN or
-                                '*@(.sh|.inc|.bash|.command)',
-                        }
-                    },
-                    filetypes = {
-                        "sh"
-                    },
-                    root_dir = lspconfig.util.root_pattern(
-                        '.root'
-                    )
-                })
-            end,
-            ["verible"] = function()
-                local lspconfig = require("lspconfig")
-                lspconfig.verible.setup({
-                    on_attach = on_attach,
-                    cmd = { 'verible-verilog-ls', '--rules_config_search' },
-                    filetypes = { "systemverilog", "verilog" },
-                })
-            end
-        }
-    })
-end
-
 --- Set up cmp lsp windows, mappings, sources, etc.
 ---@param cmp table require('cmp')
 ---@param lspkind table require('lspkind')
@@ -187,65 +21,22 @@ local function cmp_setup(cmp, lspkind)
             documentation = cmp.config.window.bordered(),
         },
         mapping = {
-            ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-            ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-            ['<c-n>'] = cmp.mapping({
-                c = function()
-                    if cmp.visible() then
-                        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                    else
-                        vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
-                    end
-                end,
-                i = function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                    else
-                        fallback()
-                    end
-                end
-            }),
-            ['<c-p>'] = cmp.mapping({
-                c = function()
-                    if cmp.visible() then
-                        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                    else
-                        vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
-                    end
-                end,
-                i = function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                    else
-                        fallback()
-                    end
-                end
-            }),
             ['<c-j>'] = cmp.mapping({
                 c = function()
                     vim.api.nvim_feedkeys(t('<down>'), 'n', true)
                 end,
-                i = function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                    else
-                        fallback()
-                    end
+                i = function()
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                 end
             }),
             ['<c-k>'] = cmp.mapping({
                 c = function()
                     vim.api.nvim_feedkeys(t('<up>'), 'n', true)
                 end,
-                i = function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                    else
-                        fallback()
-                    end
+                i = function()
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
                 end
             }),
-            ['<C-a>'] = cmp.mapping.abort(),
             ['<Tab>'] = cmp.mapping.confirm({
                 select = true,
                 behavior = cmp.ConfirmBehavior.Insert
@@ -297,21 +88,132 @@ local function cmp_setup(cmp, lspkind)
         end,
         experimental = {
             ghost_text = { hl_group = "SpecialKey" }
-        }
+        },
+        -- completion = {
+        --     completeopt = 'menu,menuone,noinsert'
+        -- }
     })
 
     -- require("luasnip.loaders.from_vscode").lazy_load()
+end
+
+local function mason_setup(capabilities)
+    require("mason").setup()
+
+    vim.lsp.config.clangd = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = {
+            'clangd',
+            '--background-index',
+            '--clang-tidy',
+            '--log=verbose',
+            '--enable-config',
+            '--function-arg-placeholders=false',
+            -- '--indent-case-labels=false'
+        },
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+        single_file_support = true,
+        root_markers = {
+            '.clang-tidy',
+            'compile_commands.json',
+            'compile_flags.txt',
+            'configure.ac',
+            '.git'
+        }
+    }
+    vim.lsp.config.lua_ls = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+            Lua = {
+                runtime = {
+                    version = "LuaJIT",
+                    path = vim.split(package.path, ';')
+                },
+                ["completion.enable"] = false,
+                diagnostics = {
+                    globals = {
+                        "vim",
+                        "it",
+                        "describe",
+                        "before_each",
+                        "after_each"
+                    },
+                },
+                workspace = {
+                    library = {
+                        vim.env.VIMRUNTIME,
+                        vim.fn.stdpath('config'),
+                    },
+                    checkThirdParty = false,
+                },
+                telemetry = {
+                    enable = false
+                }
+            }
+        }
+    }
+    vim.lsp.config.asm_lsp = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        -- filetypes = { "s", "S" },
+        single_file_support = false,
+        root_markers = {
+            'compile_commands.json',
+            '.git'
+        }
+    }
+    vim.lsp.config.bashls = {
+        on_attach = on_attach,
+        cmd = {
+            "bash-language-server",
+            "start"
+        },
+        settings = {
+            bashIde = {
+                globPattern = vim.env.GLOB_PATTERN or
+                    '*@(.sh|.inc|.bash|.command)',
+            }
+        },
+        filetypes = {
+            "sh"
+        },
+        root_markers = {
+            '.root'
+        }
+    }
+    vim.lsp.config.verible = {
+        on_attach = on_attach,
+        cmd = { 'verible-verilog-ls', '--rules_config_search' },
+        filetypes = { "systemverilog", "verilog" },
+    }
+    vim.lsp.config.checkmate = {
+        settings = {
+            checkmate = {
+                plugins = {
+                    eslint = {}
+                }
+            }
+        }
+    }
+    vim.lsp.enable({
+        'clangd',
+        'lua_ls',
+        'asm_lsp',
+        'bashls',
+        'verible',
+        'checkmate'
+    })
 end
 
 M = {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason.nvim",
 
         "hrsh7th/cmp-nvim-lsp",
-        -- "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         -- "hrsh7th/cmp-cmdline",
@@ -341,7 +243,6 @@ M = {
 
         -- cmp
         local cmp = require('cmp')
-        -- local luasnip = require("luasnip")
         local lspkind = require("lspkind")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -357,6 +258,7 @@ M = {
         vim.diagnostic.config({
             underline = true,
             virtual_text = true,
+            -- virtual_lines = true,
             signs = true,
             update_in_insert = false,
             severity_sort = true,
@@ -372,9 +274,14 @@ M = {
 
         -- If you want insert `(` after select function or method item
         local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+        cmp.event:on(
+            "confirm_done",
+            cmp_autopairs.on_confirm_done { map_char = { tex = "" } }
+        )
 
-        borders()
+        -- local lspconfig = require("lspconfig")
+        -- local clangd_opts = require("lsp.clangd")
+        -- lspconfig.clangd.setup(clangd_opts)
     end
 }
 

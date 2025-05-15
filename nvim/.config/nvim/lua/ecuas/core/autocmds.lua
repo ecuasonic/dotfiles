@@ -17,6 +17,21 @@ autocmd("FileType", {
     end,
 })
 
+-- Set tabstop to 4 for all other files
+autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        if vim.bo.filetype ~= "c"
+            and vim.bo.filetype ~= "cpp"
+            and vim.bo.filetype ~= "h"
+            and vim.bo.filetype ~= "hpp" then
+            opt.tabstop = 4
+            opt.softtabstop = 4
+            opt.shiftwidth = 4
+        end
+    end,
+})
+
 -- For tmux keys in :Ex or netrw.
 autocmd("FileType", {
     pattern = "netrw",
@@ -33,17 +48,17 @@ autocmd("FileType", {
 -- Format code with clang-format on save without losing cursor position
 autocmd("BufWritePre", {
     pattern = {
-        -- "*.c",
-        -- "*.cpp",
-        -- "*.hpp",
-        -- "*.h",
+        "*.c",
+        "*.cpp",
+        "*.hpp",
+        "*.h",
         "*.lua",
         "*.md",
         "*.S",
         "*.s"
     },
     callback = function()
-        require("ecuas.core.utils").format(vim.lsp.buf.format, {})
+        require("ecuas.core.utils").format(vim.lsp.buf.format, {}, true)
     end,
 })
 
@@ -56,22 +71,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
         end
     end,
 })
-
--- Set tabstop to 4 for all other files
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-        if vim.bo.filetype ~= "c"
-            and vim.bo.filetype ~= "cpp"
-            and vim.bo.filetype ~= "h"
-            and vim.bo.filetype ~= "hpp" then
-            opt.tabstop = 4
-            opt.softtabstop = 4
-            opt.shiftwidth = 4
-        end
-    end,
-})
-
 
 
 local yank_group = augroup('HighlightYank', {})
@@ -119,69 +118,5 @@ autocmd("VimResized", {
         end
     end
 })
-
-local ecuasGroup = augroup('ecuas', {})
--- set keymaps when lsp attaches.
--- autocmd('LspAttach', {
---     group = ecuasGroup,
---     callback = function(e)
--- vim.keymap.set("n", "K",
---     function()
---         vim.lsp.buf.hover()
---     end,
---     { desc = "Description of current word.", buffer = e.buf }
--- )
---
--- vim.keymap.set("n", "]d",
---     function()
---         vim.diagnostic.goto_next()
---     end,
---     { desc = "Go to next diagnostic.", buffer = e.buf }
--- )
---
--- vim.keymap.set("n", "[d",
---     function()
---         vim.diagnostic.goto_prev()
---     end,
---     { desc = "Go to previous diagnostic.", buffer = e.buf }
--- )
---
--- vim.keymap.set("n", "<leader>gr",
---     function()
---         vim.lsp.buf.rename()
---     end,
---     { desc = "Rename current object throughout entire project.", buffer = e.buf }
--- )
---
--- vim.keymap.set("n", "<leader>gd",
---     function()
---         vim.lsp.buf.declaration()
---         vim.cmd("normal! zt")
---     end,
---     { desc = "Go to object's declaration.", buffer = e.buf }
--- )
---
--- vim.keymap.set("n", "<leader>gi",
---     function()
---         vim.lsp.buf.definition()
---         vim.cmd("normal! zt")
---     end,
---     { desc = "Go to object's definition.", buffer = e.buf }
--- )
---
--- vim.keymap.set("n", "<leader>.",
---     function()
---         vim.lsp.buf.code_action()
---     end,
---     { desc = "Code Action, such as fix." }
--- )
---
--- vim.cmd [[mode]]
-
--- In telescope.lua:
--- vim.keymap.set('n', '<leader>gs', builtin.lsp_references, { desc = "Telescope References" })
--- vim.keymap.set('n', '<leader>gS', builtin.lsp_document_symbols, { desc = "Telescope Symbols" })
---     end,
--- })
 
 return M

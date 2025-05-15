@@ -1,6 +1,9 @@
 -- for conciseness
 local opt = vim.opt -- vim options
 
+vim.o.winborder = 'rounded'
+-- opt.completeopt = 'noselect,fuzzy,longest,popup,menu,menuone'
+
 opt.path:append("/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/")
 vim.g.leetcode_browser = "firefox" -- or "chrome"
 
@@ -14,6 +17,8 @@ opt.fixendofline = false
 opt.jumpoptions:append("stack")
 
 opt.shell = "/bin/zsh"
+opt.ar = true
+opt.cmdwinheight = 10
 
 opt.foldmethod = "marker"
 opt.foldmarker = "{,}"
@@ -25,6 +30,7 @@ opt.foldenable = true
 vim.lsp.set_log_level("off")
 
 opt.linebreak = true
+opt.breakindent = true
 
 opt.mouse = "nv"
 

@@ -3,12 +3,40 @@ vim.g.mapleader = " " -- space key
 
 -- for conciseness
 local k = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
+k('n', '<leader><leader>o', 'o<ESC>cc', { desc = "next line - no comment" })
+k('n', '<leader><leader>O', 'O<ESC>cc', { desc = "next line - no comment" })
 k('n', '<leader>=', function() vim.lsp.buf.format() end, { desc = "Format Entire File." })
 k('n', '<leader>\\', '<c-w>v', { desc = "Open new window vertically." })
 k('n', '<leader>-', '<c-w>s', { desc = "Open new window horizontally." })
-k('n', '<leader>q', '<c-w>q', { desc = "Close window." })
-k('n', '<leader>w', '<cmd>w<cr>', { desc = "Save window." })
+
+-- mouse
+k({'n', 'v'}, '<RightMouse>', "<LeftMouse><cmd>lua vim.lsp.buf.hover()<CR>", opts)
+k('n', '<X2Mouse>', "<C-i>", opts)
+k('n', '<X1Mouse>', "<C-o>", opts)
+k('v', '<X2Mouse>', "<Esc>", opts)
+k('v', '<X1Mouse>', "<Esc>", opts)
+k({'n', 'v'}, '<2-X2Mouse>', "<Nop>", opts)
+k({'n', 'v'}, '<2-X1Mouse>', "<Nop>", opts)
+
+-- lsp
+k("n", "<leader>gd", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+k("n", "<leader>gi", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+k("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+k("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+k("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+k("n", "<leader>gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+k("n", "<leader>.", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+-- close all floating windows
+k("n", "<esc>", function()
+    for _, win in pairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_config(win).relative == 'win' then
+            vim.api.nvim_win_close(win, false)
+        end
+    end
+end, opts)
 
 -- Checkbox entire v-line selected.
 k('v', '<leader><cr>',
@@ -43,7 +71,7 @@ k('n', "yc", "yy<cmd>normal gcc<CR>p", { desc = "Yank, comment out, then paste."
 
 k("n", "<leader>x", ":!", { desc = "Execute Shell Command." })
 k("n", "<leader>X", ":%!", { desc = "Change Entire File to Sheel Command." })
-k("n", "<ESC>", "<cmd>noh<CR>")
+-- k("n", "<ESC>", "<cmd>noh<CR>")
 
 k("n", "+", "<C-a>", { desc = "Increment numbers.", noremap = true })
 k("n", "-", "<C-x>", { desc = "Decrement numbers.", noremap = true })
