@@ -44,9 +44,9 @@ local function path_parent(opts, path)
 end
 
 local function setup_keys(builtin)
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Fuzzy Find." })
+    vim.keymap.set('n', 'ff', builtin.find_files, { desc = "Fuzzy Find." })
     -- This allows for multiple words on same target line.
-    vim.keymap.set('n', '<leader>fs', function()
+    vim.keymap.set('n', 'fs', function()
         local opts = {
             shorten_path = true,
             word_match = "-w",
@@ -56,7 +56,7 @@ local function setup_keys(builtin)
         require("telescope.builtin").grep_string(opts)
     end, { desc = "Fuzzy Search." })
     -- Stores highlighted word into register then search through grep_string.
-    vim.keymap.set('v', '<leader>fs', function()
+    vim.keymap.set('v', 'fs', function()
         local old_reg_unnamed = vim.fn.getreg('""')
         vim.cmd('normal! "zy')
         local selected_text = vim.fn.getreg('z') .. " "
@@ -70,24 +70,36 @@ local function setup_keys(builtin)
         require("telescope.builtin").grep_string(opts)
         vim.api.nvim_feedkeys(selected_text, "n", true)
     end, { desc = "Fuzzy Current Selected Text" })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope Buffers.' })
-    vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = 'Telescope Jumplist' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Telescope Diagnostics' })
-    vim.keymap.set('n', '<leader>ft', "<cmd>TodoTelescope<CR>", { desc = 'Telescope Todos' })
-    vim.keymap.set('n', '<leader>f/',
-        function()
-            local opts = {
-                search_dirs = {
-                    vim.fn.expand("%:p")
-                },
-                shorten_path = true,
-                word_match = "-w",
-                only_sort_text = true,
-                search = '',
-            }
-            require("telescope.builtin").grep_string(opts)
-        end,
-        { desc = 'Fuzzy Find in current buffer' })
+    vim.keymap.set('n', 'fb', builtin.buffers, { desc = 'Telescope Buffers.' })
+    vim.keymap.set('n', 'fd', builtin.diagnostics, { desc = 'Telescope Diagnostics' })
+    vim.keymap.set('n', 'fl', builtin.current_buffer_tags, { desc = 'Telescope Tags' })
+    vim.keymap.set('n', 'fh', builtin.help_tags, { desc = 'Telescope Help' })
+    vim.keymap.set('n', 'ft', "<cmd>TodoTelescope<CR>", { desc = 'Telescope Todos' })
+    vim.keymap.set('n', 'fa', function()
+        local opts = {
+            search_dirs = {
+                vim.fn.expand("%:p")
+            },
+            shorten_path = true,
+            word_match = "-w",
+            only_sort_text = true,
+            search = 'hi',
+        }
+        require("telescope.builtin").tags(opts)
+    end)
+    vim.keymap.set('n', 'f/', function()
+        local opts = {
+            search_dirs = {
+                vim.fn.expand("%:p")
+            },
+            shorten_path = true,
+            word_match = "-w",
+            only_sort_text = true,
+            search = '',
+        }
+        require("telescope.builtin").grep_string(opts)
+    end,
+    { desc = 'Fuzzy Find in current buffer' })
 end
 
 M = {

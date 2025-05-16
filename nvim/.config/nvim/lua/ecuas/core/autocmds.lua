@@ -119,4 +119,12 @@ autocmd("VimResized", {
     end
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    callback = function()
+        if vim.bo.filetype == "help" then
+            vim.wo.statuscolumn = ""
+        end
+    end
+})
+
 return M

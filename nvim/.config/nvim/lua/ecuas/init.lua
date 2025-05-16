@@ -8,6 +8,7 @@ require("ecuas.plugin-manager")
 -- core setup.
 require("ecuas.core.opt")
 require("ecuas.core.keys")
+require("ecuas.core.term")
 
 -- load plugins.
 require("ecuas.plugins-setup")
