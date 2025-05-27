@@ -1,0 +1,5 @@
+--fields=+n
+--kinds-C=+fd
+--langmap=C:.c.h
+--exclude=build
+--languages=C
