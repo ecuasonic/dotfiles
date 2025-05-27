@@ -1,18 +1,62 @@
-vim.keymap.set('n', '<c-t>', function()
-    vim.cmd.vnew()
-    vim.cmd.term()
-    vim.cmd.wincmd("J")
-    vim.api.nvim_win_set_height(0, 15)
-    vim.cmd.startinsert()
-end)
+local state = {
+    floating = {
+        buf = -1,
+        win = -1,
+    }
+}
 
-vim.api.nvim_create_autocmd('TermOpen', {
-    group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
-    callback = function()
-        vim.wo.statuscolumn = ""
-        vim.wo.number = false
-        vim.wo.relativenumber = false
+local function create_floating_window(opts)
+    opts = opts or {}
+    local width = opts.width or math.floor(vim.o.columns * 0.8)
+    local height = opts.height or math.floor(vim.o.lines * 0.8)
+
+    -- Calculate the position to center the window
+    local col = math.floor((vim.o.columns - width) / 2)
+    local row = math.floor((vim.o.lines - height) / 2)
+
+    -- Create a buffer
+    local buf = nil
+    if vim.api.nvim_buf_is_valid(opts.buf) then
+        buf = opts.buf
+    else
+        buf = vim.api.nvim_create_buf(false, true) -- No file, scratch buffer
     end
-})
 
-vim.keymap.set('t', '<c-t>', '<c-d>')
+    -- Define window configuration
+    local win_config = {
+        relative = "editor",
+        width = width,
+        height = height,
+        col = col,
+        row = row,
+        style = "minimal",
+        border = "rounded"
+    }
+
+    -- Create the floating window
+    local win = vim.api.nvim_open_win(buf, true, win_config)
+
+    return { buf = buf, win = win}
+end
+
+local toggle_terminal
+toggle_terminal = function ()
+    -- if window is either closed or non-existent:
+    if not vim.api.nvim_win_is_valid(state.floating.win) then
+        -- create window using stashed buffer
+        state.floating = create_floating_window { buf = state.floating.buf }
+        if vim.bo[state.floating.buf].buftype ~= "terminal" then
+            vim.cmd.terminal()
+        end
+        vim.keymap.set({'n', 't'}, '<c-h>', toggle_terminal, {buffer = state.floating.buf })
+        vim.keymap.set({'n', 't'}, '<c-j>', toggle_terminal, {buffer = state.floating.buf })
+        vim.keymap.set({'n', 't'}, '<c-k>', toggle_terminal, {buffer = state.floating.buf })
+        vim.keymap.set({'n', 't'}, '<c-l>', toggle_terminal, {buffer = state.floating.buf })
+        vim.cmd.startinsert()
+    else
+        vim.api.nvim_win_hide(state.floating.win)
+    end
+end
+
+vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {})
+vim.keymap.set({'n', 't'}, '<c-t>', toggle_terminal)

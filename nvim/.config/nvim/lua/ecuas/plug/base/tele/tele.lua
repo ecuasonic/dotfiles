@@ -72,21 +72,78 @@ local function setup_keys(builtin)
     end, { desc = "Fuzzy Current Selected Text" })
     vim.keymap.set('n', 'fb', builtin.buffers, { desc = 'Telescope Buffers.' })
     vim.keymap.set('n', 'fd', builtin.diagnostics, { desc = 'Telescope Diagnostics' })
-    vim.keymap.set('n', 'fl', builtin.current_buffer_tags, { desc = 'Telescope Tags' })
     vim.keymap.set('n', 'fh', builtin.help_tags, { desc = 'Telescope Help' })
     vim.keymap.set('n', 'ft', "<cmd>TodoTelescope<CR>", { desc = 'Telescope Todos' })
+
+    vim.keymap.set('n', 'fl', function()
+        local opts = {
+            only_sort_text = true
+        }
+        require("telescope.builtin").current_buffer_tags(opts)
+    end, { desc = 'Telescope Local Tags' })
+
     vim.keymap.set('n', 'fa', function()
         local opts = {
-            search_dirs = {
-                vim.fn.expand("%:p")
-            },
-            shorten_path = true,
-            word_match = "-w",
-            only_sort_text = true,
-            search = 'hi',
+            only_sort_text = true
         }
         require("telescope.builtin").tags(opts)
-    end)
+    end, {desc = 'Telescope Tags'})
+
+    vim.keymap.set('n', '<leader>gi', function()
+        local word = vim.fn.expand("<cword>")
+        local opts = {
+            only_sort_text = true,
+            default_text = word
+        }
+
+        local function find_tags_file()
+            local path = vim.fn.getcwd()
+            while path ~= "/" do
+                if vim.fn.filereadable(path .. "/tags") == 1 then
+                    return path .. "/tags"
+                end
+                path = vim.fn.fnamemodify(path, ":h")
+            end
+            return nil
+        end
+
+        -- local function debug_log(msg)
+        --     local log_file = "/tmp/nvim_debug.log"
+        --     local f = io.open(log_file, "a")
+        --     f:write(msg .. "\n")
+        --     f:close()
+        -- end
+
+        local tags_path = find_tags_file()
+
+        if tags_path then
+            local matches = {}
+            for line in io.lines(tags_path) do
+                if line:match("^" .. word .. "\t") then
+                    table.insert(matches, line)
+                end
+            end
+
+            if #matches == 0 then
+                vim.lsp.buf.definition()
+                return
+            elseif #matches == 1 then
+                local original_tagfunc = vim.bo.tagfunc
+                vim.bo.tagfunc = nil
+                vim.cmd("tag " .. word)
+                vim.bo.tagfunc = original_tagfunc
+                return
+            end
+
+            word = word .. "$"
+            opts.default_text = word
+            require('telescope.builtin').tags(opts)
+        else
+            vim.lsp.buf.definition()
+        end
+
+    end, {desc = 'Search with telescope tags (goto definition)'})
+
     vim.keymap.set('n', 'f/', function()
         local opts = {
             search_dirs = {
@@ -98,8 +155,7 @@ local function setup_keys(builtin)
             search = '',
         }
         require("telescope.builtin").grep_string(opts)
-    end,
-    { desc = 'Fuzzy Find in current buffer' })
+    end, { desc = 'Fuzzy Find in current buffer' })
 end
 
 M = {
@@ -193,6 +249,7 @@ M = {
                     width = 0.98,
                 },
                 file_ignore_patterns = {
+                    "tags",
                     "%.o",
                     "%.png",
                     "%.jpg",

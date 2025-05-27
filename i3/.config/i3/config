@@ -33,12 +33,11 @@ exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xcape" "-e 'Control_L=
 
 exec --no-startup-id $SCRIPTS/i3_startup.sh
 
-bindsym Print exec --no-startup-id $SCRIPTS/screenshot.sh
-bindsym F6 exec --no-startup-id $SCRIPTS/screenshot.sh
 bindsym F12 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
 bindsym F11 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
-bindsym F10 exec --no-startup-id zsh -c "$SCRIPTS/switch_monitor.sh 2>> $ERROR_LOG"
-bindsym F9 exec --no-startup-id $SCRIPTS/upload_download.sh
+bindsym F10 exec --no-startup-id zsh -c "$SCRIPTS/display/switch_monitor.sh 2>> $ERROR_LOG"
+bindsym F6 exec --no-startup-id $SCRIPTS/screenshot.sh
+bindsym Print exec --no-startup-id $SCRIPTS/screenshot.sh
 
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "picom" 2>> $ERROR_LOG
 exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "nitrogen" "--restore" 2>> $ERROR_LOG

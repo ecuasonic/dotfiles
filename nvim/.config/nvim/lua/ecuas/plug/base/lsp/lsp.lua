@@ -44,13 +44,13 @@ local function cmp_setup(cmp, lspkind)
         },
         sources = cmp.config.sources(
             {
-                { name = 'nvim_lsp' },
-                -- { name = 'luasnip', keyword_length = 2 },
-                { name = 'nvim_lua' },
+                { name = 'nvim_lsp', keyword_length = 1},
+                -- { name = 'luasnip', keyword_length = 1 },
+                { name = 'nvim_lua', keyword_length = 1},
             },
             {
-                { name = "path",   keyword_length = 3 },
-                { name = 'buffer', keyword_length = 3 },
+                { name = "path",   keyword_length = 1 },
+                { name = 'buffer', keyword_length = 1 },
             }),
         formatting = {
             fields = { "abbr", "kind", "menu" },
@@ -100,14 +100,14 @@ end
 local function mason_setup(capabilities)
     require("mason").setup()
 
+
     vim.lsp.config.clangd = {
-        on_attach = on_attach,
         capabilities = capabilities,
         cmd = {
             'clangd',
-            '--background-index',
+            '-j=2',
+            '--background-index=false',
             '--clang-tidy',
-            '--log=verbose',
             '--enable-config',
             '--function-arg-placeholders=false',
             -- '--indent-case-labels=false'
@@ -131,7 +131,7 @@ local function mason_setup(capabilities)
                     version = "LuaJIT",
                     path = vim.split(package.path, ';')
                 },
-                ["completion.enable"] = false,
+                ["completion.enable"] = true,
                 diagnostics = {
                     globals = {
                         "vim",
@@ -157,8 +157,9 @@ local function mason_setup(capabilities)
     vim.lsp.config.asm_lsp = {
         on_attach = on_attach,
         capabilities = capabilities,
-        -- filetypes = { "s", "S" },
-        single_file_support = false,
+        filetypes = { "asm", "s", "S" },
+        cmd = { "asm-lsp" },
+        single_file_support = true,
         root_markers = {
             'compile_commands.json',
             '.git'
@@ -176,9 +177,7 @@ local function mason_setup(capabilities)
                     '*@(.sh|.inc|.bash|.command)',
             }
         },
-        filetypes = {
-            "sh"
-        },
+        filetypes = { "sh" },
         root_markers = {
             '.root'
         }
@@ -188,22 +187,12 @@ local function mason_setup(capabilities)
         cmd = { 'verible-verilog-ls', '--rules_config_search' },
         filetypes = { "systemverilog", "verilog" },
     }
-    vim.lsp.config.checkmate = {
-        settings = {
-            checkmate = {
-                plugins = {
-                    eslint = {}
-                }
-            }
-        }
-    }
     vim.lsp.enable({
         'clangd',
         'lua_ls',
         'asm_lsp',
         'bashls',
         'verible',
-        'checkmate'
     })
 end
 

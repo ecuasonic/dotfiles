@@ -14,6 +14,7 @@ lazy.setup({
     { import = "ecuas.plug.base.lsp" },
     { import = "ecuas.plug.base.tele" },
     { import = "ecuas.plug.base.ts" },
+    -- { import = "ecuas.plug.debug" },
 }, {
     -- options
     ui = {

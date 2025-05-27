@@ -18,6 +18,8 @@ hibernate=" Hibernate"
 suspend="󰒲 Sleep"
 logout=" Logout"
 
+source ~/.config/scripts/display/utils.sh
+
 # Confirmation
 confirm_exit() {
     rofi -dmenu\
@@ -68,20 +70,20 @@ case $chosen in
         ;;
     "$lock")
         if [[ -f /usr/bin/i3lock ]]; then
-            i3lock -i "$(~/.config/scripts/i3lock_background.sh)"
+            i3lock -i "$(i3lock_background)"
             sleep 2
         fi
         ;;
     "$hibernate")
         ~/.config/scripts/rs_workspace.sh -s
-        ~/.config/scripts/laptop_monitor.sh
+        ~/.config/scripts/display/laptop_monitor.sh
         sleep 1
-        i3lock -i "$(~/.config/scripts/i3lock_background.sh)"
+        i3lock -i "$(i3lock_background)"
         sleep 1
         systemctl hibernate
         ;;
     "$suspend")
-        i3lock -i "$(~/.config/scripts/i3lock_background.sh)"
+        i3lock -i "$(i3lock_background)"
         sleep 1
         systemctl suspend
         ;;

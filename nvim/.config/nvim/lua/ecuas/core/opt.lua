@@ -4,6 +4,7 @@ local opt = vim.opt -- vim options
 vim.o.winborder = 'rounded'
 -- opt.completeopt = 'noselect,fuzzy,longest,popup,menu,menuone'
 
+opt.tags = { "./tags;" }
 opt.path:append("/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/")
 vim.g.leetcode_browser = "firefox" -- or "chrome"
 

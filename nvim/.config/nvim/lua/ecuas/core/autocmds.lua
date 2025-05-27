@@ -127,4 +127,22 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     end
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    callback = function()
+        local excluded_filetypes = {
+            dapui_stacks = true,
+            dapui_breakpoints = true,
+            dapui_console = true,
+            dapui_scopes = true,
+            ["dap-repl"] = true,
+            dapui_watches = true,
+        }
+
+        if excluded_filetypes[vim.bo.filetype] then
+            vim.wo.statuscolumn = ""
+            vim.wo.winbar = vim.fn.expand("%:t")
+        end
+    end
+})
+
 return M

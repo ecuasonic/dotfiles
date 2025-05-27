@@ -21,8 +21,8 @@ k({'n', 'v'}, '<2-X2Mouse>', "<Nop>", opts)
 k({'n', 'v'}, '<2-X1Mouse>', "<Nop>", opts)
 
 -- lsp
-k("n", "<leader>gd", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-k("n", "<leader>gi", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+k("n", "gd", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+-- k("n", "<leader>gi", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 k("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 k("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 k("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
