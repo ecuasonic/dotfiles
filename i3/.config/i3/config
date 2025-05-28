@@ -21,6 +21,10 @@ bindsym button1 [all] move left
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 # ----------------------------------------------------------------------------
 for_window [class=".*"] border pixel 5
+
+# for_window [floating] resize set 640 480
+for_window [floating] focus
+for_window [floating] move position center
 # ----------------------------------------------------------------------------
 
 # Set the keyboard repeat and delay.
