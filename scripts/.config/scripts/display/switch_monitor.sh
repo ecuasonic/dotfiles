@@ -34,31 +34,46 @@ function restart_floating() {
     fi
 }
 
+# ==============================================================================
+# ==============================================================================
+
 function restart_all() {
     restart_polybar_i3
     restart_floating
     restart_nitrogen_i3
 }
 
+function in_array() {
+    local val=$1; shift
+    for item; do
+        [ "$item" = "$val" ] && return 0
+    done
+    return 1
+}
+
 function main() {
     # HDMI -> eDP
     display_ports="$(detect_monitor)"
 
+    hdmi_ports=("HDMI-1-1" "HDMI-1" "HDMI-2")
+    edp_ports=("eDP-1" "eDP-2")
 
-    if [ "$display_ports" = "HDMI-1-1" ] || [ "$display_ports" = "HDMI-1" ] || [ "$display_ports" = "HDMI-2" ]; then
-        xrandr --output eDP-1 --auto --output eDP-1 --same-as "$display_ports" --output "$display_ports" --off
-        xrandr --output eDP-2 --auto --output eDP-2 --same-as "$display_ports" --output "$display_ports" --off
+    if in_array "$display_ports" "${hdmi_ports[@]}"; then
+        for edp in "${edp_ports[@]}"; do
+            xrandr --output "$edp" --auto --same-as "$display_ports"
+        done
+        xrandr --output "$display_ports" --off
         sleep 0.5
         xrandr -r 60
         restart_all
 
-    # eDP -> HDMI
-    elif [ "$display_ports" = "eDP-2" ] || [ "$display_ports" = "eDP-1" ]; then
-        xrandr --output HDMI-1-1 --auto --output HDMI-1-1 --same-as "$display_ports"
-        xrandr --output HDMI-1 --auto --output HDMI-1-1 --same-as "$display_ports"
-        xrandr --output HDMI-2 --auto --output HDMI-1-1 --same-as "$display_ports"
+        # eDP -> HDMI
+    elif in_array "$display_ports" "${edp_ports[@]}"; then
+        for hdmi in "${hdmi_ports[@]}"; do
+            xrandr --output "$hdmi" --auto --same-as "$display_ports"
+        done
         display_ports2="$(detect_monitor)"
-        if [ "$display_ports2" != "eDP-2" ] && [ "$display_ports2" != "eDP-1" ]; then
+        if ! in_array "$display_ports2" "${edp_ports[@]}"; then
             xrandr --output "$display_ports" --off
             restart_all
         else
