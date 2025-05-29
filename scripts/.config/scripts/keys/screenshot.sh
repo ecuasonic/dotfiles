@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dir="$HOME/dotfiles/scripts/.config/scripts/rofi"
+dir="${HOME}/dotfiles/scripts/.config/scripts/rofi"
 rofi_command="rofi -no-config -hover-select -theme $dir/screenshot.rasi"
 rofi_command_2="rofi -no-config -theme $dir/ss_name.rasi"
 

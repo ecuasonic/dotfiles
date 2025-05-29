@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /home/ecuas/.config/scripts/display/utils.sh
+source "$HOME/.config/scripts/display/utils.sh"
 
 #######################################
 # Restart Nitrogen and i3
@@ -10,12 +10,13 @@ source /home/ecuas/.config/scripts/display/utils.sh
 function restart_nitrogen_i3() {
 
     killall nitrogen
-    sleep 0.5
     new_background
     sleep 0.5
     nitrogen --set-centered "${HOME}/Backgrounds/output.png"
-    sleep 0.5
-    i3 restart
+}
+
+function restart_polybar_i3() {
+    ~/.config/polybar/launch.sh
 }
 
 function restart_floating() {
@@ -28,7 +29,15 @@ function restart_floating() {
     new_height=$((height * 80 / 100))
 
     # Resize the focused window
-    i3-msg "resize set ${new_width} ${new_height}"
+    if i3-msg -t get_tree | jq '.. | select(.focused? == true) | .floating' | grep -q 'user_on'; then
+        i3-msg "resize set ${new_width} ${new_height}"
+    fi
+}
+
+function restart_all() {
+    restart_polybar_i3
+    restart_floating
+    restart_nitrogen_i3
 }
 
 function main() {
@@ -41,6 +50,7 @@ function main() {
         xrandr --output eDP-2 --auto --output eDP-2 --same-as "$display_ports" --output "$display_ports" --off
         sleep 0.5
         xrandr -r 60
+        restart_all
 
     # eDP -> HDMI
     elif [ "$display_ports" = "eDP-2" ] || [ "$display_ports" = "eDP-1" ]; then
@@ -50,12 +60,11 @@ function main() {
         display_ports2="$(detect_monitor)"
         if [ "$display_ports2" != "eDP-2" ] && [ "$display_ports2" != "eDP-1" ]; then
             xrandr --output "$display_ports" --off
+            restart_all
         else
             xrandr -r 60
         fi
     fi
-    restart_nitrogen_i3
-    restart_floating
 }
 
 main

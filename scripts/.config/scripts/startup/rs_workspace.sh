@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-ERROR_LOG=/home/ecuas/.config/scripts/i3_resurrect_error.log
-: > $ERROR_LOG
+ERROR_LOG="${HOME}/.config/scripts/i3_resurrect_error.log"
+: > "$ERROR_LOG"
 
 show_usage() {
     echo "Usage: $0 [-r (restore) | -s (save)]"

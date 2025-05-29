@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /home/ecuas/.config/scripts/display/utils.sh
+source "${HOME}/.config/scripts/display/utils.sh"
 display_ports="$(detect_monitor)"
 
 if [ "$display_ports" = "HDMI-1-1" ]; then

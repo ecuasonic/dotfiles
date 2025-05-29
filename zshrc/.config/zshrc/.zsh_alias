@@ -1,7 +1,7 @@
-alias f="~/.config/scripts/change_kitty_font.sh"
+alias f="~/.config/scripts/keys/change_kitty_font.sh"
 
-alias start_notes="~/.config/scripts/notes_session.sh -s"
-alias end_notes="~/.config/scripts/notes_session.sh -e"
+alias start_notes="~/.config/scripts/keys/notes_session.sh -s"
+alias end_notes="~/.config/scripts/keys/notes_session.sh -e"
 alias nvim="~/local/nvim-linux-x86_64/bin/nvim"
 alias nvim_si="nvim scp://rbarrezueta3@ece-rschsrv.ece.gatech.edu/"
 alias nvim_ice="nvim scp://rbarrezueta3@login-ice.pace.gatech.edu/"
@@ -41,6 +41,3 @@ alias ga='git add -p'
 alias gcoall="git checkout --"
 alias gr='git remote'
 alias gre='git reset'
-
-#-----------FANS-------------------
-# alias fan="sudo ~/dotfiles/root_scripts/.config/root_scripts/fan_switch.sh"

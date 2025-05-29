@@ -5,7 +5,7 @@ function kill_polybar {
     killall -q polybar
 
     # Wait until the processes have been shut down
-    while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+    while pgrep -u $UID -x polybar >/dev/null; do sleep 0.5; done
 }
 
 function launch_polybar {
@@ -26,7 +26,8 @@ function get_wireless_iface() {
 function export_options {
     # Font size:
     read -r height < <(xrandr --listmonitors | tail -1 | awk '{print $3}' | awk -F'[/x]' '{print $3}')
-    export TEXT_FONT="Terminus:size=$(( height / 75 ));3"
+    export BAR_HEIGHT="$(( height / 45 ))"
+    export TEXT_FONT="Terminus:size=$(( height / 100 ));3"
 
     # Wireless-network interface:
     iface=$(get_wireless_iface)
