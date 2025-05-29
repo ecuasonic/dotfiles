@@ -42,7 +42,7 @@ function ek() {
     _go_to_then_return_ ".config/kitty" "kitty.conf"
 }
 function ep() {
-    _go_to_then_return_ ".config/polybar/hack" "config.ini"
+    _go_to_then_return_ ".config/polybar" "config.ini"
 }
 function en() {
     _go_to_then_return_ ".config/nvim/lua/ecuas" "init.lua"

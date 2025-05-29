@@ -17,12 +17,13 @@ command_not_found_handler() {
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=$HOME/.config/zshrc
-export SIZE="2560x1600"
 export EDITOR="$(which nvim)"
 export DEVKITPRO=/opt/devkitpro
 export DEVKITARM=/opt/devkitpro/devkitARM
 export DEVKITPPC=/opt/devkitpro/devkitppc
 export PATH=$DEVKITARM/bin:$DEVKITPRO/tools/bin:$PATH
+
+# source ~/dotfiles/scripts/.config/scripts/display/launch_polybar.sh
 
 # # Sets Control to be both escape and Control (set in i3 config)
 # setxkbmap -option ctrl:nocaps

@@ -2,6 +2,14 @@
 -- main function starts at M
 --
 
+local lsps = {
+        'clangd',
+        'lua_ls',
+        'asm_lsp',
+        'bashls',
+        'verible',
+}
+
 --- Set up cmp lsp windows, mappings, sources, etc.
 ---@param cmp table require('cmp')
 ---@param lspkind table require('lspkind')
@@ -99,6 +107,10 @@ end
 
 local function mason_setup(capabilities)
     require("mason").setup()
+    require("mason-lspconfig").setup {
+        automatic_enable = false,
+        ensure_installed = lsps
+    }
 
 
     vim.lsp.config.clangd = {
@@ -123,7 +135,6 @@ local function mason_setup(capabilities)
         }
     }
     vim.lsp.config.lua_ls = {
-        on_attach = on_attach,
         capabilities = capabilities,
         settings = {
             Lua = {
@@ -155,7 +166,6 @@ local function mason_setup(capabilities)
         }
     }
     vim.lsp.config.asm_lsp = {
-        on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { "asm", "s", "S" },
         cmd = { "asm-lsp" },
@@ -166,11 +176,11 @@ local function mason_setup(capabilities)
         }
     }
     vim.lsp.config.bashls = {
-        on_attach = on_attach,
         cmd = {
             "bash-language-server",
             "start"
         },
+        single_file_support = true,
         settings = {
             bashIde = {
                 globPattern = vim.env.GLOB_PATTERN or
@@ -183,17 +193,10 @@ local function mason_setup(capabilities)
         }
     }
     vim.lsp.config.verible = {
-        on_attach = on_attach,
         cmd = { 'verible-verilog-ls', '--rules_config_search' },
         filetypes = { "systemverilog", "verilog" },
     }
-    vim.lsp.enable({
-        'clangd',
-        'lua_ls',
-        'asm_lsp',
-        'bashls',
-        'verible',
-    })
+    vim.lsp.enable(lsps)
 end
 
 M = {
@@ -201,6 +204,7 @@ M = {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "mason-org/mason.nvim",
+        "mason-org/mason-lspconfig.nvim",
 
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -267,10 +271,6 @@ M = {
             "confirm_done",
             cmp_autopairs.on_confirm_done { map_char = { tex = "" } }
         )
-
-        -- local lspconfig = require("lspconfig")
-        -- local clangd_opts = require("lsp.clangd")
-        -- lspconfig.clangd.setup(clangd_opts)
     end
 }
 

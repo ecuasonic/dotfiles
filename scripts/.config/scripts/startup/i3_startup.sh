@@ -9,13 +9,7 @@ xrandr --output "HDMI-2" --off
 sleep 1
 
 $SCRIPTS/display/switch_monitor.sh 2>> $ERROR_LOG
-sleep 1
-
-$SCRIPTS/firefox_zoom.sh 2>> $ERROR_LOG
-# $SCRIPTS/rs_workspace.sh -r 2>> $ERROR_LOG
-sleep 1
-
-$SCRIPTS/display/resize_floating.sh 2>> $ERROR_LOG
-sleep 1
+$SCRIPTS/startup/machine_specific.sh 2>> $ERROR_LOG
+$SCRIPTS/startup/firefox_zoom.sh 2>> $ERROR_LOG
 
 i3-msg restart

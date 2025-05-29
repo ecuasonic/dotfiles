@@ -5,7 +5,7 @@
 ## Github  : @adi1090x
 ## Twitter : @adi1090x
 
-dir="$HOME/dotfiles/polybar/.config/polybar/hack/scripts/rofi"
+dir="$HOME/dotfiles/polybar/.config/polybar/scripts/rofi"
 uptime=$(uptime -p | sed -e 's/up //g')
 
 rofi_command="rofi -no-config -hover-select -theme $dir/powermenu.rasi"
@@ -18,7 +18,7 @@ hibernate=" Hibernate"
 suspend="󰒲 Sleep"
 logout=" Logout"
 
-source ~/.config/scripts/display/utils.sh
+source "/home/ecuasonic/.config/scripts/display/utils.sh"
 
 # Confirmation
 confirm_exit() {
@@ -46,7 +46,7 @@ case $chosen in
             # Prevents "server exited unexpectedly"
             rm -rf /tmp/tmux-1000/
             sleep 1
-            ~/.config/scripts/rs_workspace.sh -s
+            # ~/.config/scripts/startup/rs_workspace.sh -s
             systemctl poweroff
         elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
             exit 0
@@ -60,7 +60,7 @@ case $chosen in
             # Prevents "server exited unexpectedly"
             rm -rf /tmp/tmux-1000/
             sleep 1
-            ~/.config/scripts/rs_workspace.sh -s
+            # ~/.config/scripts/startup/rs_workspace.sh -s
             systemctl reboot
         elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
             exit 0
@@ -75,7 +75,7 @@ case $chosen in
         fi
         ;;
     "$hibernate")
-        ~/.config/scripts/rs_workspace.sh -s
+        # ~/.config/scripts/startup/rs_workspace.sh -s
         ~/.config/scripts/display/laptop_monitor.sh
         sleep 1
         i3lock -i "$(i3lock_background)"
@@ -93,7 +93,7 @@ case $chosen in
             # Prevents "server exited unexpectedly"
             rm -rf /tmp/tmux-1000/
             sleep 1
-            ~/.config/scripts/rs_workspace.sh -s
+            # ~/.config/scripts/startup/rs_workspace.sh -s
             i3-msg exit
         elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
             exit 0

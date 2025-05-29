@@ -71,7 +71,7 @@ k('n', "yc", "yy<cmd>normal gcc<CR>p", { desc = "Yank, comment out, then paste."
 
 k("n", "<leader>x", ":!", { desc = "Execute Shell Command." })
 k("n", "<leader>X", ":%!", { desc = "Change Entire File to Sheel Command." })
--- k("n", "<ESC>", "<cmd>noh<CR>")
+k("n", "<ESC>", "<cmd>noh<CR>")
 
 k("n", "+", "<C-a>", { desc = "Increment numbers.", noremap = true })
 k("n", "-", "<C-x>", { desc = "Decrement numbers.", noremap = true })

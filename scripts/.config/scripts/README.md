@@ -15,31 +15,26 @@ Display:
         polybar/powermenu.sh
             i3/config
 
+Keys:
+    **change_kitty_font.sh**
+        zshrc/.zsh_alias
+    **mouse_warping.sh**
+        i3/config (keybind)
+    **notes_session.sh**
+        zshrc/.zsh_alias
+    **screenshot.sh**
+        i3/config (keybind)
+    **volume_up.sh**
+        i3/config (keybind)
 
-**change_kitty_font.sh**
-    zshrc/.zsh_alias
-
-**firefox_zoom.sh**
-    **i3_startup.sh**
+Startup:
+    **firefox_zoom.sh**
+        **i3_startup.sh**
+            i3/config
+    **rs_workspace.sh**
+        polybar/powermenu.sh
+            i3/config
+    **start_i3_program.sh**
+        **i3_startup.sh**
+            i3/config
         i3/config
-
-**mouse_warping.sh**
-    i3/config (keybind)
-
-**notes_session.sh**
-    zshrc/.zsh_alias
-
-**rs_workspace.sh**
-    polybar/powermenu.sh
-        i3/config
-
-**screenshot.sh**
-    i3/config (keybind)
-
-**start_i3_program.sh**
-    **i3_startup.sh**
-        i3/config
-    i3/config
-
-**volume_up.sh**
-    i3/config (keybind)

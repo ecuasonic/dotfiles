@@ -3,7 +3,7 @@
 
 set $ERROR_LOG ~/.config/i3/error.log
 set $SCRIPTS ~/dotfiles/scripts/.config/scripts
-set $mouse_warping ~/dotfiles/scripts/.config/scripts/mouse_warping.sh
+set $mouse_warping ~/dotfiles/scripts/.config/scripts/keys/mouse_warping.sh
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 # ----------------------------------------------------------------------------
@@ -29,22 +29,22 @@ for_window [floating] move position center
 
 # Set the keyboard repeat and delay.
 # Also sets screen off delay.
-exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xset" "dpms 0 0 0 r rate 200 40" 2> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/startup/start_i3_program.sh "xset" "dpms 0 0 0 r rate 200 40" 2> $ERROR_LOG
 
 # Sets Control to be both escape and Control
-exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "setxkbmap" "-option ctrl:nocaps" 2>> $ERROR_LOG
-exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "xcape" "-e 'Control_L=Escape' -t 175" 2>> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/startup/start_i3_program.sh "setxkbmap" "-option ctrl:nocaps" 2>> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/startup/start_i3_program.sh "xcape" "-e 'Control_L=Escape' -t 175" 2>> $ERROR_LOG
 
-exec --no-startup-id $SCRIPTS/i3_startup.sh
+exec --no-startup-id $SCRIPTS/startup/i3_startup.sh
 
-bindsym F12 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
-bindsym F11 exec --no-startup-id ~/.config/polybar/hack/scripts/powermenu.sh
+bindsym F12 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
+bindsym F11 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
 bindsym F10 exec --no-startup-id zsh -c "$SCRIPTS/display/switch_monitor.sh 2>> $ERROR_LOG"
-bindsym F6 exec --no-startup-id $SCRIPTS/screenshot.sh
-bindsym Print exec --no-startup-id $SCRIPTS/screenshot.sh
+bindsym F6 exec --no-startup-id $SCRIPTS/keys/screenshot.sh
+bindsym Print exec --no-startup-id $SCRIPTS/keys/screenshot.sh
 
-exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "picom" 2>> $ERROR_LOG
-exec_always --no-startup-id $SCRIPTS/start_i3_program.sh "nitrogen" "--restore" 2>> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/startup/start_i3_program.sh "picom" 2>> $ERROR_LOG
+exec_always --no-startup-id $SCRIPTS/startup/start_i3_program.sh "nitrogen" "--restore" 2>> $ERROR_LOG
 
 hide_edge_borders none
 
@@ -53,7 +53,7 @@ hide_edge_borders none
 font pango:MesloLGS NF 11
 
 # kill any hanging polybar processes
-exec_always --no-startup-id ~/.config/polybar/hack/launch.sh
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -101,8 +101,8 @@ bindsym $mod_alt+q kill
 bindsym $mod_win+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod_alt+d exec "rofi -no-config -sort -sorting-method 'fzf' -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/hack/scripts/rofi/launcher.rasi"
-bindsym $mod_win+d exec "rofi -no-config -sort -sorting-method 'fzf' -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/hack/scripts/rofi/launcher.rasi"
+bindsym $mod_alt+d exec "rofi -no-config -sort -sorting-method 'fzf' -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/scripts/rofi/launcher.rasi"
+bindsym $mod_win+d exec "rofi -no-config -sort -sorting-method 'fzf' -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/scripts/rofi/launcher.rasi"
 
 # change focus
 bindsym $mod_alt+h exec --no-startup-id $mouse_warping -f -h

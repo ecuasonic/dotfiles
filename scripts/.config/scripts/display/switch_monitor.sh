@@ -7,7 +7,7 @@ source /home/ecuas/.config/scripts/display/utils.sh
 # Globals:
 #   SIZE    Array dimensions of background image
 #######################################
-restart_nitrogen_i3() {
+function restart_nitrogen_i3() {
 
     killall nitrogen
     sleep 0.5
@@ -16,12 +16,22 @@ restart_nitrogen_i3() {
     nitrogen --set-centered "${HOME}/Backgrounds/output.png"
     sleep 0.5
     i3 restart
-
 }
 
+function restart_floating() {
 
+    # Get screen width and height
+    read -r width height < <(xrandr --listmonitors | tail -1 | awk '{print $3}' | awk -F'[/x]' '{print $1, $3}')
 
-main() {
+    # Make floating window 80% of screen size
+    new_width=$((width * 80 / 100))
+    new_height=$((height * 80 / 100))
+
+    # Resize the focused window
+    i3-msg "resize set ${new_width} ${new_height}"
+}
+
+function main() {
     # HDMI -> eDP
     display_ports="$(detect_monitor)"
 
@@ -45,6 +55,7 @@ main() {
         fi
     fi
     restart_nitrogen_i3
+    restart_floating
 }
 
 main
