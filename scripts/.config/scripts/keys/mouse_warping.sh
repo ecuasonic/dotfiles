@@ -25,7 +25,10 @@ while getopts "mfhjkl" option; do
     esac
 done
 
-i3-msg "$command"
+function main() {
+    i3-msg "$command"
+    eval "$(xdotool getwindowfocus getwindowgeometry --shell)"
+    xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2))
+}
 
-eval "$(xdotool getwindowfocus getwindowgeometry --shell)"
-xdotool mousemove $((X + WIDTH / 2)) $((Y + HEIGHT / 2))
+main
