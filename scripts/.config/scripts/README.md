@@ -34,6 +34,9 @@ Startup:
     **rs_workspace.sh**
         polybar/powermenu.sh
             i3/config
+    **machine_specific.sh**
+        **i3_startup.sh**
+            i3/config
     **start_i3_program.sh**
         **i3_startup.sh**
             i3/config
