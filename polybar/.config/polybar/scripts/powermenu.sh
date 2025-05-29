@@ -1,104 +1,90 @@
 #!/usr/bin/env bash
-
-## Author  : Aditya Shakya
-## Mail    : adi1090x@gmail.com
-## Github  : @adi1090x
-## Twitter : @adi1090x
-
-dir="${HOME}/dotfiles/polybar/.config/polybar/scripts/rofi"
-uptime=$(uptime -p | sed -e 's/up //g')
-
-rofi_command="rofi -no-config -hover-select -theme $dir/powermenu.rasi"
-
-# Options
-shutdown=" Shutdown"
-reboot=" Restart"
-lock=" Lock"
-hibernate=" Hibernate"
-suspend="󰒲 Sleep"
-logout=" Logout"
-
 source "${HOME}/.config/scripts/display/utils.sh"
 
-# Confirmation
-confirm_exit() {
-    rofi -dmenu\
-        -no-config\
-        -i\
-        -no-fixed-num-lines\
-        -p "Are You Sure? : "\
-        -theme "$dir"/confirm.rasi
-    }
+DIR="${HOME}/dotfiles/polybar/.config/polybar/scripts/rofi"
+ROFI_CMD="rofi -no-config -hover-select -theme $DIR/powermenu.rasi"
 
-# Message
-msg() {
-    rofi -no-config -theme "$dir/message.rasi" -e "Available Options  -  yes / y / no / n"
+declare -A ACTIONS=(
+    [" Shutdown"]="poweroff"
+    [" Restart"]="reboot"
+    [" Lock"]="lock"
+    [" Hibernate"]="hibernate"
+    ["󰒲 Sleep"]="suspend"
+    [" Logout"]="logout"
+)
+
+# =============================================================================
+
+function rofi_confirm_exit() {
+    rofi -dmenu -no-config -i -no-fixed-num-lines -p "Are You Sure? : " -theme "$DIR"/confirm.rasi
+}
+function rofi_msg() {
+    rofi -no-config -theme "$DIR/message.rasi" -e "Available Options  -  yes / y / no / n"
 }
 
-# Variable passed to rofi
-options="$lock\n$logout\n$suspend\n$hibernate\n$reboot\n$shutdown"
+# =============================================================================
 
-chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 0)"
-case $chosen in
-    "$shutdown")
-        ans=$(confirm_exit &)
-        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            # Prevents "server exited unexpectedly"
+function in_array() {
+    local val=$1; shift
+    for item; do
+        [ "$item" = "$val" ] && return 0
+    done
+    return 1
+}
+
+# =============================================================================
+
+function confirm_then_action() {
+    local action=$1
+    local ans
+    ans=$(rofi_confirm_exit &)
+    case "${ans,,}" in
+        y|yes)
             rm -rf /tmp/tmux-1000/
             sleep 1
-            # ~/.config/scripts/startup/rs_workspace.sh -s
-            systemctl poweroff
-        elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
+            systemctl "$action"
+            ;;
+        n|no)
             exit 0
-        else
-            msg
-        fi
-        ;;
-    "$reboot")
-        ans=$(confirm_exit &)
-        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            # Prevents "server exited unexpectedly"
-            rm -rf /tmp/tmux-1000/
-            sleep 1
-            # ~/.config/scripts/startup/rs_workspace.sh -s
-            systemctl reboot
-        elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-            exit 0
-        else
-            msg
-        fi
-        ;;
-    "$lock")
-        if [[ -f /usr/bin/i3lock ]]; then
-            i3lock -i "$(i3lock_background)"
-            sleep 2
-        fi
-        ;;
-    "$hibernate")
-        # ~/.config/scripts/startup/rs_workspace.sh -s
-        ~/.config/scripts/display/laptop_monitor.sh
-        sleep 1
+            ;;
+        *)
+            rofi_msg
+            ;;
+    esac
+}
+
+function lock_screen() {
+    if [[ -f /usr/bin/i3lock ]]; then
         i3lock -i "$(i3lock_background)"
         sleep 1
-        systemctl hibernate
-        ;;
-    "$suspend")
-        i3lock -i "$(i3lock_background)"
-        sleep 1
-        systemctl suspend
-        ;;
-    "$logout")
-        ans=$(confirm_exit &)
-        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            # Prevents "server exited unexpectedly"
-            rm -rf /tmp/tmux-1000/
-            sleep 1
-            # ~/.config/scripts/startup/rs_workspace.sh -s
-            i3-msg exit
-        elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-            exit 0
-        else
-            msg
-        fi
-        ;;
-esac
+    fi
+}
+
+function main() {
+    # Variable passed to rofi
+    options=$(printf "%s\n" "${!ACTIONS[@]}")
+    uptime=$(uptime -p | sed -e 's/up //g')
+    chosen="$(echo -e "$options" | $ROFI_CMD -p "Uptime: $uptime" -dmenu -selected-row 0)"
+
+    case $chosen in
+        " Lock")
+            lock_screen
+            ;;
+        " Hibernate")
+            ~/.config/scripts/display/laptop_monitor.sh
+            lock_screen
+            systemctl hibernate
+            ;;
+        "󰒲 Sleep")
+            lock_screen
+            systemctl suspend
+            ;;
+        *)
+            if [[ -n "${ACTIONS[$chosen]}" ]]; then
+                confirm_then_action "${ACTIONS[$chosen]}"
+            fi
+            ;;
+    esac
+}
+
+main
