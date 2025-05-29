@@ -13,13 +13,28 @@ function launch_polybar {
     polybar -q bottom &
 }
 
+function get_wireless_iface() {
+    ip link | awk -F: '/state UP/ {print $2}' | while read -r iface; do
+        if iw dev "$iface" info &>/dev/null; then
+            echo "$iface"
+            return 0
+        fi
+    done
+    return 1
+}
+
 function export_options {
-    # Get screen dimensions, then calculate bar height + text size.
+    # Font size:
     read -r height < <(xrandr --listmonitors | tail -1 | awk '{print $3}' | awk -F'[/x]' '{print $3}')
-    export BAR_HEIGHT=$(( height / 40 ))
     export TEXT_FONT="Terminus:size=$(( height / 75 ));3"
 
-    # Bar options
+    # Wireless-network interface:
+    iface=$(get_wireless_iface)
+    export WIFI_INTERFACE=$iface
+
+    # Backlight:
+    backlight=$(ls -1 /sys/class/backlight)
+    export BACKLIGHT=$backlight
 }
 
 function main {
