@@ -5,7 +5,7 @@
 ## Github  : @adi1090x
 ## Twitter : @adi1090x
 
-dir="$HOME/dotfiles/polybar/.config/polybar/scripts/rofi"
+dir="${HOME}/dotfiles/polybar/.config/polybar/scripts/rofi"
 uptime=$(uptime -p | sed -e 's/up //g')
 
 rofi_command="rofi -no-config -hover-select -theme $dir/powermenu.rasi"
@@ -18,7 +18,7 @@ hibernate=" Hibernate"
 suspend="󰒲 Sleep"
 logout=" Logout"
 
-source "/home/ecuasonic/.config/scripts/display/utils.sh"
+source "${HOME}/.config/scripts/display/utils.sh"
 
 # Confirmation
 confirm_exit() {
