@@ -6,6 +6,7 @@ sudo dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-
 # Install needed programs:
 sudo dnf install @base-x i3 stow nvim # telescope-fzf for nvim may need to make within folder.
 sudo dnf install ImageMagick ImageMagick-devel
+sudo dnf xclip maim
 sudo dnf install gh git git-delta
 sudo dnf install kitty luarocks btop zsh zoxide shellcheck xdotool bear
 

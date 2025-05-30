@@ -8,7 +8,8 @@ tmux source ~/.config/tmux/tmux.conf
 stow polybar
 stow i3
 stow bat
-stow kitty
+cp kitty/.config/kitty ~/.config/kitty
 stow nitrogen
-stow i3
 
+stow asm-lsp
+stow ctags
