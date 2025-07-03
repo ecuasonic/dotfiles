@@ -37,10 +37,14 @@ exec_always --no-startup-id $SCRIPTS/startup/start_i3_program.sh "xcape" "-e 'Co
 
 exec --no-startup-id $SCRIPTS/startup/i3_startup.sh
 
-bindsym F12 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
-bindsym F11 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
-bindsym F10 exec --no-startup-id zsh -c "$SCRIPTS/display/switch_monitor.sh 2>> $ERROR_LOG"
-bindsym F6 exec --no-startup-id $SCRIPTS/keys/screenshot.sh
+bindsym $mod_alt+F12 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
+bindsym $mod_win+F12 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
+bindsym $mod_alt+F11 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
+bindsym $mod_win+F11 exec --no-startup-id ~/.config/polybar/scripts/powermenu.sh
+bindsym $mod_alt+F10 exec --no-startup-id zsh -c "$SCRIPTS/display/switch_monitor.sh 2>> $ERROR_LOG"
+bindsym $mod_win+F10 exec --no-startup-id zsh -c "$SCRIPTS/display/switch_monitor.sh 2>> $ERROR_LOG"
+bindsym $mod_alt+F6 exec --no-startup-id $SCRIPTS/keys/screenshot.sh
+bindsym $mod_win+F6 exec --no-startup-id $SCRIPTS/keys/screenshot.sh
 bindsym Print exec --no-startup-id $SCRIPTS/keys/screenshot.sh
 
 exec_always --no-startup-id $SCRIPTS/startup/start_i3_program.sh "picom" 2>> $ERROR_LOG

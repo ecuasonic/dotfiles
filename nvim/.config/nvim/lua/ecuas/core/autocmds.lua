@@ -121,7 +121,7 @@ autocmd("VimResized", {
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     callback = function()
-        if vim.bo.filetype == "help" then
+        if vim.bo.filetype == "help" or vim.bo.filetype == "Outline" then
             vim.wo.statuscolumn = ""
         end
     end

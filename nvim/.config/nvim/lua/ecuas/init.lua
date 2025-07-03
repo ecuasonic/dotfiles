@@ -26,6 +26,12 @@ vim.filetype.add({
     }
 })
 
+vim.api.nvim_create_user_command("VYank", function(opts)
+  require("ecuas.verilog.verilog_utils").generate_instance_from_selection()
+end, { range = true })
+vim.keymap.set('v', '<leader>v', ":VYank<cr>")
+vim.keymap.set('n', '<leader>v', "m`vip:VYank<CR>``", { desc = "Yank Verilog instance and return" })
+
 -- load everything else last.
 require("ecuas.core.hi")
 require("ecuas.core.autocmds")

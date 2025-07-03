@@ -8,6 +8,7 @@ local lsps = {
         'asm_lsp',
         'bashls',
         'verible',
+        'neocmake'
 }
 
 --- Set up cmp lsp windows, mappings, sources, etc.
@@ -195,6 +196,17 @@ local function mason_setup(capabilities)
     vim.lsp.config.verible = {
         cmd = { 'verible-verilog-ls', '--rules_config_search' },
         filetypes = { "systemverilog", "verilog" },
+        root_markers = {
+            'verible.filelist',
+            '.root'
+        }
+    }
+    vim.lsp.config.neocmake = {
+        cmd = { 'neocmakelsp', '--stdio' },
+        filetypes = { "cmake" },
+        root_markers = {
+            '.git'
+        }
     }
     vim.lsp.enable(lsps)
 end

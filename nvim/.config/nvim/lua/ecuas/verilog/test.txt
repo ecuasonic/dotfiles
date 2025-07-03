@@ -1,0 +1,16 @@
+module VGA_Counter #(
+    parameter int H_TOTAL,
+    parameter int V_TOTAL
+) (
+    input wire clk,
+    input wire n_rst,
+    output reg [15:0] h_count,
+    output reg [15:0] v_count
+);
+
+VGA_Counter name (
+    .clk(),
+    .n_rst(),
+    .h_count(),
+    .v_count()
+);

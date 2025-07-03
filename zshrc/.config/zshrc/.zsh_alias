@@ -5,6 +5,8 @@ alias end_notes="~/.config/scripts/keys/notes_session.sh -e"
 alias nvim="~/local/nvim-linux-x86_64/bin/nvim"
 alias nvim_si="nvim scp://rbarrezueta3@ece-rschsrv.ece.gatech.edu/"
 alias nvim_ice="nvim scp://rbarrezueta3@login-ice.pace.gatech.edu/"
+alias nvim_eic="nvim scp://rbarrezueta3@eic-gt-nopdk-1.cc.gatech.edu/"
+alias p="pavucontrol"
 
 # Connect to Airpods
 alias airpods="bluetoothctl connect 70:AE:D5:D5:B4:26"

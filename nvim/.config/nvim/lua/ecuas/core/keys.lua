@@ -5,6 +5,8 @@ vim.g.mapleader = " " -- space key
 local k = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+k('n', '<leader>e', '<CMD>Oil --float<CR>', {desc = "Open parent directory"})
+
 k('n', '<leader><leader>o', 'o<ESC>cc', { desc = "next line - no comment" })
 k('n', '<leader><leader>O', 'O<ESC>cc', { desc = "next line - no comment" })
 k('n', '<leader>=', function() vim.lsp.buf.format() end, { desc = "Format Entire File." })
