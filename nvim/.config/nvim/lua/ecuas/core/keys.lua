@@ -5,6 +5,38 @@ vim.g.mapleader = " " -- space key
 local k = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+-- =======================================================
+local last_jump_pos = nil
+local function get_pos()
+    return vim.api.nvim_win_get_cursor(0) -- {line, col}
+end
+local function jump_and_save(key)
+    return function()
+    local count = vim.v.count
+    if count > 0 then
+        last_jump_pos = get_pos()
+        vim.cmd("normal! " .. count .. key)
+    else
+        vim.cmd("normal! " .. key)
+    end
+end
+end
+k('n', 'h', jump_and_save('h'), opts)
+k('n', 'j', jump_and_save('j'), opts)
+k('n', 'k', jump_and_save('k'), opts)
+k('n', 'l', jump_and_save('l'), opts)
+
+k('n', '--', function()
+    if last_jump_pos then
+        local temp_last_jump_pos = get_pos();
+        vim.api.nvim_win_set_cursor(0, last_jump_pos)
+        last_jump_pos = temp_last_jump_pos;
+    else
+        print("No jump position saved yet")
+    end
+end, opts)
+-- =======================================================
+
 k('n', '<leader>e', '<CMD>Oil --float<CR>', {desc = "Open parent directory"})
 
 k('n', '<leader><leader>o', 'o<ESC>cc', { desc = "next line - no comment" })

@@ -21,3 +21,5 @@ vim.cmd([[hi EndOfBuffer guifg=grey]])
 
 -- LSP hover (-> Visual)
 vim.cmd([[hi LspReferenceText guibg=#275378]])
+
+vim.api.nvim_set_hl(0, "@markup.raw.block.markdown", { fg = "#FFFFFF" })
