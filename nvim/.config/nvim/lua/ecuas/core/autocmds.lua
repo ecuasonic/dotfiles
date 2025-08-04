@@ -4,15 +4,14 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 local opt = vim.opt -- vim options
--- tabs & indentation
--- Set tabstop to 8 for C, C++, and header files
+-- Set for C, C++, and header files
 autocmd("FileType", {
     pattern = { "c", "cpp", "h" },
     callback = function()
         vim.schedule(function()
-            opt.tabstop = 2
-            opt.shiftwidth = 2
-            opt.softtabstop = 2
+            opt.tabstop = 4
+            opt.shiftwidth = 4
+            opt.softtabstop = 4
         end)
     end,
 })
