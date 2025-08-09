@@ -11,10 +11,7 @@ M = {
                 only_render_image_at_cursor = true,
                 only_render_image_at_cursor_mode = "inline",
                 floating_windows = false,
-                filetypes = { "markdown" },     -- markdown extensions (ie. quarto) can go here
-                -- resolve_image_path = function(document_path, image_path, fallback)
-                --     return fallback(document_path, image_path)
-                -- end,
+                filetypes = { "markdown" },
             },
         },
         kitty_method = "normal",
